@@ -1,20 +1,21 @@
 # E-Commerce Platform
 
-Live Demo: https://mechanical-keyboard-shop-mu.vercel.app/
+Live Demo: https://keyboard-shop-server-chi.vercel.app/
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup Instructions](#setup-instructions)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
-- [Usage](#usage)
-- [Contribution Guidelines](#contribution-guidelines)
-- [License](#license)
-- [Contact Information](#contact-information)
+- [E-Commerce Platform](#e-commerce-platform)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+    - [Frontend:](#frontend)
+    - [Backend:](#backend)
+    - [Database:](#database)
+    - [Tools:](#tools)
+  - [Setup Instructions](#setup-instructions)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
 
 ## Overview
 
@@ -65,7 +66,7 @@ The **E-Commerce Platform** is a full-featured web application built using the M
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/Mahmudmhb/Mechanical-Mechanical-Keyboard-Shop.git
+   git clone https://github.com/Kamrulthedev/Keyborad-Shop-Server
    ```
    cd your-repo-name
    Install backend dependencies:
