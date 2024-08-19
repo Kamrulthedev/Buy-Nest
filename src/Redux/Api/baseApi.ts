@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000/",
+  baseUrl: "https://keyboard-shop-server-chi.vercel.app/",
   // baseUrl: "http://localhost:5000/",
   //   credentials: "include",
 });
