@@ -1,0 +1,17 @@
+.active {
+    background-color: #5c53fe !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+
+.image-container {
+    overflow: hidden;
+}
+
+.image-container img {
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.1);
+}
