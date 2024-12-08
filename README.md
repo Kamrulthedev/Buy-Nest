@@ -1,10 +1,10 @@
-# E-Commerce Platform
+# Buy Nest
 
 Live Demo: https://keyboard-shop-server-chi.vercel.app/
 
 ## Table of Contents
 
-- [E-Commerce Platform](#e-commerce-platform)
+- [Buy Nest](#buy-nest)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Features](#features)
