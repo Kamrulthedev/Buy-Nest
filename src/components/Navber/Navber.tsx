@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 function Navbar() {
-  const user = { role: "USER" , profileImg : "https://i.ibb.co.com/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg"};
+  const user = { role: "ADMIN" , profileImg : "https://i.ibb.co.com/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg"};
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [language, setLanguage] = useState('EN');
@@ -67,7 +67,7 @@ function Navbar() {
                 onClick={toggleDropdown}
               />
               {isDropdownOpen && (
-                <div className="absolute right-0 -mr-4 mt-2 w-60 bg-blue-100 shadow-lg rounded-b-md z-10 p-4 h-64">
+                <div className="absolute right-0 -mr-4 mt-2 w-60 bg-blue-100 shadow-lg rounded-b-md z-10 p-4 h-64 text-lg">
                   <ul>
                     <li>
                       <button
