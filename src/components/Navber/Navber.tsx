@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 
 function Navbar() {
-  const user = { role: "USER" };
+  const user = { role: "USER" , profileImg : "https://i.ibb.co.com/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg"};
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [language, setLanguage] = useState('EN');
@@ -60,8 +60,8 @@ function Navbar() {
 
           {user ? (
             <div className="relative" ref={dropdownRef}>
-              <img
-                src="https://i.ibb.co/44vhj8G/image.png"
+              <img 
+                src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
                 alt="Profile"
                 className="h-12 w-12 rounded-full cursor-pointer border object-cover"
                 onClick={toggleDropdown}
