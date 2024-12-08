@@ -67,7 +67,7 @@ function Navbar() {
                 onClick={toggleDropdown}
               />
               {isDropdownOpen && (
-                <div className="absolute right-0 -mr-4 mt-2 w-60 bg-white shadow-lg rounded-b-md z-10 p-4 h-64 text-lg">
+                <div className="absolute right-0 -mr-14 lg:-mr-4 mt-2 w-60 bg-slate-100 shadow-lg rounded-md z-10 p-4 h-64 text-lg">
                   <ul>
                     <li>
                       <button

@@ -53,12 +53,16 @@ const Footer = () => {
               <li>Phone: 800-527-6063 (Sales)</li>
               <li>Email: support@buynest.com</li>
             </ul>
-            <div className="mt-6 flex gap-4 text-2xl">
-              <a href="#" className="text-sky-500 p-3 hover:bg-slate-200 rounded"><FaFacebookF /></a>
-              <a href="#" className="text-orange-400 p-3 hover:bg-slate-200 rounded"><LuInstagram /></a>
-              <a href="#" className="text-sky-500 p-3 hover:bg-slate-200 rounded"><FaTwitter /></a>
-              <a href="#" className="text-red-500 p-3 hover:bg-slate-200 rounded"><FaYoutube /></a>
-              <a href="#" className="text-sky-600 p-3 hover:bg-slate-200 rounded"><FaLinkedin /></a>
+            <div className="mt-6 lg:flex gap-4 text-2xl">
+              <div className='flex'>
+                <a href="#" className="text-sky-500 p-3 hover:bg-slate-200 rounded"><FaFacebookF /></a>
+                <a href="#" className="text-orange-400 p-3 hover:bg-slate-200 rounded"><LuInstagram /></a>
+                <a href="#" className="text-sky-500 p-3 hover:bg-slate-200 rounded"><FaTwitter /></a>
+              </div>
+              <div className='flex'>
+                <a href="#" className="text-red-500 p-3 hover:bg-slate-200 rounded"><FaYoutube /></a>
+                <a href="#" className="text-sky-600 p-3 hover:bg-slate-200 rounded"><FaLinkedin /></a>
+              </div>
             </div>
           </div>
         </div>

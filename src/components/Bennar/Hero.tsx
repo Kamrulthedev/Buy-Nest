@@ -6,13 +6,12 @@ import heroBcg2 from "./../../assets/offer.jpg";
 
 const Hero: React.FC = () => {
   return (
-    <Wrapper className="section-center font-serif">
+    <Wrapper className="section-center font-serif -mt-28 lg:mt-0">
       <article className="content p-8 lg:ml-10">
-      <h1 className="text-5xl md:text-7xl font-bold text-start leading-tight text-gray-800">
-  Discover Your <br /> 
-  <span className="text-blue-600">Perfect Nest</span>
-</h1>
-
+        <h1 className="text-5xl md:text-7xl font-bold text-start leading-tight text-gray-800">
+          Discover Your <br />
+          <span className="text-blue-600">Perfect Nest</span>
+        </h1>
         <p className="text-zinc-400">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus
           inventore blanditiis facilis nihil laboriosam accusantium aspernatur
