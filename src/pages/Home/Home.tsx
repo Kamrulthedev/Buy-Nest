@@ -3,16 +3,13 @@ import ServiceAdvertisement from "../Services/ServiceAdvertisement";
 import Brands from "./Brand/Brands";
 import Testimonails from "./Testimonials/Testimonails";
 import FeaturersProducts from "../Product/FeaturersProducts";
-// import Hero from "./Hero/Hero";
-import Bennar from "@/components/Bennar/Bennar";
 import AccorditionSection from "@/components/AccorditionSection/AccorditionSection";
+import Hero from "@/components/Bennar/Hero";
 
 const Home = () => {
   return (
     <div>
-      <Bennar />
-      {/* <Hero /> */}
-
+      <Hero></Hero>
       <div className="w-11/12 mx-auto">
         <Brands />
         <ServiceAdvertisement />

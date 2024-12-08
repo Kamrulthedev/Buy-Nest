@@ -28,7 +28,7 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-blue-100 text-black font-serif">
+    <nav className="bg-white text-black font-serif">
       <div className="flex justify-between items-center px-4 py-2">
         {/* Brand Section */}
         <Link to="/" className="flex items-center space-x-2">
@@ -67,7 +67,7 @@ function Navbar() {
                 onClick={toggleDropdown}
               />
               {isDropdownOpen && (
-                <div className="absolute right-0 -mr-4 mt-2 w-60 bg-blue-100 shadow-lg rounded-b-md z-10 p-4 h-64 text-lg">
+                <div className="absolute right-0 -mr-4 mt-2 w-60 bg-white shadow-lg rounded-b-md z-10 p-4 h-64 text-lg">
                   <ul>
                     <li>
                       <button
