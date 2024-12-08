@@ -1,81 +1,147 @@
-import { Link, NavLink } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
-import logo from "../../assets/Mechanical Keyboard Shop.png";
-import "./navber.css";
-import { useAppSelector } from "@/Redux/hooks";
-import { selectTotalQuantity } from "@/Redux/features/products/cardSlice";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom'; 
+import { FiMenu, FiX } from 'react-icons/fi'; 
 
-const Navber = () => {
-  const cards = useAppSelector(selectTotalQuantity);
+function Navbar() {
+  const user = useState('')
+  const handleLogout = useState('')
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [language, setLanguage] = useState('EN');
+  const dropdownRef = useRef(null);
 
-  const nav = (
-    <>
-      <li>
-        <NavLink to="/"> Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/products"> Products</NavLink>
-      </li>
-      <li>
-        <NavLink to="/about">About Us</NavLink>
-      </li>
-      <li>
-        <NavLink to="/contact">Contact Us</NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
-    </>
-  );
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  const handleLanguageChange = (e: any) => setLanguage(e.target.value);
+
   return (
-    <div className="bg-black text-white border-b">
-      <div className=" w-11/12 mx-auto navbar ">
-        <div className="navbar-start ">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm active dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 text-2xl shadow"
+    <nav className="bg-slate-50 text-black font-serif">
+      <div className="flex justify-between items-center px-4 py-2">
+        {/* Brand Section */}
+        <Link to="/" className="flex items-center space-x-2">
+          <div className="rounded-full bg-green-400 h-10 w-10 flex items-center justify-center text-2xl">
+            <span role="img" aria-label="logo" className='text-2xl font-bold'>B</span>
+          </div>
+          <h1 className="font-bold text-2xl">Buy Nest</h1>
+        </Link>
+
+        {/* Main Navigation */}
+        <div className="hidden md:flex lg:gap-5">
+          {['Discover', 'News Feed', 'About Us', 'Contact Us'].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.replace(/\s+/g, '').toLowerCase()}`}
+              className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg"
             >
-              {nav}
-            </ul>
-          </div>
-          {/* <a className="btn btn-ghost text-xl">{logo}</a> */}
-          <div>
-            <Link to="/">
-              <img className="h-12 rounded-xl" src={logo} alt="" />
+              {item}
             </Link>
-          </div>
+          ))}
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{nav}</ul>
-        </div>
-        <div className="navbar-end">
-          <Link to="/cards">
-            <div className="badge ">
-              <FaShoppingCart className="text-[#5c53fe] text-2xl" />
-              <span className="mb-5 "> {cards}</span>
+
+        {/* Right Side Section */}
+        <div className="flex items-center gap-4">
+          <select
+            value={language}
+            onChange={handleLanguageChange}
+            className="bg-white text-black px-3 py-2 rounded hidden md:block"
+          >
+            <option value="EN">English</option>
+            <option value="FR">Français</option>
+            <option value="ES">Español</option>
+          </select>
+
+          {user ? (
+            <div className="relative" ref={dropdownRef}>
+              <img
+                src={user.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
+                alt="Profile"
+                className="h-12 w-12 rounded-full cursor-pointer border object-cover"
+                onClick={toggleDropdown}
+              />
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-purple-300 shadow-lg rounded-md z-10 p-4">
+                  <ul>
+                    <li>
+                      <button
+                        className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
+                        onClick={() => (window.location.href = '/myProfile/myPosts')}
+                      >
+                        My Profile
+                      </button>
+                    </li>
+                    {user.role === 'ADMIN' && (
+                      <li>
+                        <button
+                          className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
+                          onClick={() => (window.location.href = '/admin/adminDeshborad')}
+                        >
+                          Admin Dashboard
+                        </button>
+                      </li>
+                    )}
+                    {user.role === 'USER' && (
+                      <li>
+                        <button
+                          className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
+                          onClick={() => (window.location.href = '/user/dashborad')}
+                        >
+                          Dashboard
+                        </button>
+                      </li>
+                    )}
+                    <li>
+                      <button
+                        className="w-full text-left px-4 py-2 text-red-700 hover:bg-purple-400 rounded-lg"
+                        onClick={handleLogout}
+                      >
+                        Log out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
-          </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-white text-black shadow-sm text-[16px] border px-4 py-2 rounded"
+            >
+              Sign In
+            </Link>
+          )}
+
+          <button onClick={toggleMenu} className="md:hidden">
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default Navber;
+      {isMenuOpen && (
+        <div className="md:hidden bg-white px-4 py-2">
+          {['Discover', 'News Feed', 'About Us', 'Contact Us'].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.replace(/\s+/g, '').toLowerCase()}`}
+              className="block text-xl py-2 hover:bg-slate-100 rounded-lg"
+            >
+              {item}
+            </Link>
+          ))}
+          <select
+            value={language}
+            onChange={handleLanguageChange}
+            className="bg-white text-black px-3 py-2 rounded w-full mt-2"
+          >
+            <option value="EN">English</option>
+            <option value="FR">Français</option>
+            <option value="ES">Español</option>
+          </select>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+export default Navbar;

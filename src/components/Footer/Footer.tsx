@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/Mechanical Keyboard Shop.png";
+import logo from "../../assets/golo.png";
 const Footer = () => {
   return (
     <div
@@ -15,7 +15,6 @@ const Footer = () => {
               to="/contact"
               className="hover:border-b hover:duration-300 hover:translate-x-1"
             >
-              {" "}
               Visit our Contact Page
             </Link>
             <br /> or email us directly at <br />
