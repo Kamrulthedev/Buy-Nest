@@ -1,99 +1,116 @@
-import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FiMenu, FiX } from 'react-icons/fi';
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { FiMenu, FiX, FiShoppingCart, FiSearch } from "react-icons/fi";
 
 function Navbar() {
-  const user = { role: "ADMIN" , profileImg : "https://i.ibb.co.com/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg"};
+  const user = {
+    role: "ADMIN",
+    profileImg:
+      "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
+  };
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [language, setLanguage] = useState('EN');
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => setLanguage(e.target.value);
+
 
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Scroll behavior
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav className="bg-white text-black font-serif">
-      <div className="flex justify-between items-center px-4 py-2">
+    <nav
+      className={`${isScrolled ? "fixed top-0 left-0 right-0 shadow-lg bg-white" : ""
+        } z-50 transition-all duration-300 font-serif`}
+    >
+      <div className="flex justify-between items-center px-4 py-3">
         {/* Brand Section */}
         <Link to="/" className="flex items-center space-x-2">
           <div className="rounded-full bg-green-400 h-10 w-10 flex items-center justify-center text-2xl">
-            <span role="img" aria-label="logo" className="text-2xl font-bold">B</span>
+            <span className="text-2xl font-bold">B</span>
           </div>
           <h1 className="font-bold text-2xl">Buy Nest</h1>
         </Link>
 
+        {/* Search Bar */}
+        <div className="hidden md:flex items-center w-1/3 mx-4 bg-white relative">
+          <input
+            type="text"
+            placeholder="Search for products"
+            className="w-full px-4 py-2 border rounded-xl focus:outline-none bg-white"
+          />
+          <button className="relative -ml-16 px-4 rounded-r-lg text-blue text-green-500">
+            <FiSearch size={20} />
+          </button>
+        </div>
+
         {/* Navigation Links */}
-        <div className="hidden md:flex lg:gap-5">
-          <Link to="/" className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg">Home</Link>
-          <Link to="/" className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg">Shop Now</Link>
-          <Link to="/" className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg">About Us</Link>
-          <Link to="/" className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg">Contact Us</Link>
+        <div className="hidden md:flex lg:gap-5 font-serif">
+          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/'>Home</Link>
+          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/shop'>Shop</Link>
+          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/shop'>About</Link>
+          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/shop'>Contact</Link>
         </div>
 
         {/* Right Side Section */}
-        <div className="flex items-center gap-4">
-          <select
-            value={language}
-            onChange={handleLanguageChange}
-            className="bg-white text-black px-3 py-2 rounded hidden md:block"
+        <div className="flex items-center gap-6">
+          <Link
+            to="/cart"
+            className="text-black hover:text-green-500 flex items-center gap-1"
           >
-            <option value="EN">English</option>
-            <option value="FR">Bangla</option>
-            <option value="ES">Español</option>
-          </select>
-
+            <FiShoppingCart size={24} />
+            <span className="hidden md:inline">Cart</span>
+          </Link>
           {user ? (
             <div className="relative" ref={dropdownRef}>
-              <img 
+              <img
                 src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
                 alt="Profile"
                 className="h-12 w-12 rounded-full cursor-pointer border object-cover"
                 onClick={toggleDropdown}
               />
               {isDropdownOpen && (
-                <div className="absolute right-0 -mr-14 lg:-mr-4 mt-2 w-60 bg-slate-100 shadow-lg rounded-md z-10 p-4 h-64 text-lg">
+                <div className="absolute right-0 mt-2 w-60 bg-slate-100 shadow-lg rounded-md z-10 p-4 text-lg">
                   <ul>
                     <li>
                       <button
                         className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
-                        onClick={() => (window.location.href = '/myProfile/myPosts')}
+                        onClick={() =>
+                          (window.location.href = "/myProfile/myPosts")
+                        }
                       >
                         My Profile
                       </button>
                     </li>
-                    {user.role === 'ADMIN' && (
+                    {user.role === "ADMIN" && (
                       <li>
                         <button
                           className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
-                          onClick={() => (window.location.href = '/admin/adminDeshborad')}
+                          onClick={() =>
+                            (window.location.href = "/admin/adminDashboard")
+                          }
                         >
                           Admin Dashboard
-                        </button>
-                      </li>
-                    )}
-                    {user.role === 'USER' && (
-                      <li>
-                        <button
-                          className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
-                          onClick={() => (window.location.href = '/user/adminDeshborad')}
-                        >
-                          Dashboard
                         </button>
                       </li>
                     )}
@@ -127,19 +144,20 @@ function Navbar() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white px-4 py-2">
-          <Link to="/" className="block text-xl py-2 hover:bg-slate-100 rounded-lg">Home</Link>
-          <Link to="/" className="block text-xl py-2 hover:bg-slate-100 rounded-lg">Shop Now</Link>
-          <Link to="/" className="block text-xl py-2 hover:bg-slate-100 rounded-lg">About Us</Link>
-          <Link to="/" className="block text-xl py-2 hover:bg-slate-100 rounded-lg">Contact Us</Link>
-          <select
-            value={language}
-            onChange={handleLanguageChange}
-            className="bg-white text-black px-3 py-2 rounded w-full mt-2"
-          >
-            <option value="EN">English</option>
-            <option value="FR">Bangla</option>
-            <option value="ES">Español</option>
-          </select>
+          <div className="flex items-center mb-4 relative">
+            <input
+              type="text"
+              placeholder="Search products"
+              className="w-full px-4 py-2 border bg-white rounded-l-lg focus:outline-none"
+            />
+            <button className="relative -ml-14  px-4 rounded-r-lg text-green-500">
+              <FiSearch size={20} />
+            </button>
+          </div>
+          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/'>Home</Link>
+          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/shop'>Shop</Link>
+          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/shop'>About</Link>
+          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/shop'>Contact</Link>
         </div>
       )}
     </nav>
