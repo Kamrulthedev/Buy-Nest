@@ -62,7 +62,7 @@ const CategoryProducts = () => {
             <div className="absolute bottom-4 left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
               <Link
                 to={`/product/${product.id}`}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-600"
               >
                 View Details
               </Link>
