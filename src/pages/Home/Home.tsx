@@ -5,6 +5,7 @@ import AccorditionSection from "@/components/AccorditionSection/AccorditionSecti
 import Hero from "@/components/Bennar/Hero";
 import MarqueeComponent from "@/components/Bennar/Marquee";
 import CategoryProducts from "@/components/CetegoryProducts/CetegoryProducts";
+import Line from "@/components/CetegoryProducts/Line";
 
 const Home = () => {
   return (
@@ -12,7 +13,11 @@ const Home = () => {
       <Hero></Hero>
       <MarqueeComponent></MarqueeComponent>
       <div className="w-11/12 mx-auto">
-      <CategoryProducts></CategoryProducts>
+        <CategoryProducts></CategoryProducts>
+        <Line></Line>
+
+
+        
         <ServiceAdvertisement />
         <FeaturersProducts />
         <Discover />
