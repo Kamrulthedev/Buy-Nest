@@ -47,9 +47,9 @@ function Navbar() {
         {/* Brand Section */}
         <Link to="/" className="flex items-center space-x-2">
           <div className="rounded-full bg-green-400 h-10 w-10 flex items-center justify-center text-2xl">
-            <span className="text-2xl font-bold">B</span>
+            <span className="text-2xl font-bold animate__animated animate__zoomIn">B</span>
           </div>
-          <h1 className="font-bold text-2xl">Buy Nest</h1>
+          <h1 className="font-bold text-2xl animate__animated animate__zoomIn">Buy Nest</h1>
         </Link>
 
         {/* Search Bar */}
@@ -90,11 +90,11 @@ function Navbar() {
                 onClick={toggleDropdown}
               />
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-60 bg-slate-100 shadow-lg rounded-md z-10 p-4 text-lg">
+                <div className="absolute right-0 mt-2 w-60 bg-slate-100 shadow-lg rounded-md z-10 p-4 text-lg animate__animated animate__zoomIn">
                   <ul>
                     <li>
                       <button
-                        className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
+                        className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-lg"
                         onClick={() =>
                           (window.location.href = "/myProfile/myPosts")
                         }
@@ -105,7 +105,7 @@ function Navbar() {
                     {user.role === "ADMIN" && (
                       <li>
                         <button
-                          className="w-full text-left px-4 py-2 hover:bg-purple-400 rounded-lg"
+                          className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white  rounded-lg"
                           onClick={() =>
                             (window.location.href = "/admin/adminDashboard")
                           }
@@ -116,7 +116,7 @@ function Navbar() {
                     )}
                     <li>
                       <button
-                        className="w-full text-left px-4 py-2 text-red-700 hover:bg-purple-400 rounded-lg"
+                        className="w-full text-left px-4 py-2 text-red-700 hover:bg-gray-600 hover:text-red-500 rounded-lg"
                         onClick={() => console.log("Logged out")}
                       >
                         Log out

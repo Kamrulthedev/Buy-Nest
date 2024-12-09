@@ -11,7 +11,7 @@ const demoProducts = [
   { id: 4, brand: "LEVI'S", name: "Stretch Cotton Skinny Pant", price: "$240.00", img: "https://i.ibb.co.com/ZVqYgG9/image.png" },
 ];
 
-const categories = ["All", "Men", "Women", "Accessories", "Sale"];
+const categories = ["Men", "Women", "Accessories"];
 
 const CategoryProducts = () => {
   return (

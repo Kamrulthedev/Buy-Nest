@@ -1,12 +1,11 @@
-import Discover from "@/components/Discover/Discover";
 import ServiceAdvertisement from "../Services/ServiceAdvertisement";
-import FeaturersProducts from "../Product/FeaturersProducts";
 import AccorditionSection from "@/components/AccorditionSection/AccorditionSection";
 import Hero from "@/components/Bennar/Hero";
 import MarqueeComponent from "@/components/Bennar/Marquee";
 import CategoryProducts from "@/components/CetegoryProducts/CetegoryProducts";
 import Line from "@/components/CetegoryProducts/Line";
 import Cetegory from "@/components/CetegoryProducts/Cetegory";
+import RecentProducts from "@/components/RecentProducts/RecentProducts";
 
 const Home = () => {
   return (
@@ -17,11 +16,10 @@ const Home = () => {
         <CategoryProducts></CategoryProducts>
         <Line></Line>
         <Cetegory></Cetegory>
-
-
+        <RecentProducts></RecentProducts>
+        <Line></Line>
         <ServiceAdvertisement />
-        <FeaturersProducts />
-        <Discover />
+        
         <AccorditionSection />
       </div>
     </div>
