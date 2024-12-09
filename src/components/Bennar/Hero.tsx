@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
       <article className="content p-8 lg:ml-10">
         <h1 className="text-5xl md:text-7xl font-bold text-start leading-tight text-gray-800 animate__animated animate__fadeInDown">
           Discover Your <br />
-          <span className="text-blue-600">Perfect Nest</span>
+          <span className="text-violet-400">Perfect Nest</span>
         </h1>
         <p className="text-zinc-400 animate__animated animate__fadeInDown">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus

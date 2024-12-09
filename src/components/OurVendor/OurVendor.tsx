@@ -4,6 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay"; // Import the autoplay style
 import "./OurVendor.css";
 import { Autoplay, Navigation } from "swiper/modules";
+import Heading from "@/Heading/Heading";
 
 const vendors = [
     { id: 1, name: "Jhon Dow", logo: "https://i.ibb.co.com/nMPzV4Z/image.png", description: "Vendor 1 provides high-quality products and services to our customers. Trusted by thousands. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores explicabo facilis veniam magni, corrupti dolore culpa corporis esse eius, quas deleniti quidem ad impedit iusto, quasi magnam repellendus tenetur tempore! " },
@@ -16,24 +17,24 @@ const vendors = [
 
 const OurVendor = () => {
     return (
-        <div className="bg-white py-8 px-4 mt-20 font-serif">
-            <h2 className="text-center text-3xl font-semibold mb-6">Our Vendors Shop</h2>
+        <div className="bg-white py-8 px-4 mt-20 font-serif mb-16">
+             <Heading Heading="Our Vendors Shop"></Heading>
             <Swiper
                 modules={[Autoplay, Navigation]}
                 autoplay={{
                     delay: 3000,
                     disableOnInteraction: false,
                 }}
-                speed={400}
                 loop
                 slidesPerView={1}
                 spaceBetween={20}
+                speed={100}
                 navigation
                 className="vendor-swiper"
             >
                 {vendors.map((vendor) => (
                     <SwiperSlide key={vendor.id}>
-                        <div className="p-8 bg-white  rounded-lg flex flex-col items-center w-full mx-auto transition-all duration-300 hover:scale-105">
+                        <div className="p-8 animate__animated animate__slideInRight bg-white  rounded-lg flex flex-col items-center w-full mx-auto transition-all duration-300 hover:scale-105">
                             <img
                                 src={vendor.logo}
                                 alt={vendor.name}
