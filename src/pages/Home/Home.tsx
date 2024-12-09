@@ -1,5 +1,4 @@
 import ServiceAdvertisement from "../Services/ServiceAdvertisement";
-import AccorditionSection from "@/components/AccorditionSection/AccorditionSection";
 import Hero from "@/components/Bennar/Hero";
 import MarqueeComponent from "@/components/Bennar/Marquee";
 import CategoryProducts from "@/components/CetegoryProducts/CetegoryProducts";
@@ -19,8 +18,6 @@ const Home = () => {
         <RecentProducts></RecentProducts>
         <Line></Line>
         <ServiceAdvertisement />
-        
-        <AccorditionSection />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 # Buy Nest
 
-Live Demo: https://keyboard-shop-server-chi.vercel.app/
+Live Demo: 
 
 ## Table of Contents
 
