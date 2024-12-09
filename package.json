@@ -33,7 +33,7 @@
     "react-router-dom": "^6.24.1",
     "styled-components": "^6.1.13",
     "sweetalert2": "^11.12.2",
-    "swiper": "^11.1.4",
+    "swiper": "^11.1.15",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },

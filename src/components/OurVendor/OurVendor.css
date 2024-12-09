@@ -1,0 +1,40 @@
+/* Larger Cards */
+.vendor-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* Adjust card size */
+  }
+  
+  /* Make Navigation Buttons Smaller */
+  .vendor-swiper .swiper-button-next,
+  .vendor-swiper .swiper-button-prev {
+    width: 92px;
+    height: 92px;
+    color: #333;
+  }
+  
+  .vendor-swiper .swiper-button-next::after,
+  .vendor-swiper .swiper-button-prev::after {
+    font-size: 16px; /* Reduce arrow size */
+  }
+  
+  /* Adjust space around the navigation buttons */
+  .vendor-swiper .swiper-button-next {
+    right: -20px;
+  }
+  
+  .vendor-swiper .swiper-button-prev {
+    left: -20px;
+  }
+  
+  /* Card Styling */
+  .vendor-swiper .swiper-slide div {
+    max-width: 500px; /* Limit the max width of cards */
+    transition: transform 0.3s;
+  }
+  
+  .vendor-swiper .swiper-slide:hover div {
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+  

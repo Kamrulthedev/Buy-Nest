@@ -46,7 +46,7 @@ function Navbar() {
       <div className="flex justify-between items-center px-4 py-3">
         {/* Brand Section */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="rounded-full bg-green-400 h-10 w-10 flex items-center justify-center text-2xl">
+          <div className="rounded-full bg-violet-500 text-white h-10 w-10 flex items-center justify-center text-2xl">
             <span className="text-2xl font-bold animate__animated animate__zoomIn">B</span>
           </div>
           <h1 className="font-bold text-2xl animate__animated animate__zoomIn">Buy Nest</h1>
@@ -59,7 +59,7 @@ function Navbar() {
             placeholder="Search for products"
             className="w-full px-4 py-2 border rounded-xl focus:outline-none bg-white"
           />
-          <button className="relative -ml-16 px-4 rounded-r-lg text-blue text-green-500">
+          <button className="relative -ml-16 px-4 rounded-r-lg text-blue text-gray-500">
             <FiSearch size={20} />
           </button>
         </div>
@@ -76,7 +76,7 @@ function Navbar() {
         <div className="flex items-center gap-6">
           <Link
             to="/cart"
-            className="text-black hover:text-green-500 flex items-center gap-1"
+            className="text-black hover:text-violet-500 flex items-center gap-1"
           >
             <FiShoppingCart size={24} />
             <span className="hidden md:inline">Cart</span>

@@ -5,6 +5,7 @@ import CategoryProducts from "@/components/CetegoryProducts/CetegoryProducts";
 import Line from "@/components/CetegoryProducts/Line";
 import Cetegory from "@/components/CetegoryProducts/Cetegory";
 import RecentProducts from "@/components/RecentProducts/RecentProducts";
+import OurVendor from "@/components/OurVendor/OurVendor";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         <Cetegory></Cetegory>
         <RecentProducts></RecentProducts>
         <Line></Line>
+        <OurVendor></OurVendor>
         <ServiceAdvertisement />
       </div>
     </div>
