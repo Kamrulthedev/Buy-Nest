@@ -24,7 +24,7 @@ const Category = () => {
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[500px] object-cover"
+                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -45,7 +45,7 @@ const Category = () => {
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[240px] object-cover"
+                                className="w-full shadow-lg h-[240px] object-cover hover:scale-110 transition-transform"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -66,7 +66,7 @@ const Category = () => {
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[500px] object-cover"
+                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">

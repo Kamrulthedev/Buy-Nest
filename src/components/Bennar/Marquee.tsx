@@ -15,35 +15,35 @@ const MarqueeComponent = () => {
               <img
                 src="https://i.ibb.co.com/Mh2FRdP/image.png"
                 alt=""
-                className="w-44 h-44 object-contain"
+                className="w-44 h-44  object-cover hover:scale-110 transition-transform"
               />
             </li>
             <li>
               <img
                 src="https://i.ibb.co.com/CV0nTWh/image.png"
                 alt=""
-                className="w-44 h-44 object-contain"
+                className="w-44 h-44 object-cover hover:scale-110 transition-transform"
               />
             </li>
             <li>
               <img
                 src="https://i.ibb.co.com/HqQx06P/image.png"
                 alt=""
-                className="w-44 h-44 object-contain"
+                className="w-44 h-44 object-cover hover:scale-110 transition-transform"
               />
             </li>
             <li>
               <img
                 src="https://i.ibb.co.com/Gxdp0RC/image.png"
                 alt=""
-                className="w-44 h-44 object-contain"
+                className="w-44 h-44 object-cover hover:scale-110 transition-transform"
               />
             </li>
             <li>
               <img
                 src="https://i.ibb.co.com/XJTxf21/image.png"
                 alt=""
-                className="w-44 h-44 object-contain"
+                className="w-44 h-44 object-cover hover:scale-110 transition-transform"
               />
             </li>
 
@@ -51,7 +51,7 @@ const MarqueeComponent = () => {
               <img
                 src="https://i.ibb.co.com/K7234qv/image.png"
                 alt=""
-                className="w-44 h-44 object-contain"
+                className="w-44 h-44 object-cover hover:scale-110 transition-transform"
               />
             </li>
 

@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
         </Link>
       </article>
       <article className="img-container">
-        <img src={heroBcg} alt="nice table" className="main-img pt-5 pr-5 animate__animated animate__zoomIn" />
+        <img src={heroBcg} alt="nice table" className="main-img pt-5 pr-5 animate__animated animate__zoomIn"/>
         <img src={heroBcg2} alt="person working" className="accent-img animate__animated animate__zoomIn" />
       </article>
     </Wrapper>

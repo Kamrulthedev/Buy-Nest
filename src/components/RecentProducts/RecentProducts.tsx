@@ -40,7 +40,7 @@ const RecentProducts = () => {
                 {demoProducts.slice(0, 8).map((product) => (
                     <div key={product.id} className="relative bg-white overflow-hidden group animate__animated animate__pulse">
                         {/* Product Image */}
-                        <img src={product.img} alt={product.name} className="w-full shadow-lg h-48 lg:h-80 object-cover" />
+                        <img src={product.img} alt={product.name} className="w-full shadow-lg h-48 lg:h-80 object-cover hover:scale-110 transition-transform" />
 
                         {/* Overlay Icons */}
                         <div className="absolute top-2 right-2 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
