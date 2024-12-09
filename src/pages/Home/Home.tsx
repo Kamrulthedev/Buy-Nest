@@ -6,6 +6,7 @@ import Hero from "@/components/Bennar/Hero";
 import MarqueeComponent from "@/components/Bennar/Marquee";
 import CategoryProducts from "@/components/CetegoryProducts/CetegoryProducts";
 import Line from "@/components/CetegoryProducts/Line";
+import Cetegory from "@/components/CetegoryProducts/Cetegory";
 
 const Home = () => {
   return (
@@ -15,9 +16,9 @@ const Home = () => {
       <div className="w-11/12 mx-auto">
         <CategoryProducts></CategoryProducts>
         <Line></Line>
+        <Cetegory></Cetegory>
 
 
-        
         <ServiceAdvertisement />
         <FeaturersProducts />
         <Discover />
