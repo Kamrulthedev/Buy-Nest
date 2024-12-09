@@ -4,8 +4,8 @@ const MarqueeComponent = () => {
   return (
     <div className="pt-16 text-center font-serif bg-white">
       <div className="pt-12">
-        <h1 className="text-2xl text-gray-800">
-          Join <span className="text-rose-400">10,000+</span> successful brands choosing Minimog to build & grow their Shopify stores!
+        <h1 className="text-2xl text-gray-800 animate__animated animate__flash">
+          Join <span className="text-rose-400 animate__animated animate__flash">10,000+</span> successful brands choosing Minimog to build & grow their Shopify stores!
         </h1>
       </div>
       <ReactFastMarquee>

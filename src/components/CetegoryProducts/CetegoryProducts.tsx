@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiShoppingCart, FiEye, FiHeart } from "react-icons/fi";
 import { GiDorsalScales } from "react-icons/gi";
+import Heading from "@/Heading/Heading";
 
 
 const demoProducts = [
@@ -15,10 +16,8 @@ const categories = ["All", "Men", "Women", "Accessories", "Sale"];
 const CategoryProducts = () => {
   return (
     <div className="bg-white py-8 px-4 font-serif">
-
-      <div className="text-center p-7">
-        <h1 className="text-3xl font-bold">Trendy Products</h1>
-      </div>
+      <Heading Heading="Trendy Products">
+      </Heading>
       {/* Category Buttons */}
       <div className="flex justify-center gap-4 mb-8">
         {categories.map((category, index) => (
@@ -34,7 +33,7 @@ const CategoryProducts = () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {demoProducts.map((product) => (
-          <div key={product.id} className="relative bg-white overflow-hidden group">
+          <div key={product.id} className="relative bg-white overflow-hidden group animate__animated animate__pulse">
             {/* Product Image */}
             <img src={product.img} alt={product.name} className="w-full shadow-lg h-80 object-cover" />
 
@@ -59,14 +58,14 @@ const CategoryProducts = () => {
             </div>
 
             {/* Hover Buttons */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute  bottom-4 left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
               <Link
                 to={`/product/${product.id}`}
                 className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-600"
               >
                 View Details
               </Link>
-              <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
+              <button className="px-4 py-2  bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
                 Add to Cart <FiShoppingCart className="inline ml-2" />
               </button>
             </div>

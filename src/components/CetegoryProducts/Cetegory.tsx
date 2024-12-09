@@ -1,3 +1,4 @@
+import Heading from "@/Heading/Heading";
 
 
 
@@ -11,9 +12,8 @@ const demoProducts = [
 const Category = () => {
     return (
         <div className="bg-white py-8 px-4 font-serif">
-            <div className="text-center p-7">
-                <h1 className="text-3xl font-bold">Shop by Categories</h1>
-            </div>
+            <Heading Heading="Shop by Categories">
+            </Heading>
             {/* Product Grid */}
             <div className="grid lg:grid-cols-3 grid-cols-1 gap-4">
                 {/* First Category */}
@@ -30,7 +30,7 @@ const Category = () => {
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                                 <button className="text-black py-3 px-6 bg-white shadow-lg group-hover:bg-gray-500 group-hover:text-white transition-all">
                                     <span className="group-hover:hidden">Man Shop</span>
-                                    <span className="hidden group-hover:inline">Shop Now ⇨</span>
+                                    <span className="hidden group-hover:inline animate__animated animate__flash">Shop Now ⇨</span>
                                 </button>
                             </div>
                         </div>
@@ -51,7 +51,7 @@ const Category = () => {
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                                 <button className="text-black py-3 px-6 bg-white shadow-lg group-hover:bg-gray-500 group-hover:text-white transition-all">
                                     <span className="group-hover:hidden">Man Shop</span>
-                                    <span className="hidden group-hover:inline">Shop Now ⇨</span>
+                                    <span className="hidden group-hover:inline animate__animated animate__flash">Shop Now ⇨</span>
                                 </button>
                             </div>
                         </div>
@@ -72,7 +72,7 @@ const Category = () => {
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                                 <button className="text-black py-3 px-6 bg-white shadow-lg group-hover:bg-gray-500 group-hover:text-white transition-all">
                                     <span className="group-hover:hidden">Man Shop</span>
-                                    <span className="hidden group-hover:inline">Shop Now ⇨</span>
+                                    <span className="hidden group-hover:inline animate__animated animate__flash">Shop Now ⇨</span>
                                 </button>
                             </div>
                         </div>
@@ -80,7 +80,7 @@ const Category = () => {
                 </div>
             </div>
 
-          
+
         </div>
     );
 };

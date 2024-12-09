@@ -8,22 +8,22 @@ const Hero: React.FC = () => {
   return (
     <Wrapper className="section-center font-serif md:-mt-0 sm:-mt-28 lg:mt-0 bg-white">
       <article className="content p-8 lg:ml-10">
-        <h1 className="text-5xl md:text-7xl font-bold text-start leading-tight text-gray-800">
+        <h1 className="text-5xl md:text-7xl font-bold text-start leading-tight text-gray-800 animate__animated animate__fadeInDown">
           Discover Your <br />
           <span className="text-blue-600">Perfect Nest</span>
         </h1>
-        <p className="text-zinc-400">
+        <p className="text-zinc-400 animate__animated animate__fadeInDown">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus
           inventore blanditiis facilis nihil laboriosam accusantium aspernatur
           distinctio voluptatum iusto saepe.
         </p>
-        <Link to="/products" className="btn hero-btn bg-slate-300 text-slate-700 hover:bg-slate-400">
+        <Link to="/products" className="btn hero-btn bg-slate-300 text-slate-700 hover:bg-slate-400 animate__animated animate__fadeInDown">
           shop now
         </Link>
       </article>
       <article className="img-container">
-        <img src={heroBcg} alt="nice table" className="main-img pt-5 pr-5" />
-        <img src={heroBcg2} alt="person working" className="accent-img" />
+        <img src={heroBcg} alt="nice table" className="main-img pt-5 pr-5 animate__animated animate__zoomIn" />
+        <img src={heroBcg2} alt="person working" className="accent-img animate__animated animate__zoomIn" />
       </article>
     </Wrapper>
   );
