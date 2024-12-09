@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
           inventore blanditiis facilis nihil laboriosam accusantium aspernatur
           distinctio voluptatum iusto saepe.
         </p>
-        <Link to="/products" className="btn hero-btn">
+        <Link to="/products" className="btn hero-btn bg-slate-300 text-slate-700 hover:bg-slate-400">
           shop now
         </Link>
       </article>

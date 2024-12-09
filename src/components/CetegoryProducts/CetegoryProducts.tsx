@@ -4,13 +4,13 @@ import { GiDorsalScales } from "react-icons/gi";
 
 
 const demoProducts = [
-  { id: 1, brand: "POLO", name: "Rounded Cat Eye Sunglasses", price: "$180.00", img: "https://via.placeholder.com/150" },
-  { id: 2, brand: "LACOSTE", name: "Saffiano Leather Belt", price: "$200.00", img: "https://via.placeholder.com/150" },
-  { id: 3, brand: "GUESS", name: "Silk Polka-Dot Scarf", price: "$220.00", img: "https://via.placeholder.com/150" },
-  { id: 4, brand: "LEVI'S", name: "Stretch Cotton Skinny Pant", price: "$240.00", img: "https://via.placeholder.com/150" },
+  { id: 1, brand: "POLO", name: "Rounded Cat Eye Sunglasses", price: "$180.00", img: "https://i.ibb.co.com/HPX62Qv/image.png" },
+  { id: 2, brand: "LACOSTE", name: "Saffiano Leather Belt", price: "$200.00", img: "https://i.ibb.co.com/SwqymT0/image.png" },
+  { id: 3, brand: "GUESS", name: "Silk Polka-Dot Scarf", price: "$220.00", img: "https://i.ibb.co.com/5T1mNC7/image.png" },
+  { id: 4, brand: "LEVI'S", name: "Stretch Cotton Skinny Pant", price: "$240.00", img: "https://i.ibb.co.com/ZVqYgG9/image.png" },
 ];
 
-const categories = ["All","Men", "Women", "Accessories", "Sale"];
+const categories = ["All", "Men", "Women", "Accessories", "Sale"];
 
 const CategoryProducts = () => {
   return (
@@ -24,7 +24,7 @@ const CategoryProducts = () => {
         {categories.map((category, index) => (
           <button
             key={index}
-            className="px-4 py-2 bg-white shadow-md rounded-lg hover:bg-blue-100 text-black font-medium"
+            className="px-4 py-2 bg-white shadow-md rounded-lg hover:bg-slate-300 text-black font-medium"
           >
             {category}
           </button>
@@ -36,7 +36,7 @@ const CategoryProducts = () => {
         {demoProducts.map((product) => (
           <div key={product.id} className="relative bg-white overflow-hidden group">
             {/* Product Image */}
-            <img src={product.img} alt={product.name} className="w-full shadow-lg h-72 object-cover" />
+            <img src={product.img} alt={product.name} className="w-full shadow-lg h-80 object-cover" />
 
             {/* Overlay Icons */}
             <div className="absolute top-2 right-2 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -59,7 +59,7 @@ const CategoryProducts = () => {
             </div>
 
             {/* Hover Buttons */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute bottom-4 left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity">
               <Link
                 to={`/product/${product.id}`}
                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"

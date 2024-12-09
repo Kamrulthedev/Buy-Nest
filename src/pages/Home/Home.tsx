@@ -1,6 +1,5 @@
 import Discover from "@/components/Discover/Discover";
 import ServiceAdvertisement from "../Services/ServiceAdvertisement";
-import Testimonails from "./Testimonials/Testimonails";
 import FeaturersProducts from "../Product/FeaturersProducts";
 import AccorditionSection from "@/components/AccorditionSection/AccorditionSection";
 import Hero from "@/components/Bennar/Hero";
@@ -17,7 +16,6 @@ const Home = () => {
         <ServiceAdvertisement />
         <FeaturersProducts />
         <Discover />
-        <Testimonails />
         <AccorditionSection />
       </div>
     </div>
