@@ -38,7 +38,7 @@ const RecentProducts = () => {
             {/* Product Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {demoProducts.slice(0, 8).map((product) => (
-                    <div key={product.id} className="relative bg-white overflow-hidden group animate__animated animate__pulse">
+                    <div key={product.id} className="relative bg-white overflow-hidden group animate__animated animate__fadeInDown">
                         {/* Product Image */}
                         <img src={product.img} alt={product.name} className="w-full shadow-lg h-48 lg:h-80 object-cover hover:scale-110 transition-transform" />
 

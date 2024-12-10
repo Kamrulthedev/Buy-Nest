@@ -9,7 +9,7 @@ const MarqueeComponent = () => {
         </h1>
       </div>
       <ReactFastMarquee>
-        <div>
+        <div className="animate__animated animate__slideInDown">
           <ul className="flex gap-16 items-center">
             <li>
               <img

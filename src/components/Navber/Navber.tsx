@@ -73,7 +73,7 @@ function Navbar() {
         </div>
 
         {/* Right Side Section */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 ">
           <Link
             to="/cart"
             className="text-black hover:text-violet-500 flex items-center gap-1"

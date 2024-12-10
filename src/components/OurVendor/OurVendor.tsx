@@ -7,7 +7,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import Heading from "@/Heading/Heading";
 
 const vendors = [
-    { id: 1, name: "Jhon Dow", logo: "https://i.ibb.co.com/nMPzV4Z/image.png", description: "Vendor 1 provides high-quality products and services to our customers. Trusted by thousands. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores explicabo facilis veniam magni, corrupti dolore culpa corporis esse eius, quas deleniti quidem ad impedit iusto, quasi magnam repellendus tenetur tempore! " },
+    { id: 1, name: "Kamrul Islam", logo: "https://i.ibb.co.com/nMPzV4Z/image.png", description: "Vendor 1 provides high-quality products and services to our customers. Trusted by thousands. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores explicabo facilis veniam magni, corrupti dolore culpa corporis esse eius, quas deleniti quidem ad impedit iusto, quasi magnam repellendus tenetur tempore! " },
     { id: 2, name: "Ringina Tabassum", logo: "https://i.ibb.co.com/fSy3MFp/image.png", description: " omers. Trusted by thousands. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores explicabo facilis veniam magni, corrupti dolore culpa corporis esse eius, quas deleniti quidem ad impediVendor 2 specializes in fast deliveries and customer satisfaction." },
     { id: 3, name: "Dinmojumdar", logo: "https://i.ibb.co.com/hC5dpNF/image.png", description: " omers. Trusted by thousands. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores explicabo facilis veniam magni, corrupti dolore culpa corporis esse eius, quas deleniti quidem ad impedi Vendor 3 offers competitive pricing and extensive customer support." },
     { id: 4, name: "Denal Trmp", logo: "https://i.ibb.co.com/rfp43Tn/image.png", description: " omers. Trusted by thousands. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores explicabo facilis veniam magni, corrupti dolore culpa corporis esse eius, quas deleniti quidem ad impedi Vendor 4 is known for eco-friendly products and innovation." },
@@ -17,7 +17,7 @@ const vendors = [
 
 const OurVendor = () => {
     return (
-        <div className="bg-white py-8 px-4 mt-20 font-serif mb-16">
+        <div className="bg-white py-8 px-4 mt-8 font-serif mb-16">
              <Heading Heading="Our Vendors Shop"></Heading>
             <Swiper
                 modules={[Autoplay, Navigation]}

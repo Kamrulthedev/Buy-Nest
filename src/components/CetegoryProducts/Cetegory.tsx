@@ -19,12 +19,12 @@ const Category = () => {
                 {/* First Category */}
                 <div className="gap-6 bg-gray-200">
                     {demoProducts.slice(0, 1).map((product) => (
-                        <div key={product.id} className="relative overflow-hidden group">
+                        <div key={product.id} className="relative overflow-hidden group animate__animated animate__fadeInDown">
                             {/* Product Image */}
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform"
+                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform "
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -45,7 +45,7 @@ const Category = () => {
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[240px] object-cover hover:scale-110 transition-transform"
+                                className="w-full shadow-lg h-[240px] object-cover hover:scale-110 transition-transform animate__animated animate__fadeInDown"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -66,7 +66,7 @@ const Category = () => {
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform"
+                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform animate__animated animate__fadeInDown"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
