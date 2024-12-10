@@ -1,3 +1,4 @@
+import FilterPageSearch from "@/components/ui/Filter/FilterPageSearch";
 
 
 const Products = () => {
@@ -12,15 +13,7 @@ const Products = () => {
       <div className="container mx-auto mt-8 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-[250px_1fr]">
         {/* Filters */}
         <aside className="bg-white p-6 rounded-lg shadow-lg">
-          <div className="mb-4">
-            <h2 className="font-bold text-lg">Search</h2>
-            <input
-              type="text"
-              placeholder="Search"
-              className="mt-2 w-full p-2 border border-gray-300 bg-white rounded focus:outline-none focus:ring-2 focus:ring-violet-500"
-            />
-          </div>
-
+          <FilterPageSearch></FilterPageSearch>
           <div className="mb-4">
             <h2 className="font-bold text-lg">Category</h2>
             <ul className="mt-2 space-y-2">
