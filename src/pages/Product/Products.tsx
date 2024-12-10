@@ -1,115 +1,112 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import Heading from "@/Heading/Heading";
-
-import { TProductProps } from "@/types/types";
-import Product from "./Product";
-import {
-  clearFilters,
-  selectFilters,
-  seleteSearchQueray,
-  seletetProducts,
-  setSearchQuery,
-  setSort,
-} from "@/Redux/features/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
-import { ChangeEvent } from "react";
 
 
 const Products = () => {
-  const dispatch = useAppDispatch();
-  const products = useAppSelector(seletetProducts);
-  const filters = useAppSelector(selectFilters);
-
-  const searchProductQuery = useAppSelector(seleteSearchQueray);
-  const handleInputSearchQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery(event.target.value));
-  };
-
-  const handleSortChange = (value: string) => {
-    if (value === "low") {
-      dispatch(setSort("low-to-high"));
-    } else if (value === "high") {
-      dispatch(setSort("high-to-low"));
-    } else {
-      dispatch(clearFilters());
-    }
-  };
-  const searchProduct = products
-    ?.filter((product: TProductProps) =>
-      product.title
-        .toLocaleLowerCase()
-        .includes(searchProductQuery.toLocaleLowerCase())
-    )
-    .filter(
-      (product: TProductProps) =>
-        product.price >= filters.minPrice && product.price <= filters.maxPrice
-    )
-    .sort((a, b) => {
-      if (filters.sort === "low-to-high") {
-        return a.price - b.price;
-      } else if (filters.sort === "high-to-low") {
-        return b.price - a.price;
-      } else {
-        return 0;
-      }
-    });
   return (
-    <div className="w-11/12  mx-auto ">
+    <main className="bg-white min-h-screen py-8">
+      {/* Hero Section */}
+      <div className="bg-gray-200 p-2 px-10 shadow text-start">
+        <p>Home/products</p>
+      </div>
 
-      <div className="my-20">
-        <div className="md:flex items-center  justify-between my-10">
-          <Heading
-            Heading="All Products"
-            Text="Shop MK's selection of over 1,000 Mechanical Keyboards. Unlike membrane keyboards, where pressing a key pushes down on a single keyboard-sized membrane to complete a circuit, mechanical keyboards use individual mechanical switches for each key. Shop from a wide variety of sizes, switch types, keycaps, brands, and more to customize your gaming and typing experience."
-          ></Heading>
-        </div>
-        <div className="md:flex items-center justify-between  mb-5">
-          <label className="input input-bordered my-5 flex items-center gap-2">
+      {/* Wrapper Section */}
+      <div className="container mx-auto mt-8 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-[250px_1fr]">
+        {/* Filters */}
+        <aside className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="mb-4">
+            <h2 className="font-bold text-lg">Search</h2>
             <input
               type="text"
-              className="grow"
-              placeholder="Search Your Product"
-              onChange={handleInputSearchQuery}
+              placeholder="Search"
+              className="mt-2 w-full p-2 border border-gray-300 bg-white rounded focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </label>
-          <div>
-            <Select onValueChange={handleSortChange}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sort By Price" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="low">Low to High</SelectItem>
-                <SelectItem value="high">High to Low</SelectItem>
-                <SelectItem value="reset">Reset All</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
-        </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
-          {searchProduct?.map((product: TProductProps) => (
-            <Product key={product?._id} product={product} />
-          ))}
-        </div>
+
+          <div className="mb-4">
+            <h2 className="font-bold text-lg">Category</h2>
+            <ul className="mt-2 space-y-2">
+              <li className="cursor-pointer hover:text-blue-500">All</li>
+              <li className="cursor-pointer hover:text-blue-500">Men</li>
+              <li className="cursor-pointer hover:text-blue-500">Women</li>
+              <li className="cursor-pointer hover:text-blue-500">Kids</li>
+              <li className="cursor-pointer hover:text-blue-500">Accessories</li>
+            </ul>
+          </div>
+
+          <div className="mb-4">
+            <h2 className="font-bold text-lg">Vendors</h2>
+            <select
+              className="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 "
+            >
+              <option value="all">All</option>
+              <option value="polo">Polo</option>
+              <option value="lacoste">Lacoste</option>
+              <option value="guess">Guess</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <h2 className="font-bold text-lg">Price</h2>
+            <div className="flex items-center gap-4 mt-2">
+              <span className="text-gray-500">-$∞</span>
+              <input
+                type="range"
+                className="flex-grow"
+                min="0"
+                max="500"
+                step="10"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="free-shipping"
+              className="w-4 h-4 cursor-pointer"
+            />
+            <label htmlFor="free-shipping" className="text-gray-700 cursor-pointer">
+              Free Shipping
+            </label>
+          </div>
+
+          <button className="mt-4 w-full py-2 bg-red-500 text-white rounded hover:bg-red-600">
+            Clear Filters
+          </button>
+        </aside>
+
+        {/* Products Section */}
+        <section>
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-gray-700">0 Products Found</p>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <button className="p-2 border rounded-md bg-gray-200">
+                  Grid
+                </button>
+                <button className="p-2 border rounded-md">
+                  List
+                </button>
+              </div>
+              <div>
+                <label htmlFor="sort" className="text-gray-700 mr-2">
+                  Sort By
+                </label>
+                <select
+                  id="sort"
+                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="lowest">Price (Lowest)</option>
+                  <option value="highest">Price (Highest)</option>
+                  <option value="a-z">Name (A-Z)</option>
+                  <option value="z-a">Name (Z-A)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          {/* Add your product list or grid here */}
+          <div className="text-center text-gray-500">No products available</div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 

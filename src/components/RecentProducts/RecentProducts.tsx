@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 
 const demoProducts = [
-    { id: 1, brand: "POLO", name: "Rounded Cat Eye Sunglasses", price: "$180.00", img: "https://i.ibb.co.com/HPX62Qv/image.png" },
-    { id: 2, brand: "LACOSTE", name: "Saffiano Leather Belt", price: "$200.00", img: "https://i.ibb.co.com/SwqymT0/image.png" },
-    { id: 3, brand: "GUESS", name: "Silk Polka-Dot Scarf", price: "$220.00", img: "https://i.ibb.co.com/5T1mNC7/image.png" },
-    { id: 4, brand: "LEVI'S", name: "Stretch Cotton Skinny Pant", price: "$240.00", img: "https://i.ibb.co.com/ZVqYgG9/image.png" },
+    { id: 1, brand: "POLO", name: "Rounded Cat Eye Sunglasses", price: "$180.00", img: "https://i.ibb.co.com/G5tXztb/image.png" },
+    { id: 2, brand: "LACOSTE", name: "Saffiano Leather Belt", price: "$200.00", img: "https://i.ibb.co.com/Sy94FSd/image.png" },
+    { id: 3, brand: "GUESS", name: "Silk Polka-Dot Scarf", price: "$220.00", img: "https://i.ibb.co.com/dDtNncx/image.png" },
+    { id: 4, brand: "LEVI'S", name: "Stretch Cotton Skinny Pant", price: "$240.00", img: "https://i.ibb.co.com/W0JX8Rr/image.png" },
     { id: 5, brand: "POLO", name: "Rounded Cat Eye Sunglasses", price: "$180.00", img: "https://i.ibb.co.com/HPX62Qv/image.png" },
     { id: 6, brand: "LACOSTE", name: "Saffiano Leather Belt", price: "$200.00", img: "https://i.ibb.co.com/SwqymT0/image.png" },
     { id: 7, brand: "GUESS", name: "Silk Polka-Dot Scarf", price: "$220.00", img: "https://i.ibb.co.com/5T1mNC7/image.png" },

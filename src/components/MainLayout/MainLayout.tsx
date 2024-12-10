@@ -6,7 +6,7 @@ import usePageRefreshWarning from "../usePageRefreshWarning/UsePageRefreshWarnin
 const MainLayout = () => {
   usePageRefreshWarning();
   return (
-    <div>
+    <div className="font-serif">
       <Navber></Navber>
       <Outlet />
       <Footer></Footer>
