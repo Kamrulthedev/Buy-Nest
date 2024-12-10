@@ -34,11 +34,13 @@ const VendorFilter = () => {
         menu: (provided: any) => ({
             ...provided,
             animation: 'fadeInDown 0.3s ease-in-out',
+            padding: '8px',
             backgroundColor: '#ffffff',
         }),
         option: (provided: any, state: any) => ({
             ...provided,
             backgroundColor: state.isSelected ? '#7c3aed' : state.isFocused ? '#e9d8fd' : '#ffffff',
+            borderRadius: '2px',
             color: state.isSelected ? '#ffffff' : '#333333',
             '&:hover': {
                 backgroundColor: '#e9d8fd',
