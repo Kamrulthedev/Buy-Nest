@@ -24,18 +24,18 @@ const Products = () => {
           <div className="mb-4">
             <h2 className="font-bold text-lg">Category</h2>
             <ul className="mt-2 space-y-2">
-              <li className="cursor-pointer hover:text-blue-500">All</li>
-              <li className="cursor-pointer hover:text-blue-500">Men</li>
-              <li className="cursor-pointer hover:text-blue-500">Women</li>
-              <li className="cursor-pointer hover:text-blue-500">Kids</li>
-              <li className="cursor-pointer hover:text-blue-500">Accessories</li>
+              <li className="cursor-pointer hover:text-violet-500">All</li>
+              <li className="cursor-pointer hover:text-violet-500">Men</li>
+              <li className="cursor-pointer hover:text-violet-500">Women</li>
+              <li className="cursor-pointer hover:text-violet-500">Kids</li>
+              <li className="cursor-pointer hover:text-violet-500">Accessories</li>
             </ul>
           </div>
 
           <div className="mb-4">
             <h2 className="font-bold text-lg">Vendors</h2>
             <select
-              className="w-full mt-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 "
+              className="w-full mt-2 p-2 border border-gray-300 bg-white rounded focus:outline-none focus:ring-2 focus:ring-violet-500"
             >
               <option value="all">All</option>
               <option value="polo">Polo</option>
@@ -68,7 +68,7 @@ const Products = () => {
             </label>
           </div>
 
-          <button className="mt-4 w-full py-2 bg-red-500 text-white rounded hover:bg-red-600">
+          <button className="mt-4 w-full text-xs py-2 bg-red-500 text-white rounded hover:bg-red-600">
             Clear Filters
           </button>
         </aside>
@@ -92,7 +92,7 @@ const Products = () => {
                 </label>
                 <select
                   id="sort"
-                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-violet-500 bg-white"
                 >
                   <option value="lowest">Price (Lowest)</option>
                   <option value="highest">Price (Highest)</option>
