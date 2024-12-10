@@ -45,11 +45,13 @@ function Navbar() {
     >
       <div className="flex justify-between items-center px-4 py-3">
         {/* Brand Section */}
-        <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-x-110">
-          <div className="rounded-full bg-violet-500 text-white h-10 w-10 flex items-center justify-center text-2xl">
+        <Link to="/" className="transition-transform hover:scale-x-110">
+        <div className="flex items-center space-x-2 animate__animated animate__fadeInDown">
+        <div className="rounded-full bg-violet-500 text-white h-10 w-10 flex items-center justify-center text-2xl">
             <span className="text-2xl font-bold animate__animated animate__zoomIn">B</span>
           </div>
           <h1 className="font-bold text-2xl animate__animated animate__zoomIn">Buy Nest</h1>
+        </div>
         </Link>
 
         {/* Search Bar */}

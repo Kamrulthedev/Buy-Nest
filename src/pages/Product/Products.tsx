@@ -1,24 +1,12 @@
 import FilterPageSearch from "@/components/ui/Filter/FilterPageSearch";
-import { Link } from "react-router-dom";
-
+import ProductHero from "./ProductHero";
+import VendorFilter from "@/components/ui/Filter/VendorFilter";
 
 const Products = () => {
+
   return (
     <main className="bg-white min-h-screen py-8 animate__animated animate__fadeInDown">
-      {/* Hero Section */}
-      <div className="bg-gray-200 p-2 px-10 shadow text-start">
-        <p>
-          <Link to="/" className="text-violet-500 hover:underline">
-            Home
-          </Link>
-          /
-          <Link to="/products" className="text-violet-500 hover:underline">
-            Products
-          </Link>
-        </p>
-      </div>
-
-
+      <ProductHero></ProductHero>
       {/* Wrapper Section */}
       <div className="container mx-auto mt-8 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-[250px_1fr]">
         {/* Filters */}
@@ -34,18 +22,7 @@ const Products = () => {
               <li className="cursor-pointer hover:text-violet-500">Accessories</li>
             </ul>
           </div>
-
-          <div className="mb-4">
-            <h2 className="font-bold text-lg">Vendors</h2>
-            <select
-              className="w-full mt-2 p-2 border border-gray-300 bg-white rounded focus:outline-none focus:ring-2 focus:ring-violet-500"
-            >
-              <option value="all">All</option>
-              <option value="polo">Polo</option>
-              <option value="lacoste">Lacoste</option>
-              <option value="guess">Guess</option>
-            </select>
-          </div>
+          <VendorFilter></VendorFilter>
           <div className="mb-4">
             <h2 className="font-bold text-lg">Price</h2>
             <div className="flex items-center gap-4 mt-2">
