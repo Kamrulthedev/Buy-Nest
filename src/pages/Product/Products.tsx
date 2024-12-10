@@ -19,7 +19,7 @@ import {
 } from "@/Redux/features/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { ChangeEvent } from "react";
-import Hero from "../Home/Hero/Hero";
+
 
 const Products = () => {
   const dispatch = useAppDispatch();
@@ -61,7 +61,7 @@ const Products = () => {
     });
   return (
     <div className="w-11/12  mx-auto ">
-      <Hero></Hero>
+
       <div className="my-20">
         <div className="md:flex items-center  justify-between my-10">
           <Heading
