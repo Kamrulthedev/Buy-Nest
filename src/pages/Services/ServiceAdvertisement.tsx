@@ -4,7 +4,7 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 
 const ServiceAdvertisement = () => {
   return (
-    <div className="mb-20 font-serif mt-10">
+    <div className="mb-20 font-serif mt-10 bg-white rounded-md">
       <div>
         <div>
           <div className="md:grid grid-cols-3 gap-4">

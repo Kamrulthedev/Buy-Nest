@@ -6,10 +6,11 @@ import Line from "@/components/CetegoryProducts/Line";
 import Cetegory from "@/components/CetegoryProducts/Cetegory";
 import RecentProducts from "@/components/RecentProducts/RecentProducts";
 import OurVendor from "@/components/OurVendor/OurVendor";
+import SignupBanner from "@/components/Bennar/SignupBanner";
 
 const Home = () => {
   return (
-    <div>
+    <div className="font-serif">
       <Hero></Hero>
       <MarqueeComponent></MarqueeComponent>
       <div className="w-11/12 mx-auto">
@@ -20,6 +21,7 @@ const Home = () => {
         <Line></Line>
         <OurVendor></OurVendor>
         <ServiceAdvertisement />
+        <SignupBanner></SignupBanner>
       </div>
     </div>
   );
