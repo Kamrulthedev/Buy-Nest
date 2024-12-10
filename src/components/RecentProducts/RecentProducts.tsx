@@ -28,7 +28,7 @@ const RecentProducts = () => {
                 {categories.map((category, index) => (
                     <button
                         key={index}
-                        className="px-4 py-2 bg-white shadow-md rounded-lg hover:bg-slate-300 text-black font-medium"
+                        className="px-4 py-2 bg-white shadow-md rounded-lg hover:bg-slate-300 animate__animated animate__fadeInDown text-black font-medium"
                     >
                         {category}
                     </button>

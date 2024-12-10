@@ -57,7 +57,7 @@ function Navbar() {
           <input
             type="text"
             placeholder="Search for products"
-            className="w-full px-4 py-2 border rounded-xl focus:outline-none bg-white"
+            className="w-full px-4 py-2 border rounded-xl text-gray-500 focus:outline-none bg-white"
           />
           <button className="relative -ml-16 px-4 rounded-r-lg text-blue text-gray-500">
             <FiSearch size={20} />
@@ -149,9 +149,9 @@ function Navbar() {
               <input
                 type="text"
                 placeholder="Search products"
-                className="w-full px-4 py-2 border bg-white rounded-l-lg focus:outline-none"
+                className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg focus:outline-none"
               />
-              <button className="relative -ml-14  px-4 rounded-r-lg text-green-500">
+              <button className="relative -ml-14  px-4 rounded-r-lg text-viole-500">
                 <FiSearch size={20} />
               </button>
             </div>
