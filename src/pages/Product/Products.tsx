@@ -1,13 +1,23 @@
 import FilterPageSearch from "@/components/ui/Filter/FilterPageSearch";
+import { Link } from "react-router-dom";
 
 
 const Products = () => {
   return (
-    <main className="bg-white min-h-screen py-8">
+    <main className="bg-white min-h-screen py-8 animate__animated animate__fadeInDown">
       {/* Hero Section */}
       <div className="bg-gray-200 p-2 px-10 shadow text-start">
-        <p>Home/products</p>
+        <p>
+          <Link to="/" className="text-violet-500 hover:underline">
+            Home
+          </Link>
+          /
+          <Link to="/products" className="text-violet-500 hover:underline">
+            Products
+          </Link>
+        </p>
       </div>
+
 
       {/* Wrapper Section */}
       <div className="container mx-auto mt-8 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-[250px_1fr]">
