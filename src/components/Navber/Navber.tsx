@@ -53,7 +53,7 @@ function Navbar() {
         </Link>
 
         {/* Search Bar */}
-        <div className="hidden md:flex items-center w-1/3 mx-4 bg-white relative">
+        <div className="hidden md:flex items-center w-1/3 mx-4 bg-white relative hover:scale-110 transition-transform">
           <input
             type="text"
             placeholder="Search for products"
@@ -143,21 +143,23 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white px-4 py-2">
-          <div className="flex items-center mb-4 relative">
-            <input
-              type="text"
-              placeholder="Search products"
-              className="w-full px-4 py-2 border bg-white rounded-l-lg focus:outline-none"
-            />
-            <button className="relative -ml-14  px-4 rounded-r-lg text-green-500">
-              <FiSearch size={20} />
-            </button>
+        <div className="md:hidden bg-violet-50 px-4 py-2 animate__animated animate__fadeInDown rounded-md">
+          <div className="p-3">
+            <div className="flex items-center mb-4 relative hover:scale-105 transition-transform">
+              <input
+                type="text"
+                placeholder="Search products"
+                className="w-full px-4 py-2 border bg-white rounded-l-lg focus:outline-none"
+              />
+              <button className="relative -ml-14  px-4 rounded-r-lg text-green-500">
+                <FiSearch size={20} />
+              </button>
+            </div>
+            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/'>Home</Link>
+            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/shop'>Shop</Link>
+            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/shop'>About</Link>
+            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/shop'>Contact</Link>
           </div>
-          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/'>Home</Link>
-          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/shop'>Shop</Link>
-          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/shop'>About</Link>
-          <Link className="block text-xl py-2 hover:bg-slate-100 rounded-lg" to='/shop'>Contact</Link>
         </div>
       )}
     </nav>

@@ -24,7 +24,7 @@ const Category = () => {
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform "
+                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -40,12 +40,12 @@ const Category = () => {
                 {/* Second Category */}
                 <div className="space-y-[21px]">
                     {demoProducts.slice(1, 3).map((product) => (
-                        <div key={product.id} className="bg-gray-200 relative overflow-hidden group">
+                        <div key={product.id} className="bg-gray-200 relative overflow-hidden group animate__animated animate__fadeInDown">
                             {/* Product Image */}
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[240px] object-cover hover:scale-110 transition-transform animate__animated animate__fadeInDown"
+                                className="w-full shadow-lg h-[240px] object-cover hover:scale-110 transition-transform"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -61,12 +61,12 @@ const Category = () => {
                 {/* Third Category */}
                 <div className="bg-gray-200">
                     {demoProducts.slice(3, 4).map((product) => (
-                        <div key={product.id} className="relative overflow-hidden group">
+                        <div key={product.id} className="relative overflow-hidden group animate__animated animate__fadeInDown">
                             {/* Product Image */}
                             <img
                                 src={product.img}
                                 alt={product.name}
-                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform animate__animated animate__fadeInDown"
+                                className="w-full shadow-lg h-[500px] object-cover hover:scale-110 transition-transform"
                             />
                             {/* Button at the bottom center */}
                             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
