@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FiMenu, FiX, FiShoppingCart, FiSearch, FiHeart, FiBell } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
+import Notification from "./Notification";
+import Wishlist from "./Wishlist";
+import NavberCart from "./NavberCart";
+import NavberSearchBar from "./NavberSearchBar";
+import NavberBrandLink from "./NavberBrandLink";
+import NavigationLinks from "./NavigationLinks";
+import MobaileNaber from "./MobaileNaber";
 
 function Navbar() {
   const user = {
@@ -45,116 +52,20 @@ function Navbar() {
     >
       <div className="flex justify-between items-center px-4 py-3">
         {/* Brand Section */}
-        <Link to="/" className="transition-transform hover:scale-x-110">
-        <div className="flex items-center space-x-2 animate__animated animate__fadeInDown">
-        <div className="rounded-full bg-violet-500 text-white h-10 w-10 flex items-center justify-center text-2xl">
-            <span className="text-2xl font-bold animate__animated animate__zoomIn">B</span>
-          </div>
-          <h1 className="font-bold text-2xl animate__animated animate__zoomIn">Buy Nest</h1>
-        </div>
-        </Link>
-
+        <NavberBrandLink></NavberBrandLink>
         {/* Search Bar */}
-        <div className="hidden md:flex items-center w-1/3 mx-4 bg-white relative hover:scale-110 transition-transform">
-          <input
-            type="text"
-            placeholder="Search for products"
-            className="w-full px-4 py-2 border rounded-xl text-gray-500 focus:outline-none bg-white"
-          />
-          <button className="relative -ml-16 px-4 rounded-r-lg text-blue text-gray-500">
-            <FiSearch size={20} />
-          </button>
-        </div>
-
+        <NavberSearchBar></NavberSearchBar>
         {/* Navigation Links */}
-        <div className="hidden md:flex lg:gap-5 font-serif">
-          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/'>Home</Link>
-          {/* Shop Dropdown */}
-          <div className="relative group lg:mt-2">
-            <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to="/products">Shop »</Link>
-            <div className="absolute top-full left-0 hidden group-hover:block bg-white shadow-lg rounded-lg w-72 z-10 animate__animated animate__fadeInDown">
-              <div className="flex p-7">
-                <div>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category1">Category 1</Link>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category2">Category 2</Link>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category3">Category 3</Link>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category4">Category 4</Link>
-                </div>
-                <div>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category1">Category 1</Link>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category2">Category 2</Link>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products/category3">Category 3</Link>
-                  <Link className="block px-4 py-2 hover:bg-slate-100 rounded-lg" to="/products">All Shop List</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/about'>About</Link>
-          <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/contact'>Contact</Link>
-        </div>
+        <NavigationLinks></NavigationLinks>
 
         {/* Right Side Section */}
         <div className="flex items-center gap-6">
           {/* Wishlist */}
-          <Link
-            to="/wishlist"
-            className="text-black hover:text-violet-500 flex items-center gap-1"
-          >
-            <FiHeart size={24} />
-            <span className="hidden md:inline">Wishlist</span>
-          </Link>
-
+          <Wishlist></Wishlist>
           {/* Notifications Dropdown */}
-          <div className="relative group">
-            <button className="relative text-black hover:text-violet-500">
-              <FiBell size={24} />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-            </button>
-            <div className="absolute top-full right-0 hidden group-hover:block bg-white shadow-lg rounded-lg w-64 mt-2 z-10 animate__animated animate__fadeInDown">
-              <ul className="p-4">
-                <li>
-                  <Link
-                    className="block px-4 py-2 hover:bg-slate-100 rounded-lg text-gray-700"
-                    to="/notifications/1"
-                  >
-                    Notification 1
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="block px-4 py-2 hover:bg-slate-100 rounded-lg text-gray-700"
-                    to="/notifications/2"
-                  >
-                    Notification 2
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="block px-4 py-2 hover:bg-slate-100 rounded-lg text-gray-700"
-                    to="/notifications/3"
-                  >
-                    Notification 3
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="block px-4 py-2 hover:bg-slate-100 rounded-lg text-gray-700"
-                    to="/notifications/all"
-                  >
-                    View All
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <Link
-            to="/cart"
-            className="text-black hover:text-violet-500 flex items-center gap-1"
-          >
-            <FiShoppingCart size={24} />
-            <span className="hidden md:inline">Cart</span>
-          </Link>
+          <Notification></Notification>
+          {/* Cart */}
+          <NavberCart></NavberCart>
           {user ? (
             <div className="relative" ref={dropdownRef}>
               <img
@@ -217,24 +128,7 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-violet-50 px-4 py-2 animate__animated animate__fadeInDown rounded-md">
-          <div className="p-3">
-            <div className="flex items-center mb-4 relative hover:scale-105 transition-transform">
-              <input
-                type="text"
-                placeholder="Search products"
-                className="w-full px-4 py-2 border text-gray-500 bg-white rounded-lg focus:outline-none"
-              />
-              <button className="relative -ml-14 px-4 rounded-r-lg text-violet-500">
-                <FiSearch size={20} />
-              </button>
-            </div>
-            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/'>Home</Link>
-            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/products'>Shop</Link>
-            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/about'>About</Link>
-            <Link className="block text-xl py-2 hover:bg-gray-200 p-3 rounded-lg" to='/contact'>Contact</Link>
-          </div>
-        </div>
+        <MobaileNaber></MobaileNaber>
       )}
     </nav>
   );
