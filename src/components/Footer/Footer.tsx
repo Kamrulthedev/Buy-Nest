@@ -7,7 +7,7 @@ const Footer = () => {
   const year = currentDateTime.getFullYear();
 
   return (
-    <footer className="bg-slate-50 text-black px-4 lg:px-8 py-16 lg:py-20">
+    <footer className="bg-gray-50 text-black px-4 lg:px-8 py-16 lg:py-20">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {/* Company Links */}

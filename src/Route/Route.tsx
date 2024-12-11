@@ -8,6 +8,7 @@ import Success from "@/pages/Checkout/Success";
 import ContactUs from "@/pages/Contact/ContactUs";
 import NotFound from "@/pages/Error/NotFound";
 import Home from "@/pages/Home/Home";
+import Login from "@/pages/Login/Login";
 import Products from "@/pages/Product/Products";
 import ProductsDetails from "@/pages/Product/ProductsDetails";
 import { createBrowserRouter } from "react-router-dom";
@@ -16,7 +17,6 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: "",
     children: [
       {
         path: "/",
@@ -59,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <Success />,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
       }
     ],
   },

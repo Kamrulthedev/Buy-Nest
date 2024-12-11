@@ -8,13 +8,16 @@ import NavberSearchBar from "./NavberSearchBar";
 import NavberBrandLink from "./NavberBrandLink";
 import NavigationLinks from "./NavigationLinks";
 import MobaileNaber from "./MobaileNaber";
+import { FaUser } from "react-icons/fa";
 
 function Navbar() {
-  const user = {
-    role: "ADMIN",
-    profileImg:
-      "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
-  };
+  // const user = {
+  //   role: "ADMIN",
+  //   profileImg:
+  //     "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
+  // };
+
+  const user = false
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -87,7 +90,7 @@ function Navbar() {
                         My Profile
                       </button>
                     </li>
-                    {user.role === "ADMIN" && (
+                    {user?.role === "ADMIN" && (
                       <li>
                         <button
                           className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-lg"
@@ -114,9 +117,9 @@ function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="bg-white text-black shadow-sm text-[16px] border px-4 py-2 rounded"
-            >
-              Sign In
+              className="text-black hover:text-violet-500 flex gap-2  items-center lg:mr-3">
+              <FaUser className="text-2xl" />
+                <span className="text-lg"> Login</span>
             </Link>
           )}
 
