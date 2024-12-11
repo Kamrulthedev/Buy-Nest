@@ -6,6 +6,7 @@ import Cards from "@/pages/Cards/Cards";
 import Checkout from "@/pages/Checkout/Checkout";
 import Success from "@/pages/Checkout/Success";
 import ContactUs from "@/pages/Contact/ContactUs";
+import NotFound from "@/pages/Error/NotFound";
 import Home from "@/pages/Home/Home";
 import Products from "@/pages/Product/Products";
 import ProductsDetails from "@/pages/Product/ProductsDetails";
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: "",
     children: [
       {
         path: "/",
@@ -57,7 +59,11 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <Success />,
-      },
+      }
     ],
   },
+  {
+    path: "*",
+    element: <NotFound></NotFound>
+  }
 ]);
