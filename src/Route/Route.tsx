@@ -11,6 +11,7 @@ import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
 import Products from "@/pages/Product/Products";
 import ProductsDetails from "@/pages/Product/ProductsDetails";
+import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
       }
     ],
   },
