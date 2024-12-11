@@ -24,10 +24,10 @@ const Login = () => {
     };
 
     return (
-        <div className="bg-gray-50 p-6">
+        <div className="bg-gray-50 p-6 ">
             <HeadLink tag="Home" tag1="Login"></HeadLink>
             <div className="lg:flex justify-around p-6 pb-10">
-                <div className="hidden lg:flex flex-col justify-center font-serif h-screen mx-auto -mt-16">
+                <div className="hidden lg:flex flex-col justify-center font-serif h-screen mx-auto -mt-16 animate__animated animate__fadeInDown">
                     <h1 className="text-7xl mb-6 text-gray-700 font-semibold">
                         Welcome to <br /> <span className="text-violet-400">Buy Nest</span>
                     </h1>
@@ -36,7 +36,7 @@ const Login = () => {
                     </p>
                 </div>
 
-                <div className="flex justify-center items-center h-screen md:h-full lg:w-[500px] w-full">
+                <div className="flex justify-center items-center h-screen md:h-full lg:w-[500px] w-full animate__animated animate__fadeInDown">
                     <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg font-serif">
                         <h2 className="text-2xl text-black text-center font-semibold">Login to Buy Nest</h2>
                         <p className="text-center text-black">Access your account</p>
@@ -94,22 +94,22 @@ const Login = () => {
                             )}
 
                             <div className="text-right">
-                                <a href="/forgot-password" className="text-blue-500">
+                                <a href="/forgot-password" className="text-violet-500">
                                     Forgot password?
                                 </a>
                             </div>
 
                             <button
                                 type="submit"
-                                className="w-full p-3 bg-blue-500 text-white rounded-lg"
+                                className="w-full p-3 bg-violet-500 text-white rounded-lg"
                             >
                                 Continue
                             </button>
                         </form>
 
                         <div className="text-center text-black">
-                            <a href="/register" className="text-blue-500 mr-2">
-                                Sign Up
+                            <a href="/register" className="text-violet-500 mr-2">
+                                Sign Up ⇨
                             </a>
                             if you don’t have an account.
                         </div>

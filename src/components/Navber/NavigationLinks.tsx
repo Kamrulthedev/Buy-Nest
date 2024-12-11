@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const NavigationLinks = () => {
     return (
-        <div className="hidden md:flex lg:gap-5 font-serif">
+        <div className="hidden md:flex lg:gap-5 font-serif text-gray-600">
             <Link className="lg:text-lg hover:bg-slate-100 p-2 hover:rounded-lg" to='/'>Home</Link>
             {/* Shop Dropdown */}
             <div className="relative group lg:mt-2">

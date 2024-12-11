@@ -6,7 +6,7 @@ const Wishlist = () => {
         <div>
             <Link
                 to="/wishlist"
-                className="text-black hover:text-violet-500 flex items-center gap-1"
+                className="text-gray-600 hover:text-violet-500 flex items-center gap-1"
             >
                 <FiHeart size={24} />
                 <span className="hidden md:inline">Wishlist</span>

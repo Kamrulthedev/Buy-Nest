@@ -8,7 +8,7 @@ import NavberSearchBar from "./NavberSearchBar";
 import NavberBrandLink from "./NavberBrandLink";
 import NavigationLinks from "./NavigationLinks";
 import MobaileNaber from "./MobaileNaber";
-import { FaUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 
 function Navbar() {
   // const user = {
@@ -117,9 +117,9 @@ function Navbar() {
           ) : (
             <Link
               to="/login"
-              className="text-black hover:text-violet-500 flex gap-2  items-center lg:mr-3">
-              <FaUser className="text-2xl" />
-                <span className="text-lg"> Login</span>
+              className="text-gray-600 hover:text-violet-500 flex gap-1 items-center lg:mr-3">
+              <FaRegUser className="text-[20px]" />
+                <span className="text-base mt-[2px]"> Login</span>
             </Link>
           )}
 

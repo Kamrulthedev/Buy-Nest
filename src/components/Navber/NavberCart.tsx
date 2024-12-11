@@ -4,10 +4,10 @@ import { FiShoppingCart } from "react-icons/fi";
 
 const NavberCart = () => {
     return (
-        <div>
+        <div className="text-gray-600">
              <Link
             to="/cart"
-            className="text-black hover:text-violet-500 flex items-center gap-1"
+            className="hover:text-violet-500 flex items-center gap-1"
           >
             <FiShoppingCart size={24} />
             <span className="hidden md:inline">Cart</span>
