@@ -1,7 +1,5 @@
 import MainLayout from "@/components/MainLayout/MainLayout";
-import Dashboard from "@/components/AdminDashboard/Dashboard";
 import AboutUs from "@/pages/About/AboutUs";
-import Admin from "@/pages/Admin/Admin";
 import Cards from "@/pages/Cards/Cards";
 import Checkout from "@/pages/Checkout/Checkout";
 import Success from "@/pages/Checkout/Success";
@@ -13,6 +11,8 @@ import Products from "@/pages/Product/Products";
 import ProductsDetails from "@/pages/Product/ProductsDetails";
 import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
+import AdminLayout from "@/pages/Admin/AdminNavber";
+import Dashboard from "@/pages/Admin/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -67,11 +67,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Admin></Admin>,
+    element: <AdminLayout></AdminLayout>,
     children : [
       {
         path: 'adminDashboard',
-        element: <Dashboard></Dashboard>
+        element:<Dashboard></Dashboard>
       }
     ]
   }
