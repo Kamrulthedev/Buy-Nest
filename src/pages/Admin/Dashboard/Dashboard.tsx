@@ -2,7 +2,7 @@
 const Dashboard = () => {
     return (
         <div>
-            <h1>Welcome to Amdon Dashborasd</h1>
+            <h1>Welcome to Admin Dashborasd</h1>
         </div>
     );
 };
