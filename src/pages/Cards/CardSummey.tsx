@@ -11,10 +11,9 @@ const CardSummey = () => {
   return (
     <div>
       <div>
-        <Heading Heading="card summery"></Heading>
-
+        <Heading Heading="Card Summery"></Heading>
         <div className="space-y-4">
-          <div className="flex justify-between ">
+          <div className="flex justify-between">
             <h1>Total Items: </h1>
             <h1>{cartItems?.length}</h1>
           </div>
@@ -30,11 +29,11 @@ const CardSummey = () => {
             <h1></h1>
           </div>
           <div className="flex justify-between border-t">
-            {" "}
             <h1>Total price:</h1>
             <h1 className="font-bold">{cartTotalPrice!}</h1>
           </div>
-        </div>
+   
+        </div> 
       </div>
     </div>
   );

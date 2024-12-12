@@ -19,7 +19,7 @@ const Cards = () => {
         <div>
           <Heading Heading="Shopping Cart" />
         </div>
-        <div className="md:grid grid-cols-6 gap-4">
+        <div className="md:grid grid-cols-6 gap-4  animate__animated animate__fadeInDown">
           <div className="overflow-x-auto col-span-4">
             <table className="table">
               <thead>
@@ -45,7 +45,7 @@ const Cards = () => {
             </table>
           </div>
 
-          <div className="col-span-2 border  my-5 p-5">
+          <div className="col-span-2 border my-5 p-5 animate__animated animate__fadeInDown">
             <div className="space-y-5">
               <CardSummey></CardSummey>
               <div>

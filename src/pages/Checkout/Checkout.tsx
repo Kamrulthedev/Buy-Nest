@@ -32,6 +32,7 @@ const Checkout = () => {
       timer: 1500,
     });
     dispatch(clearCart());
+    
     navigate("/success");
   };
   return (
