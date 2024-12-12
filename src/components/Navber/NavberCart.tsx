@@ -6,7 +6,7 @@ const NavberCart = () => {
     return (
         <div className="text-gray-600">
              <Link
-            to="/cart"
+            to="/cards"
             className="hover:text-violet-500 flex items-center gap-1"
           >
             <FiShoppingCart size={24} />

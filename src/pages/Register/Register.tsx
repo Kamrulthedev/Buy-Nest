@@ -26,9 +26,9 @@ const Register = () => {
     };
 
     return (
-        <div className="bg-gray-50 p-6 ">
+        <div className="bg-gray-50 p-6">
             <HeadLink tag="Home" tag1="Register"></HeadLink>
-            <div className="lg:flex justify-around p-6 pb-10 lg:mt-0 mt-16">
+            <div className="lg:flex justify-around p-6 pb-10 lg:mt-0 md:mt-16 mt-8">
                 <div className="hidden lg:flex flex-col justify-center font-serif h-screen mx-auto -mt-16 animate__animated animate__fadeInDown">
                     <h1 className="text-7xl mb-6 text-gray-700 font-semibold">
                         Welcome to <br /> <span className="text-violet-400">Buy Nest</span>

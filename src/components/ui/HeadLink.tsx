@@ -12,7 +12,7 @@ const HeadLink = ({ tag, tag1 }: any) => {
                 <GrNext className="text-[12px]" />
             </p>
             <p>
-                <Link to="/login" className="text-violet-500 hover:underline">
+                <Link to={`/${tag1}`} className="text-violet-500 hover:underline">
                     {tag1}
                 </Link></p>
         </div>
