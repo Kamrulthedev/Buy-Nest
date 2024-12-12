@@ -47,7 +47,7 @@ const DashboardGraph = ({ stats }: any) => {
         },
     };
     return (
-        <div className="min-h-screen sticky bg-white">
+        <div className="min-h-screen sticky">
             <div className="max-w-7xl mx-auto p-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
                 <p className="text-gray-500 mb-6">Latest statistics overview of your platform.</p>

@@ -5,7 +5,6 @@ const Dashboard = () => {
 
     return (
         <div>            
-            {/* Sticky Graph Container */}
             <div className="sticky">
             <DashboardGraph />
             </div>

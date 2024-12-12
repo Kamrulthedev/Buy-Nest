@@ -100,7 +100,7 @@ const AdminLayout = () => {
             ))}
             {/* Logout */}
             <li
-                className={`flex items-center text-gray-600 hover:text-black transition hover:bg-violet-600 rounded-lg p-2 
+                className={`flex items-center text-red-500 hover:text-red-700 transition hover:bg-violet-600 rounded-lg p-2 
                 ${selectedItem === "Logout" ? "bg-violet-600 text-white" : ""}`}
                 onClick={() => handleMenuItemClick("Logout")}
             >
@@ -152,7 +152,7 @@ const AdminLayout = () => {
                         </li>
                         <li>
                             <button
-                                className="w-full text-left px-4 py-2 text-black hover:bg-violet-400 hover:rounded-lg"
+                                className="w-full text-left px-4 py-2 text-red-500 hover:text-red-700 hover:bg-violet-400 hover:rounded-lg"
                                 onClick={handleLogout}
                             >
                                 Log Out
