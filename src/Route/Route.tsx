@@ -2,6 +2,7 @@ import MainLayout from "@/components/MainLayout/MainLayout";
 import AddProducts from "@/Dashboard/AddProducts/AddProducts";
 import Dashboard from "@/Dashboard/Dashboard";
 import AboutUs from "@/pages/About/AboutUs";
+import Admin from "@/pages/Admin/Admin";
 import Cards from "@/pages/Cards/Cards";
 import Checkout from "@/pages/Checkout/Checkout";
 import Success from "@/pages/Checkout/Success";
@@ -44,11 +45,6 @@ export const router = createBrowserRouter([
         path: "/contact",
         element: <ContactUs />,
       },
-
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
       {
         path: "/cards",
         element: <Cards />,
@@ -74,5 +70,15 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound></NotFound>
+  },
+  {
+    path: "/admin",
+    element: <Admin></Admin>,
+    children : [
+      {
+        path: 'adminDashboard',
+        element: <Dashboard></Dashboard>
+      }
+    ]
   }
 ]);

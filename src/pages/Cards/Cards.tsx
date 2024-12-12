@@ -6,15 +6,16 @@ import { Button } from "@/components/ui/button";
 import CardSummey from "./CardSummey";
 import { Link } from "react-router-dom";
 import HeadLink from "@/components/ui/HeadLink";
+import Line from "@/components/CetegoryProducts/Line";
 
 const Cards = () => {
   const cartItems = useAppSelector(cardProduct);
 
   return (
     <div>
-    <div className="px-6">
-    <HeadLink tag="Home" tag1="cards"></HeadLink>
-    </div>
+      <div className="px-6">
+        <HeadLink tag="Home" tag1="cards"></HeadLink>
+      </div>
       <div className="w-5/6 mx-auto my-5 min-h-screen">
         <div>
           <Heading Heading="Shopping Cart" />
@@ -66,7 +67,11 @@ const Cards = () => {
             </div>
           </div>
         </div>
+        <div>
+          <Line></Line>
+        </div>
       </div>
+
     </div>
   );
 };
