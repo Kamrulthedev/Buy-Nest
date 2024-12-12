@@ -3,13 +3,16 @@ import {
     FaBars,
     FaTimes,
     FaChartLine,
-    FaUser,
-    FaCalendarAlt,
     FaHome,
-    FaMoneyCheckAlt,
-    FaCog,
+    FaProductHunt,
+    FaClipboardList,
+    FaUsers,
+    FaMoneyBillWave,
+    FaCogs,
+    FaStore,
+    FaListAlt,
+    FaChartPie,
 } from "react-icons/fa";
-import { MdVerified } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
 
@@ -69,17 +72,21 @@ const AdminLayout = () => {
                 md:relative md:translate-x-0 transition-transform duration-300 ease-in-out`}
             >
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
-                <ul className="space-y-2 ">
+                <ul className="space-y-2">
                     {[
                         { name: "Home", icon: <FaHome />, path: "/" },
                         { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-                        { name: "Manage Users", icon: <FaUser />, path: "/admin/users" },
-                        { name: "Manage Posts", icon: <FaCalendarAlt />, path: "/admin/posts" },
-                        { name: "Verified Users", icon: <MdVerified />, path: "/admin/verifiedUsers" },
-                        { name: "Payments", icon: <FaMoneyCheckAlt />, path: "/admin/payments" },
-                        { name: "Settings", icon: <FaCog />, path: "/admin/settings" },
+                        { name: "User Management", icon: <FaUsers />, path: "/admin/customers" },
+                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
+                        { name: "Category Management", icon: <FaListAlt />, path: "/admin/categories" },
+                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
+                        { name: "Customer Management", icon: <FaUsers />, path: "/admin/customers" },
+                        { name: "Order Monitoring", icon: <FaClipboardList />, path: "/admin/orders" },
+                        { name: "Transaction History", icon: <FaMoneyBillWave />, path: "/admin/payments" },
+                        { name: "Reports & Analytics", icon: <FaChartPie />, path: "/admin/reports" },
+                        { name: "Settings", icon: <FaCogs />, path: "/admin/settings" },
                     ].map((menu) => (
-                        <Link to={menu.path} key={menu.name}>
+                        <Link className="text-sm" to={menu.path} key={menu.name}>
                             <li
                                 className={`flex items-center text-gray-600 hover:text-black transition hover:bg-violet-600 rounded-lg p-2 
                                 ${selectedItem === menu.name ? "bg-violet-600 text-white" : ""}`}
@@ -131,7 +138,7 @@ const AdminLayout = () => {
                         onClick={toggleDropdown}
                     />
                     {isDropdownOpen && (
-                        <div className="absolute right-0 mt-2 w-48 bg-gray-100 shadow-lg rounded-md z-10 p-4">
+                        <div className="absolute right-0 mt-2 w-48 bg-gray-100 shadow-lg rounded-md z-10 p-4 animate__animated animate__zoomIn">
                             <ul>
                                 <li>
                                     <button
