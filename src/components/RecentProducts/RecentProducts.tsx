@@ -79,9 +79,9 @@ const RecentProducts = () => {
             </div>
 
             <div className="flex justify-center items-center mt-8 animate__animated animate__heartBeat">
-                <button className="px-12 py-3 text-gray-700 border bg-white shadow-md hover:text-white hover:bg-gray-600 hover:shadow-lg transition-all duration-300 font-medium">
+                <Link to='/products' className="px-12 py-3 text-gray-700 border bg-white shadow-md hover:text-white hover:bg-gray-600 hover:shadow-lg transition-all duration-300 font-medium">
                     View More Products ⇨
-                </button>
+                </Link>
             </div>
 
         </div>
