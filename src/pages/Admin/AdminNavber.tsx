@@ -88,7 +88,7 @@ const AdminLayout = () => {
                     ].map((menu) => (
                         <Link className="text-sm" to={menu.path} key={menu.name}>
                             <li
-                                className={`flex items-center text-gray-600 hover:text-black transition hover:bg-violet-600 rounded-lg p-2 
+                                className={`flex items-center text-gray-600 hover:text-black transition mb-1 hover:bg-violet-600 rounded-lg p-2 
                                 ${selectedItem === menu.name ? "bg-violet-600 text-white" : ""}`}
                                 onClick={() => handleMenuItemClick(menu.name)}
                             >
@@ -164,7 +164,7 @@ const AdminLayout = () => {
                 </div>
             </nav>
             {/* Main Content Area */}
-            <main className="flex-1 mt-24 p-6 ">
+            <main className="flex-1 mt-24 p-6 h-screen">
                 <Outlet></Outlet>
             </main>
         </div>
