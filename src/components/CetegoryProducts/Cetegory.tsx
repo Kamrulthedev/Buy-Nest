@@ -3,10 +3,10 @@ import Heading from "@/Heading/Heading";
 
 
 const demoProducts = [
-    { id: 1, name: "Stretch Cotton Skinny Pant", img: "https://i.ibb.co.com/y88YGy2/image.png" },
-    { id: 2, img: "https://i.ibb.co.com/2hpfvxR/image.png" },
-    { id: 4, img: "https://i.ibb.co.com/CKp5c8k/image.png" },
-    { id: 5, img: "https://i.ibb.co.com/99nQLHT/image.png" },
+    { id: 1, name: "Stretch Cotton Skinny Pant", img: "https://i.ibb.co.com/jVwtGKT/image.png" },
+    { id: 2, img: "https://i.ibb.co.com/ftdJY1B/image.png" },
+    { id: 4, img: "https://i.ibb.co.com/hRfSKxk/image.png" },
+    { id: 5, img: "https://i.ibb.co.com/ZGzhqbG/image.png" },
 ];
 
 const Category = () => {

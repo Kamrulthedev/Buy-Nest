@@ -38,7 +38,7 @@ const MainLayout = () => {
       {showButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-5 right-5 w-12 h-12 bg-gray-800 animate__animated animate__zoomIn text-white rounded-full text-xl flex items-center justify-center hover:bg-gray-600 transition"
+          className="fixed bottom-5 right-5 w-12 h-12 bg-violet-800 animate__animated animate__zoomIn text-white rounded-full text-xl flex items-center justify-center hover:bg-violet-500 transition"
         >
           ↑
         </button>
