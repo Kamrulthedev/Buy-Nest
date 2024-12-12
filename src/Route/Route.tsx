@@ -13,7 +13,8 @@ import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
 import AdminLayout from "@/pages/Admin/AdminNavber";
 import Dashboard from "@/pages/Admin/Dashboard/Dashboard";
-import Profile from "@/pages/Admin/Profile/Profile";
+import Profile from "@/pages/Profile/Profile";
+import MyProfile from "@/pages/Profile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -77,7 +78,13 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: "/myProfile",
-    element: <Profile></Profile>
+    path: "/Profile",
+    element: <Profile></Profile>,
+    children: [
+      {
+        path: "myProfile",
+        element: <MyProfile></MyProfile>
+      }
+    ]
   }
 ]);
