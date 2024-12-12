@@ -30,7 +30,7 @@ const AdminLayout = () => {
 
     const handleMenuItemClick = (item: string) => {
         setSelectedItem(item);
-        setIsSidebarOpen(false); // Close sidebar on mobile
+        setIsSidebarOpen(false);
     };
 
     const handleLogout = () => {
@@ -61,12 +61,12 @@ const AdminLayout = () => {
     };
 
     return (
-        <div className="relative font-serif min-h-screen flex w-full text-black bg-gray-50">
+        <div className="relative font-serif min-h-screen flex w-full text-black bg-gray-50 animate__animated animate__fadeInDown">
             {/* Sidebar */}
             <div
                 className={`fixed top-0 left-0 h-screen w-64 bg-gray-200  mt-20  p-6 z-40 transform 
                 ${isSidebarOpen ? "translate-x-0 animate__animated animate__fadeInDown" : "-translate-x-full "} 
-                md:relative md:translate-x-0 transition-transform duration-300 ease-in-out `}
+                md:relative md:translate-x-0 transition-transform duration-300 ease-in-out`}
             >
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
                 <ul className="space-y-2 ">
@@ -111,29 +111,27 @@ const AdminLayout = () => {
                 ></div>
             )}
             {/* Top Navber */}
-            <nav
-                className={`w-full px-4 md:px-10 py-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 bg-gray-200 transition-transform duration-300 animate__animated animate__fadeInDown`}
-            >
+            <nav className="w-full px-4 md:px-10 py-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 bg-gray-200 transition-all duration-300">
                 <button
                     className="md:hidden text-2xl focus:outline-none"
                     onClick={toggleSidebar}
-                    aria-label={isSidebarOpen ? "Close sidebar " : "Open sidebar"}
+                    aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
                 >
                     {isSidebarOpen ? <FaTimes /> : <FaBars />}
                 </button>
 
-                <h1 className="text-xl font-bold">Admin Panel</h1>
+                <h1 className="text-2xl font-bold lg:-ml-4">Admin Panel</h1>
 
                 {/* Profile Section */}
                 <div className="relative" ref={dropdownRef}>
                     <img
-                        src={user?.profileImg || "https://i.ibb.co.com/44vhj8G/image.png"}
+                        src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
                         alt="Profile"
                         className="h-12 w-12 rounded-full border border-gray-300 object-cover cursor-pointer"
                         onClick={toggleDropdown}
                     />
                     {isDropdownOpen && (
-                        <div className="absolute right-0 mt-2 w-48 bg-gray-100 shadow-lg rounded-md z-10 p-4 animate__animated animate__zoomIn">
+                        <div className="absolute right-0 mt-2 w-48 bg-gray-100 shadow-lg rounded-md z-10 p-4">
                             <ul>
                                 <li>
                                     <button
@@ -158,9 +156,6 @@ const AdminLayout = () => {
                     )}
                 </div>
             </nav>
-
-
-
             {/* Main Content Area */}
             <main className="flex-1 mt-24 p-6 ">
                 <Outlet></Outlet>
