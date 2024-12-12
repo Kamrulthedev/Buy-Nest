@@ -1,3 +1,4 @@
+import Photo from '@/components/Profile/Photo';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -14,8 +15,7 @@ const MyProfile = () => {
         <div className='mb-20 p-5 animate__animated animate__fadeInDown'>
             <div className='max-w-screen-lg mx-auto p-6 bg-white shadow-md rounded-lg'>
                 {/* Cover Photo and Profile */}
-     
-
+                <Photo></Photo>
                 <div className="py-6 animate__animated animate__fadeInDown">
                     {/* Profile Info and Edit Button */}
                     <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
@@ -65,12 +65,21 @@ const MyProfile = () => {
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-sm font-semibold mb-2">Job Title</label>
+                            <label className="text-sm font-semibold mb-2">Your Email</label>
                             <input
                                 type="text"
                                 className="bg-white p-3 border rounded-md"
-                                {...register('jobTitle')}
-                                placeholder="Enter your job title"
+                                {...register('email')}
+                                placeholder="Enter your email"
+                            />
+                        </div>
+                        <div className="flex flex-col">
+                            <label className="text-sm font-semibold mb-2">Phone Numbar</label>
+                            <input
+                                type="text"
+                                className="bg-white p-3 border rounded-md"
+                                {...register('location')}
+                                placeholder="Enter your phone numbar"
                             />
                         </div>
                         <div className="flex flex-col">
@@ -82,7 +91,6 @@ const MyProfile = () => {
                                 placeholder="Enter your location"
                             />
                         </div>
-
                         <div className="flex space-x-4 mt-6">
                             <button
                                 type="submit"
