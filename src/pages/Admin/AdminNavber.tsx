@@ -145,7 +145,7 @@ const AdminLayout = () => {
                         <li>
                             <button
                                 className="w-full text-left px-4 py-2 text-black hover:bg-violet-400 hover:rounded-lg"
-                                onClick={() => (window.location.href = "/myProfile/myPosts")}
+                                onClick={() => (window.location.href = "/myProfile")}
                             >
                                 My Profile
                             </button>

@@ -84,7 +84,7 @@ function Navbar() {
                       <button
                         className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-lg"
                         onClick={() =>
-                          (window.location.href = "/myProfile/myPosts")
+                          (window.location.href = "/myProfile")
                         }
                       >
                         My Profile

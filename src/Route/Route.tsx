@@ -13,6 +13,7 @@ import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router-dom";
 import AdminLayout from "@/pages/Admin/AdminNavber";
 import Dashboard from "@/pages/Admin/Dashboard/Dashboard";
+import Profile from "@/pages/Admin/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -74,5 +75,9 @@ export const router = createBrowserRouter([
         element:<Dashboard></Dashboard>
       }
     ]
+  },
+  {
+    path: "/myProfile",
+    element: <Profile></Profile>
   }
 ]);
