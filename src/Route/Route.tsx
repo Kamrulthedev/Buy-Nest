@@ -15,6 +15,7 @@ import AdminLayout from "@/pages/Admin/AdminNavber";
 import Dashboard from "@/pages/Admin/Dashboard/Dashboard";
 import Profile from "@/pages/Profile/Profile";
 import MyProfile from "@/pages/Profile/MyProfile";
+import WishlistPage from "@/pages/Wishlist/WishlistPage";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <Success />,
+      },
+      {
+        path: "/wishlist",
+        element: <WishlistPage></WishlistPage>
       },
       {
         path: "/login",
