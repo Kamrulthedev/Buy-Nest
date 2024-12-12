@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     FaBars,
     FaTimes,
@@ -16,6 +16,8 @@ import { Link, Outlet } from "react-router-dom";
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<string>("Dashboard");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const user = {
         role: "ADMIN",
@@ -34,6 +36,27 @@ const AdminLayout = () => {
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
             window.location.href = "/login";
+        }
+    };
+
+    // Profile Dropdown Toggle
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target as Node)
+        ) {
+            setIsDropdownOpen(false);
         }
     };
 
@@ -89,28 +112,53 @@ const AdminLayout = () => {
             )}
             {/* Top Navber */}
             <nav
-                className={`w-full  px-4 md:px-10 py-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 bg-gray-200 transition-transform duration-300 ${isSidebarOpen ? "translate-y-0 animate__animated animate__fadeInDown" : "translate-y-0 "
-                    }`}
+                className={`w-full px-4 md:px-10 py-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 bg-gray-200 transition-transform duration-300 animate__animated animate__fadeInDown`}
             >
                 <button
                     className="md:hidden text-2xl focus:outline-none"
                     onClick={toggleSidebar}
-                    aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
+                    aria-label={isSidebarOpen ? "Close sidebar " : "Open sidebar"}
                 >
                     {isSidebarOpen ? <FaTimes /> : <FaBars />}
                 </button>
 
                 <h1 className="text-xl font-bold">Admin Panel</h1>
 
-                <div className="flex items-center space-x-4">
-                    {/* Profile Image */}
+                {/* Profile Section */}
+                <div className="relative" ref={dropdownRef}>
                     <img
                         src={user?.profileImg || "https://i.ibb.co.com/44vhj8G/image.png"}
                         alt="Profile"
                         className="h-12 w-12 rounded-full border border-gray-300 object-cover cursor-pointer"
+                        onClick={toggleDropdown}
                     />
+                    {isDropdownOpen && (
+                        <div className="absolute right-0 mt-2 w-48 bg-gray-100 shadow-lg rounded-md z-10 p-4 animate__animated animate__zoomIn">
+                            <ul>
+                                <li>
+                                    <button
+                                        className="w-full text-left px-4 py-2 text-black hover:bg-violet-400 hover:rounded-lg"
+                                        onClick={() =>
+                                            (window.location.href = "/myProfile/myPosts")
+                                        }
+                                    >
+                                        My Profile
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        className="w-full text-left px-4 py-2 text-black hover:bg-violet-400 hover:rounded-lg"
+                                        onClick={handleLogout}
+                                    >
+                                        Log Out
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </nav>
+
 
 
             {/* Main Content Area */}
