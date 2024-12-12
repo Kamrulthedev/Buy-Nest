@@ -38,7 +38,7 @@ const MyProfile = () => {
         }
     };
     return (
-        <div className='mb-20 p-5 animate__animated animate__fadeInDown'>
+        <div className='mb-20 p-5 animate__animated animate__fadeInDown font-serif'>
             <div className='max-w-screen-lg mx-auto p-6 bg-white shadow-md rounded-lg'>
                 {/* Cover Photo and Profile */}
                 <Photo></Photo>
