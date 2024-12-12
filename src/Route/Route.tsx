@@ -1,6 +1,5 @@
 import MainLayout from "@/components/MainLayout/MainLayout";
-import AddProducts from "@/Dashboard/AddProducts/AddProducts";
-import Dashboard from "@/Dashboard/Dashboard";
+import Dashboard from "@/components/AdminDashboard/Dashboard";
 import AboutUs from "@/pages/About/AboutUs";
 import Admin from "@/pages/Admin/Admin";
 import Cards from "@/pages/Cards/Cards";
@@ -36,11 +35,6 @@ export const router = createBrowserRouter([
         path: "/about",
         element: <AboutUs />,
       },
-      {
-        path: "/addproducts/",
-        element: <AddProducts />,
-      },
-
       {
         path: "/contact",
         element: <ContactUs />,

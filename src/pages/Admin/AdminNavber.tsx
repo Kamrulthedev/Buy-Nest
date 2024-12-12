@@ -1,13 +1,14 @@
 import NavberBrandLink from "@/components/Navber/NavberBrandLink";
 import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const AdminNavber = () => {
     const [isOpen, setIsOpen] = useState(false);
     //   const [user, setUser] = useState<IUser | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [isScrolled, setIsScrolled] = useState(false);
+
 
     const user = {
         role: "ADMIN",
@@ -52,8 +53,18 @@ const AdminNavber = () => {
         };
     }, [isDropdownOpen]);
 
+      // Scroll behavior
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
     return (
-        <nav className="bg-gray-50 text-black font-serif shadow-md animate__animated animate__fadeInDown">
+        <nav
+        className={`${isScrolled ? "fixed top-0 left-0 right-0 shadow-lg bg-white animate__animated animate__fadeInDown" : ""
+          } z-50 transition-all duration-300 font-serif shadow`}
+      >
             <div className="container mx-auto flex justify-between items-center py-4 px-4 md:px-10">
                 {/* Logo */}
                 <NavberBrandLink></NavberBrandLink>
