@@ -165,7 +165,7 @@ const AdminLayout = () => {
     </nav>
 
     {/* Main Content Area */}
-    <main className="flex-1 mt-24 p-6 sticky top-20 z-20 overflow-y-auto">
+    <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto">
         <Outlet />
     </main>
 </div>

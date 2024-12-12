@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import DashboardGraph from "@/components/AdminDashboard/DashboardGraph";
 
 const Dashboard = () => {
+
     return (
-        <div>
-            <h1>Welcome to Admin Dashborasd</h1>
+        <div>            
+            {/* Sticky Graph Container */}
+            <div className="sticky">
+            <DashboardGraph />
+            </div>
         </div>
     );
 };
