@@ -9,7 +9,7 @@ const SearchBar = () => {
         placeholder="Search..."
         className="w-full md:w-1/2 p-2 border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 pr-12"
       />
-      <button className="absolute ml-28 md:ml-36 lg:ml-72 text-gray-600 rounded-r-lg">
+      <button className="absolute ml-28 md:ml-35 lg:ml-64 text-gray-600 rounded-r-lg">
         <FaSearch className="w-5 h-5" />
       </button>
     </div>

@@ -190,7 +190,7 @@ const AdminLayout = () => {
             <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto">
                 <Outlet />
             </main>
-            
+
             <div>
                 {/* Scroll to Top Button */}
                 {showButton && (

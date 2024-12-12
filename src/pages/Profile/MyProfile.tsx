@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const MyProfile = () => {
-    const { register, handleSubmit, setValue, watch } = useForm();
+    const { register, handleSubmit } = useForm();
     const [isEditing, setIsEditing] = useState(false);
     const [profileImage, setProfileImage] = useState<string | null>(null); 
     const [fileInput, setFileInput] = useState<File | null>(null); 
