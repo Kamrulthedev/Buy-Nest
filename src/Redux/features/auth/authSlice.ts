@@ -16,7 +16,7 @@ type TAuthState = {
 const initialState: TAuthState = {
     user: {
       userId: "defaultUser123",
-      role: "Customer",
+      role: "CUSTOMER",
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 3600,
     },

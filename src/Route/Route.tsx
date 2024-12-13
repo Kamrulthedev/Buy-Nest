@@ -18,6 +18,7 @@ import MyProfile from "@/pages/Profile/MyProfile";
 import WishlistPage from "@/pages/Wishlist/WishlistPage";
 import VendorLayout from "@/pages/Vendor/VendorLayout";
 import VendorDashborad from "@/pages/Vendor/VendorDashborad/VendorDashborad";
+import ProtectedRoute from "@/components/MainLayout/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +59,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <WishlistPage></WishlistPage>
+        element: (
+          <ProtectedRoute allowedRoles={["CUSTOMER"]}>
+            <WishlistPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",
@@ -95,15 +100,19 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: "/Profile",
-    element: <Profile></Profile>,
+    path: "/profile",
+    element: (
+      <ProtectedRoute allowedRoles={["customer", "vendor", "admin"]}>
+        <Profile />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "myProfile",
-        element: <MyProfile></MyProfile>
-      }
-    ]
-  }
+        element: <MyProfile />
+      },
+    ],
+  },
 ]);
 
 
