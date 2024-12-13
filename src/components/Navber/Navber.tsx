@@ -110,7 +110,7 @@ function Navbar() {
                             (window.location.href = "/vendor/vendorDashboard")
                           }
                         >
-                          VENDOR Dashboard
+                          Vendor Dashboard
                         </button>
                       </li>
                     )}

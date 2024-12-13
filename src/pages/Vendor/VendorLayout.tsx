@@ -6,11 +6,8 @@ import {
     FaHome,
     FaProductHunt,
     FaClipboardList,
-    FaUsers,
-    FaMoneyBillWave,
     FaCogs,
     FaStore,
-    FaListAlt,
     FaChartPie,
 } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
@@ -97,14 +94,14 @@ const VendorLayout = () => {
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
                 <ul className="space-y-2">
                     {[
-                        { name: "Home", icon: <FaHome />, path: "/" },
-                        { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
-                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
-                        { name: "Order History ", icon: <FaClipboardList />, path: "/admin/orders" },
-                        { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
-                        { name: "Product Duplication", icon: <FaChartPie />, path: "/admin/reports" },
-                        { name: "Account Settings", icon: <FaCogs />, path: "/admin/settings" },
+               { name: "Home", icon: <FaHome />, path: "/" },
+               { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
+               { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
+               { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
+               { name: "Order History", icon: <FaClipboardList />, path: "/admin/orders" },
+               { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
+               { name: "Product Duplication", icon: <FaChartPie />, path: "/admin/reports" },
+               { name: "Account Settings", icon: <FaCogs />, path: "/admin/settings" },
                     ].map((menu) => (
                         <Link className="text-sm" to={menu.path} key={menu.name}>
                             <li
