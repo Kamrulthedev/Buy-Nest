@@ -3,19 +3,42 @@ import productsReducer from "./features/products/productsSlice";
 import { baseApi } from "./Api/baseApi";
 import cartReducer from "./features/products/cardSlice";
 import authReducer from "./features/auth/authSlice";
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const store = configureStore({
+const persistConfig = {
+  key: "auth",
+  storage,
+};
+
+const persistAuthReducer = persistReducer(persistConfig, authReducer);
+
+export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
+    auth: persistAuthReducer,
     products: productsReducer,
     cart: cartReducer,
-    auth: authReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+  middleware: (getDefaultMiddlewares) =>
+    getDefaultMiddlewares({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(baseApi.middleware),
 });
 
+// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export default store;
+export const persistor = persistStore(store);

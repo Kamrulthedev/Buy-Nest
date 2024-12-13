@@ -9,14 +9,19 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
     const token = useAppSelector((state) => state.auth.token);
-    const role = useAppSelector((state) => state.auth.role);
+    const role = useAppSelector((state) => state.auth.user?.role);
+    // const role = useAppSelector((state) => state.auth.user?.role) || '';
     const location = useLocation();
 
     if (!token) {
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
 
-    if (!allowedRoles.includes(role)) {
+    // if (!allowedRoles.includes(role)) {
+    //     return <Navigate to="/" replace />;
+    // }
+
+    if (!role || !allowedRoles.includes(role)) {
         return <Navigate to="/" replace />;
     }
 

@@ -14,9 +14,14 @@ type TAuthState = {
 };
 
 const initialState: TAuthState = {
-  user: null,
-  token: null,
-};
+    user: {
+      userId: "defaultUser123",
+      role: "Customer",
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + 3600,
+    },
+    token: "defaultToken123",
+  };
 
 const authSlice = createSlice({
   name: "auth",
