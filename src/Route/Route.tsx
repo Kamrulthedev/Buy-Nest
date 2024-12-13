@@ -16,6 +16,8 @@ import Dashboard from "@/pages/Admin/Dashboard/Dashboard";
 import Profile from "@/pages/Profile/Profile";
 import MyProfile from "@/pages/Profile/MyProfile";
 import WishlistPage from "@/pages/Wishlist/WishlistPage";
+import VendorLayout from "@/pages/Vendor/VendorLayout";
+import VendorDashborad from "@/pages/Vendor/VendorDashborad/VendorDashborad";
 
 export const router = createBrowserRouter([
   {
@@ -75,10 +77,20 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminLayout></AdminLayout>,
-    children : [
+    children: [
       {
         path: 'adminDashboard',
-        element:<Dashboard></Dashboard>
+        element: <Dashboard></Dashboard>
+      }
+    ]
+  },
+  {
+    path: "/vendor",
+    element: <VendorLayout></VendorLayout>,
+    children: [
+      {
+        path: 'vendorDashboard',
+        element: <VendorDashborad></VendorDashborad>
       }
     ]
   },

@@ -12,7 +12,7 @@ import { FaRegUser } from "react-icons/fa";
 
 function Navbar() {
   const user = {
-    role: "ADMIN",
+    role: "VENDOR",
     profileImg:
       "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
   };
@@ -99,6 +99,30 @@ function Navbar() {
                           }
                         >
                           Admin Dashboard
+                        </button>
+                      </li>
+                    )}
+                    {user?.role === "VENDOR" && (
+                      <li>
+                        <button
+                          className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-lg"
+                          onClick={() =>
+                            (window.location.href = "/vendor/vendorDashboard")
+                          }
+                        >
+                          VENDOR Dashboard
+                        </button>
+                      </li>
+                    )}
+                    {user?.role === "CUSTOMER" && (
+                      <li>
+                        <button
+                          className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-lg"
+                          onClick={() =>
+                            (window.location.href = "/admin/adminDashboard")
+                          }
+                        >
+                          CUSTOMER Dashboard
                         </button>
                       </li>
                     )}
