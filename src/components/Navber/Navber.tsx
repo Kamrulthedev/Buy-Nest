@@ -12,7 +12,7 @@ import { FaRegUser } from "react-icons/fa";
 
 function Navbar() {
   const user = {
-    role: "VENDOR",
+    role: "CUSTOMER",
     profileImg:
       "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
   };
@@ -62,7 +62,7 @@ function Navbar() {
         <NavigationLinks></NavigationLinks>
 
         {/* Right Side Section */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 lg:gap-6">
           {/* Wishlist */}
           <Wishlist></Wishlist>
           {/* Notifications Dropdown */}
@@ -74,7 +74,7 @@ function Navbar() {
               <img
                 src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
                 alt="Profile"
-                className="h-12 w-12 rounded-full cursor-pointer border object-cover"
+                className="lg:h-12 lg:w-12 w-10 h-10 rounded-full cursor-pointer border object-cover"
                 onClick={toggleDropdown}
               />
               {isDropdownOpen && (
@@ -119,10 +119,10 @@ function Navbar() {
                         <button
                           className="w-full text-left px-4 py-2 hover:bg-gray-600 hover:text-white rounded-lg"
                           onClick={() =>
-                            (window.location.href = "/admin/adminDashboard")
+                            (window.location.href = "/customer/customerDashboard")
                           }
                         >
-                          CUSTOMER Dashboard
+                          Customer Dashboard
                         </button>
                       </li>
                     )}

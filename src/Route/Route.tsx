@@ -18,6 +18,7 @@ import MyProfile from "@/pages/Profile/MyProfile";
 import WishlistPage from "@/pages/Wishlist/WishlistPage";
 import VendorLayout from "@/pages/Vendor/VendorLayout";
 import VendorDashborad from "@/pages/Vendor/VendorDashborad/VendorDashborad";
+import CustomerLayout from "@/pages/Customer/CustomerLayout";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,16 @@ export const router = createBrowserRouter([
       {
         path: 'vendorDashboard',
         element: <VendorDashborad></VendorDashborad>
+      }
+    ]
+  },
+  {
+    path: "/customer",
+    element: <CustomerLayout></CustomerLayout>,
+    children: [
+      {
+        path: "customerDashboard",
+        element: ''
       }
     ]
   },

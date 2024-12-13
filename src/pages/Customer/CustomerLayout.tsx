@@ -17,14 +17,15 @@ import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
 
-const AdminLayout = () => {
+
+const CustomerLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<string>("Dashboard");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const user = {
-        role: "ADMIN",
+        role: "CUSTOMER",
         profileImg: "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
     };
 
@@ -148,7 +149,7 @@ const AdminLayout = () => {
                 >
                     {isSidebarOpen ? <FaTimes /> : <FaBars />}
                 </button>
-                <h1 className="text-2xl font-bold lg:-ml-4">Admin Panel</h1>
+                <h1 className="text-base md:text-xl lg:text-2xl font-bold lg:-ml-4">Dashboard</h1>
                 <div>
                     <SearchBar />
                 </div>
@@ -157,7 +158,7 @@ const AdminLayout = () => {
                     <img
                         src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
                         alt="Profile"
-                        className="h-12 w-12 rounded-full border border-gray-300 object-cover cursor-pointer"
+                        className="lg:h-12 lg:w-12 w-10 h-10 rounded-full border border-gray-300 object-cover cursor-pointer"
                         onClick={toggleDropdown}
                     />
                     {isDropdownOpen && (
@@ -205,5 +206,5 @@ const AdminLayout = () => {
 
     );
 };
+export default CustomerLayout;
 
-export default AdminLayout;
