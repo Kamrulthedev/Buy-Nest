@@ -105,3 +105,76 @@ export const router = createBrowserRouter([
     ]
   }
 ]);
+
+
+
+
+// export const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <MainLayout />,
+//     children: [
+//       { path: "/", element: <Home /> },
+//       { path: "/product/:id", element: <ProductsDetails /> },
+//       { path: "/products", element: <Products /> },
+//       { path: "/about", element: <AboutUs /> },
+//       { path: "/contact", element: <ContactUs /> },
+//       { path: "/cards", element: <Cards /> },
+//       { path: "/login", element: <Login /> },
+//       { path: "/register", element: <Register /> },
+//       {
+//         path: "/checkout",
+//         element: (
+//           <ProtectedRoute allowedRoles={["customer"]}>
+//             <Checkout />
+//           </ProtectedRoute>
+//         ),
+//       },
+//       {
+//         path: "/wishlist",
+//         element: (
+//           <ProtectedRoute allowedRoles={["customer"]}>
+//             <WishlistPage />
+//           </ProtectedRoute>
+//         ),
+//       },
+//     ],
+//   },
+//   {
+//     path: "/admin",
+//     element: (
+//       <ProtectedRoute allowedRoles={["admin"]}>
+//         <AdminLayout />
+//       </ProtectedRoute>
+//     ),
+//     children: [
+//       { path: "adminDashboard", element: <Dashboard /> },
+//     ],
+//   },
+//   {
+//     path: "/vendor",
+//     element: (
+//       <ProtectedRoute allowedRoles={["vendor"]}>
+//         <VendorLayout />
+//       </ProtectedRoute>
+//     ),
+//     children: [
+//       { path: "vendorDashboard", element: <VendorDashborad /> },
+//     ],
+//   },
+//   {
+//     path: "/profile",
+//     element: (
+//       <ProtectedRoute allowedRoles={["customer", "vendor", "admin"]}>
+//         <Profile />
+//       </ProtectedRoute>
+//     ),
+//     children: [
+//       { path: "myProfile", element: <MyProfile /> },
+//     ],
+//   },
+//   {
+//     path: "*",
+//     element: <NotFound />,
+//   },
+// ]);
