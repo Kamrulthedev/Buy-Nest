@@ -19,6 +19,7 @@ import WishlistPage from "@/pages/Wishlist/WishlistPage";
 import VendorLayout from "@/pages/Vendor/VendorLayout";
 import VendorDashborad from "@/pages/Vendor/VendorDashborad/VendorDashborad";
 import CustomerLayout from "@/pages/Customer/CustomerLayout";
+import CustomerDashboard from "@/pages/Customer/Dashboard/CustomerDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -101,7 +102,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "customerDashboard",
-        element: ''
+        element: <CustomerDashboard></CustomerDashboard>
       }
     ]
   },
