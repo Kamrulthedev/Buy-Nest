@@ -2,16 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import {
     FaBars,
     FaTimes,
-    FaChartLine,
     FaHome,
-    FaProductHunt,
     FaClipboardList,
-    FaUsers,
-    FaMoneyBillWave,
-    FaCogs,
-    FaStore,
-    FaListAlt,
-    FaChartPie,
+    FaShoppingCart,
+    FaTag,
+    FaHistory,
+    FaUserCircle,
+    FaBell,
+    FaStar,
 } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
@@ -98,17 +96,14 @@ const CustomerLayout = () => {
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
                 <ul className="space-y-2">
                     {[
-                        { name: "Home", icon: <FaHome />, path: "/" },
-                        { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-                        { name: "User Management", icon: <FaUsers />, path: "/admin/customers" },
-                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
-                        { name: "Category Management", icon: <FaListAlt />, path: "/admin/categories" },
-                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
-                        { name: "Customer Management", icon: <FaUsers />, path: "/admin/customers" },
-                        { name: "Order Monitoring", icon: <FaClipboardList />, path: "/admin/orders" },
-                        { name: "Transaction History", icon: <FaMoneyBillWave />, path: "/admin/payments" },
-                        { name: "Reports & Analytics", icon: <FaChartPie />, path: "/admin/reports" },
-                        { name: "Settings", icon: <FaCogs />, path: "/admin/settings" },
+                { name: "Home", icon: <FaHome />, path: "/" },
+                { name: "Cart", icon: <FaShoppingCart />, path: "/cart" },
+                { name: "Orders", icon: <FaClipboardList />, path: "/orders" },
+                { name: "Product Comparison", icon: <FaTag />, path: "/compare" },
+                   { name: "Recent Products", icon: <FaHistory />, path: "/recent" },
+                { name: "Account Settings", icon: <FaUserCircle />, path: "/settings" },
+                { name: "Notifications", icon: <FaBell />, path: "/notifications" },
+                { name: "Reviews & Ratings", icon: <FaStar />, path: "/reviews" },
                     ].map((menu) => (
                         <Link className="text-sm" to={menu.path} key={menu.name}>
                             <li
