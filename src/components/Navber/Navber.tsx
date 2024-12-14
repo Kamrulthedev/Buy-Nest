@@ -122,7 +122,7 @@ function Navbar() {
                             (window.location.href = "/customer/customerDashboard")
                           }
                         >
-                          Customer Dashboard
+                          My Dashboard
                         </button>
                       </li>
                     )}

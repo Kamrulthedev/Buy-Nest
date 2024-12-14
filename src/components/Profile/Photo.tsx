@@ -4,7 +4,7 @@ const Photo = () => {
     return (
         <div className='relative'>
         <img
-            src="https://i.ibb.co.com/hFRXjjy/image.png"
+            src="https://i.ibb.co.com/Xbtzq7D/image.png"
             alt="Cover Photo"
             className="w-full h-48 object-cover rounded-lg"
         />
