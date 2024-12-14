@@ -11,13 +11,13 @@ import MobaileNaber from "./MobaileNaber";
 import { FaRegUser } from "react-icons/fa";
 
 function Navbar() {
-  const user = {
-    role: "CUSTOMER",
-    profileImg:
-      "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
-  };
+  // const user = {
+  //   role: "CUSTOMER",
+  //   profileImg:
+  //     "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
+  // };
 
-  // const user = false
+  const user = false
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

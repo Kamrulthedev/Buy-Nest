@@ -6,17 +6,26 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
+import { useLoginMutation } from "@/Redux/features/auth/authApi";
 
 const Login = () => {
-
+    const [login] = useLoginMutation();
+    
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = async(data: any) => { 
+        const loginData = {
+            email: data.email,
+            password: data.password
+        }
+        
+        console.log(loginData)
+        const res = await login(loginData).unwrap();
+        console.log(res)
     };
 
     return (
