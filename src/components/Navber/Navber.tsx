@@ -9,15 +9,12 @@ import NavberBrandLink from "./NavberBrandLink";
 import NavigationLinks from "./NavigationLinks";
 import MobaileNaber from "./MobaileNaber";
 import { FaRegUser } from "react-icons/fa";
+import { useAppSelector } from "@/Redux/hooks";
 
 function Navbar() {
-  // const user = {
-  //   role: "CUSTOMER",
-  //   profileImg:
-  //     "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
-  // };
+  const user = useAppSelector((state) => state.auth.user);
 
-  const user = false
+console.log(user)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -72,7 +69,7 @@ function Navbar() {
           {user ? (
             <div className="relative" ref={dropdownRef}>
               <img
-                src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
+                src={user?.profilePhoto || "https://i.ibb.co/44vhj8G/image.png"}
                 alt="Profile"
                 className="lg:h-12 lg:w-12 w-10 h-10 rounded-full cursor-pointer border object-cover"
                 onClick={toggleDropdown}
