@@ -7,26 +7,56 @@ import { FaGithub } from "react-icons/fa";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
 import { useLoginMutation } from "@/Redux/features/auth/authApi";
+import { useAppDispatch } from "@/Redux/hooks";
+import { setUser } from "@/Redux/features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [login] = useLoginMutation();
-    
+    const dispatch = useAppDispatch();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = async(data: any) => { 
+    const onSubmit = async (data: any) => {
+        const toastId = toast.loading("Logging in...");
+      
         const loginData = {
-            email: data.email,
-            password: data.password
+          email: data.email,
+          password: data.password,
+        };
+      
+        try {
+          const res = await login(loginData);
+          if (res.data.error) {
+            throw new Error(res?.data?.message || "Login failed!");
+          }
+      
+          // Dispatch user data to the store
+          dispatch(setUser({ user: res?.data?.data?.user, token: res?.data?.data?.accessToken }));
+
+          toast.update(toastId, {
+            render: "Login successful!",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+            position: "top-right",
+          });
+        } catch (error: any) {
+          // Update error message
+          toast.update(toastId, {
+            render: error.message || "Login failed! Please try again.",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+            position: "top-right",
+          });
         }
-        
-        console.log(loginData)
-        const res = await login(loginData).unwrap();
-        console.log(res)
-    };
+      };
+      
 
     return (
         <div className="bg-gray-50 p-6 ">
