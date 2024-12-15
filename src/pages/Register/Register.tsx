@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [createCustomer, { isLoading, isError, isSuccess }] = useCreateCustomerMutation();
+    const [createCustomer, { isLoading }] = useCreateCustomerMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [login] = useLoginMutation();
+    const [login, {isLoading}] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -136,12 +136,39 @@ const Login = () => {
                                     Forgot password?
                                 </a>
                             </div>
-
                             <button
                                 type="submit"
-                                className="w-full p-3 bg-violet-500 text-white rounded-lg"
+                                disabled={isLoading}
+                                className={`w-full p-3 text-white rounded-lg flex items-center justify-center ${isLoading ? "bg-gray-400" : "bg-violet-500"
+                                    }`}
                             >
-                                Continue
+                                {isLoading ? (
+                                    <>
+                                        <svg
+                                            className="w-5 h-5 mr-2 animate-spin"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C6.477 0 2 4.477 2 10h2z"
+                                            ></path>
+                                        </svg>
+                                        Login.........
+                                    </>
+                                ) : (
+                                    "Continue"
+                                )}
                             </button>
                         </form>
 
