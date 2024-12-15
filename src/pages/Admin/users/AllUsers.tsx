@@ -1,29 +1,57 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetAllUsersQuery } from '@/Redux/features/user/userApi';
+import { useChangeStatusMutation, useGetAllUsersQuery } from '@/Redux/features/user/userApi';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import 'tailwindcss/tailwind.css';
 
 
 const AllUsers = () => {
-
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [dropdownOpen, setDropdownOpen] = useState<number | null>(null);
     const usersPerPage = 5;
 
     const { data: users = { data: [], meta: {} }, isLoading } = useGetAllUsersQuery([
-        { name: "page", value: currentPage }]);
+        { name: 'page', value: currentPage },
+    ]);
 
-    console.log(currentPage)
+    const [changeStatus, { isLoading: statusChangeLoading }] = useChangeStatusMutation();
 
-    const handleRoleToggle = (userId: any) => {
-        console.log(userId);
+    const handleRoleToggle = (userId: number, role: string) => {
+        console.log(`User ID: ${userId}, Selected Role: ${role}`);
+        setDropdownOpen(null);
     };
 
-    const handleStatusToggle = (userId: any) => {
-        console.log(userId);
+
+
+    const handleStatusToggle = async (userId: number, status: string) => {
+        const toastId = toast.loading("Updating My Profile...");
+        try {
+            const updatedData = {
+                userId,
+                status
+            };
+            const response = await changeStatus(updatedData).unwrap();
+            toast.update(toastId, {
+                render: response?.message || "User Status Change successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        } catch (error) {
+            toast.update(toastId, {
+                render: "User Status Change failed! Please try again.",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        }
     };
 
-    const handleDeleteUser = (userId: any) => {
+
+    const handleDeleteUser = (userId: number) => {
         console.log(`User with ID ${userId} deleted`);
     };
 
@@ -35,9 +63,8 @@ const AllUsers = () => {
         (user.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
         (user.email?.toLowerCase() || '').includes(searchTerm.toLowerCase())
     );
-    
 
-    const sortedUsers = filteredUsers.sort((a: any, b: any) => 
+    const sortedUsers = filteredUsers.sort((a: any, b: any) =>
         (a.name || '').localeCompare(b.name || '')
     );
 
@@ -45,19 +72,19 @@ const AllUsers = () => {
     if (isLoading) return <div>Loading...</div>;
 
     return (
-        <div className="p-6 font-serif mb-10" style={{position: "sticky"}}>
+        <div className="p-6 font-serif mb-10">
             <h1 className="text-2xl font-bold mb-4 text-center">All Users</h1>
 
-       <div className='flex justify-between'>
-       <input
-                type="text"
-                placeholder="Search by name or email..."
-                className="mb-4 px-4 py-2 border rounded  md:w-[400px] lg:w-1/2 bg-gray-100"
-                value={searchTerm}
-                onChange={handleSearch}
-            />
-            <p className='px-6'>users : {users?.meta?.total}</p>
-       </div>
+            <div className="flex justify-between">
+                <input
+                    type="text"
+                    placeholder="Search by name or email..."
+                    className="mb-4 px-4 py-2 border rounded md:w-[400px] lg:w-1/2 bg-gray-100"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+                <p className="px-6">Users: {users?.meta?.total || 0}</p>
+            </div>
 
             <div className="overflow-x-auto">
                 <table className="w-full table-auto border-collapse shadow-lg">
@@ -72,21 +99,66 @@ const AllUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.data.map((user: any) => (
+                        {sortedUsers.map((user: any) => (
                             <tr key={user.id} className="border-b text-base">
-                                <td className="p-4 ">{user.id}</td>
+                                <td className="p-4">{user.id}</td>
                                 <td className="p-4">{user.name}</td>
                                 <td className="p-4">{user.email}</td>
                                 <td className="p-4">{user.role}</td>
                                 <td className="p-4">{user.status}</td>
-                                <td className="lg:p-4 p-2 flex space-x-2">
-                                    <button onClick={() => handleRoleToggle(user.id)} className="w-32 px-2 py-1 lg:px-4 lg:py-2 text-sm lg:text-base bg-blue-500 text-white rounded hover:bg-blue-600">
-                                        Toggle Role
+                                <td className="lg:p-4 p-2 flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+                                    {/* Role Toggle Button */}
+                                    <div className="relative">
+                                        <button
+                                            onClick={() =>
+                                                setDropdownOpen(
+                                                    dropdownOpen === user.id ? null : user.id
+                                                )
+                                            }
+                                            className="w-32 px-2 py-1 lg:px-4 lg:py-2 text-sm lg:text-base bg-blue-500 text-white rounded hover:bg-blue-600"
+                                        >
+                                            Toggle Role
+                                        </button>
+                                        {dropdownOpen === user.id && (
+                                            <div className="absolute z-10 mt-2 w-32 bg-white border rounded shadow-lg">
+                                                <ul>
+                                                    {['ADMIN', 'VENDOR', 'CUSTOMER'].map((role) => (
+                                                        <li
+                                                            key={role}
+                                                            onClick={() =>
+                                                                handleRoleToggle(user.id, role)
+                                                            }
+                                                            className="px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-200"
+                                                        >
+                                                            {role}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Status Toggle Button */}
+                                    <button
+                                        onClick={() => {
+                                            const newStatus = user.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE';
+                                            handleStatusToggle(user.id, newStatus);
+                                        }}
+                                        disabled={isLoading}
+                                        className={`w-32 lg:px-4 lg:py-2 text-sm lg:text-base ${user.status === 'ACTIVE'
+                                            ? 'bg-green-500 hover:bg-green-600'
+                                            : 'bg-yellow-500 hover:bg-yellow-600'
+                                            } text-white rounded`}
+                                    >
+                                        {statusChangeLoading ? 'Updating...' : user.status === 'ACTIVE' ? 'BLOCK' : 'ACTIVE'}
                                     </button>
-                                    <button onClick={() => handleStatusToggle(user.id)} className="w-32 lg:px-4 lg:py-2 text-sm lg:text-base bg-green-500 text-white rounded hover:bg-green-600">
-                                        Toggle Status
-                                    </button>
-                                    <button onClick={() => handleDeleteUser(user.id)} className="w-32 lg:px-4 lg:py-2 text-sm lg:text-base bg-red-500 text-white rounded hover:bg-red-600">
+
+
+                                    {/* Delete Button */}
+                                    <button
+                                        onClick={() => handleDeleteUser(user.id)}
+                                        className="w-32 lg:px-4 lg:py-2 text-sm lg:text-base bg-red-500 text-white rounded hover:bg-red-600"
+                                    >
                                         Delete
                                     </button>
                                 </td>
@@ -96,18 +168,19 @@ const AllUsers = () => {
                 </table>
             </div>
 
-            <div className="mt-2 mb-12 flex justify-between">
+            {/* Pagination */}
+            <div className="mt-4 flex justify-between items-center">
                 <button
                     disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(currentPage - 1)}
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                     className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
                 >
                     Previous
                 </button>
-                <span className="px-4 py-2">Page {currentPage} of {totalPages}</span>
+                <span className="px-4 py-2">Page {currentPage} of {totalPages || 1}</span>
                 <button
                     disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(currentPage + 1)}
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
                     className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
                 >
                     Next

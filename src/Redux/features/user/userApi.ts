@@ -29,8 +29,18 @@ const userApi = baseApi.injectEndpoints({
                 }
             },
             providesTags: ['Users']
+        }),
+        ChangeStatus: builder.mutation({
+            query: (statusInfo) => {
+                return {
+                    url: 'user/change-status',
+                    method: 'PATCH',
+                    body: statusInfo
+                }
+            },
+            invalidatesTags: ['Users'],
         })
     }),
 });
 
-export const { useUpdateMeMutation, useGetAllUsersQuery }: any = userApi; 
+export const { useUpdateMeMutation, useGetAllUsersQuery, useChangeStatusMutation }: any = userApi; 
