@@ -6,11 +6,11 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
-import { useLoginMutation } from "@/Redux/features/auth/authApi";
 import { useAppDispatch } from "@/Redux/hooks";
 import { setUser } from "@/Redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "@/Redux/features/auth/authApi";
 
 const Login = () => {
     const [login, {isLoading}] = useLoginMutation();

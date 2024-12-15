@@ -2,42 +2,72 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Photo from '@/components/Profile/Photo';
+import { setUser } from '@/Redux/features/auth/authSlice';
+import { useUpdateMeMutation } from '@/Redux/features/user/userApi';
 import { useAppSelector } from '@/Redux/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const MyProfile = () => {
     const user = useAppSelector((state) => state.auth.user);
-
+    const [UpdateMe, { isLoading }] = useUpdateMeMutation();
+    const dispatch = useDispatch();
 
     const { register, handleSubmit } = useForm();
     const [isEditing, setIsEditing] = useState(false);
-    const [profileImage, setProfileImage] = useState<string | null>(null);
-    const [fileInput, setFileInput] = useState<File | null>(null);
 
 
-    const onSubmit = (data: any) => {
-        const formData = new FormData();
-
-        if (fileInput) {
-            formData.append('profilePhoto', fileInput);
+    const onSubmit = async (data: any) => {
+        const toastId = toast.loading("Updating My Profile...");
+        const { name, email, contactNumber, address, photo } = data;
+    
+        const formPayload = new FormData();
+        // Only include data if it's present
+        if (name || email || contactNumber || address) {
+            formPayload.append("data", JSON.stringify({ name, email, contactNumber, address }));
+        }else{
+            formPayload.append("data", JSON.stringify({ }));
         }
-        Object.keys(data).forEach((key) => {
-            formData.append(key, data[key]);
-        });
-        console.log("data", data);
-        console.log("file",fileInput)
-
+    
+        if (photo && photo[0]) {
+            formPayload.append("file", photo[0]);
+        }
+    
+        try {
+            const res = await UpdateMe(formPayload);
+            console.log(res);
+            if (res?.data?.error) {
+                throw new Error(res?.data?.message || "Profile Update failed!");
+            }
+    
+            dispatch(setUser({
+                user: res?.data?.data,
+            }));
+    
+            // Success toast
+            toast.update(toastId, {
+                render: res?.message || "Profile updated successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        } catch (error) {
+            toast.update(toastId, {
+                render:  "Profile update failed! Please try again.",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        }
+    
         setIsEditing(false);
     };
+    
 
-    const handleImageChange = (e: any) => {
-        const file = e.target.files[0];
-        if (file) {
-            setFileInput(file);
-            setProfileImage(URL.createObjectURL(file));
-        }
-    };
 
     return (
         <div className='mb-20 p-5 animate__animated animate__fadeInDown font-serif'>
@@ -130,12 +160,8 @@ const MyProfile = () => {
                             <input
                                 type="file"
                                 className="bg-white p-3 border rounded-md"
-                                accept="image/*"
-                                onChange={handleImageChange}
+                                {...register("photo")}
                             />
-                            {profileImage && (
-                                <img src={profileImage} alt="Profile Preview" className="mt-4 w-32 h-32 object-cover rounded-full" />
-                            )}
                         </div>
 
                         <div className="flex flex-col">
@@ -143,7 +169,7 @@ const MyProfile = () => {
                             <input
                                 type="text"
                                 className="bg-white p-3 border rounded-md"
-                                {...register('fullName')}
+                                {...register('name')}
                                 placeholder="Enter your full name"
                             />
                         </div>
@@ -161,7 +187,7 @@ const MyProfile = () => {
                             <input
                                 type="text"
                                 className="bg-white p-3 border rounded-md"
-                                {...register('phone')}
+                                {...register('contactNumber')}
                                 placeholder="Enter your phone number"
                             />
                         </div>
@@ -170,7 +196,7 @@ const MyProfile = () => {
                             <input
                                 type="text"
                                 className="bg-white p-3 border rounded-md"
-                                {...register('location')}
+                                {...register('address')}
                                 placeholder="Enter your location"
                             />
                         </div>
