@@ -33,9 +33,20 @@ const userApi = baseApi.injectEndpoints({
         ChangeStatus: builder.mutation({
             query: (statusInfo) => {
                 return {
-                    url: 'user/change-status',
+                    url: '/user/change-status',
                     method: 'PATCH',
                     body: statusInfo
+                }
+            },
+            invalidatesTags: ['Users'],
+        }),
+        DeleteUser: builder.mutation({
+            query: (data) => {
+                console.log(data)
+                return {
+                    url: '/user/delete-user',
+                    method: 'DELETE',
+                    body: data
                 }
             },
             invalidatesTags: ['Users'],
@@ -43,4 +54,4 @@ const userApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useUpdateMeMutation, useGetAllUsersQuery, useChangeStatusMutation }: any = userApi; 
+export const { useUpdateMeMutation, useGetAllUsersQuery, useChangeStatusMutation, useDeleteUserMutation  }: any = userApi; 

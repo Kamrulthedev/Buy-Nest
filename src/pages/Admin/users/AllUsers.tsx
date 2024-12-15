@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useChangeStatusMutation, useGetAllUsersQuery } from '@/Redux/features/user/userApi';
+import { useChangeStatusMutation, useDeleteUserMutation, useGetAllUsersQuery } from '@/Redux/features/user/userApi';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'tailwindcss/tailwind.css';
@@ -14,8 +15,11 @@ const AllUsers = () => {
     const { data: users = { data: [], meta: {} }, isLoading } = useGetAllUsersQuery([
         { name: 'page', value: currentPage },
     ]);
-
     const [changeStatus, { isLoading: statusChangeLoading }] = useChangeStatusMutation();
+
+
+    const [DeleteUser, { isLoading: userDeleteLoading }] = useDeleteUserMutation();
+
 
     const handleRoleToggle = (userId: number, role: string) => {
         console.log(`User ID: ${userId}, Selected Role: ${role}`);
@@ -23,9 +27,9 @@ const AllUsers = () => {
     };
 
 
-
+    //status Change function
     const handleStatusToggle = async (userId: number, status: string) => {
-        const toastId = toast.loading("Updating My Profile...");
+        const toastId = toast.loading("Changing User Status...");
         try {
             const updatedData = {
                 userId,
@@ -50,11 +54,64 @@ const AllUsers = () => {
         }
     };
 
+    // delete function
+    const handleDeleteUser = async (userId: number) => {
+        const confirmationToastId = toast(
+            <div className="flex items-center space-x-4">
+                <span>Are you sure ?     </span>
+                <button
+                    onClick={async () => {
+                        toast.update(confirmationToastId, {
+                            render: "Deleting user...",
+                            type: "info",
+                            isLoading: true,
+                            autoClose: false,
+                            closeButton: false,
+                        });
 
-    const handleDeleteUser = (userId: number) => {
-        console.log(`User with ID ${userId} deleted`);
+                        const data = { userId };
+                        try {
+                            const res = await DeleteUser(data).unwrap();
+                            toast.update(confirmationToastId, {
+                                render: res?.message || "User deleted successfully!",
+                                type: "success",
+                                isLoading: false,
+                                autoClose: 3000,
+                                closeButton: true,
+                            });
+                        } catch (error) {
+                            toast.update(confirmationToastId, {
+                                render: "Error deleting user.",
+                                type: "error",
+                                isLoading: false,
+                                autoClose: 3000,
+                                closeButton: true,
+                            });
+                        }
+                    }}
+                    className="bg-red-500 text-white rounded px-4 py-2"
+                >
+                    Yes
+                </button>
+                <button
+                    onClick={() => {
+                        toast.dismiss(confirmationToastId);
+                    }}
+                    className="bg-gray-500 text-white rounded px-4 py-2"
+                >
+                    No
+                </button>
+            </div>,
+            {
+                position: "top-right",
+                autoClose: false,
+                closeButton: false,
+                progress: undefined,
+            }
+        );
     };
 
+    
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     };
