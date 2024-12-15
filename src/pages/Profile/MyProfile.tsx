@@ -7,6 +7,7 @@ import { useUpdateMeMutation } from '@/Redux/features/user/userApi';
 import { useAppSelector } from '@/Redux/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaSpinner } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -22,30 +23,30 @@ const MyProfile = () => {
     const onSubmit = async (data: any) => {
         const toastId = toast.loading("Updating My Profile...");
         const { name, email, contactNumber, address, photo } = data;
-    
+
         const formPayload = new FormData();
         // Only include data if it's present
         if (name || email || contactNumber || address) {
             formPayload.append("data", JSON.stringify({ name, email, contactNumber, address }));
-        }else{
-            formPayload.append("data", JSON.stringify({ }));
+        } else {
+            formPayload.append("data", JSON.stringify({}));
         }
-    
+
         if (photo && photo[0]) {
             formPayload.append("file", photo[0]);
         }
-    
+
         try {
             const res = await UpdateMe(formPayload);
             console.log(res);
             if (res?.data?.error) {
                 throw new Error(res?.data?.message || "Profile Update failed!");
             }
-    
+
             dispatch(setUser({
                 user: res?.data?.data,
             }));
-    
+
             // Success toast
             toast.update(toastId, {
                 render: res?.message || "Profile updated successfully!",
@@ -56,17 +57,17 @@ const MyProfile = () => {
             });
         } catch (error) {
             toast.update(toastId, {
-                render:  "Profile update failed! Please try again.",
+                render: "Profile update failed! Please try again.",
                 type: "error",
                 isLoading: false,
                 autoClose: 3000,
                 position: "top-right",
             });
         }
-    
+
         setIsEditing(false);
     };
-    
+
 
 
     return (
@@ -151,7 +152,7 @@ const MyProfile = () => {
 
                 {/* Edit Profile Form */}
                 {isEditing && (
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-gray-50 p-6 rounded-lg mt-8">
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-gray-50 p-6 rounded-lg mt-8 animate__animated animate__fadeInDown">
                         <h2 className="text-2xl font-semibold mb-4">Edit Profile</h2>
 
                         {/* Profile Image Input */}
@@ -168,6 +169,7 @@ const MyProfile = () => {
                             <label className="text-sm font-semibold mb-2">Full Name</label>
                             <input
                                 type="text"
+                                defaultValue={user?.name}
                                 className="bg-white p-3 border rounded-md"
                                 {...register('name')}
                                 placeholder="Enter your full name"
@@ -177,6 +179,7 @@ const MyProfile = () => {
                             <label className="text-sm font-semibold mb-2">Your Email</label>
                             <input
                                 type="text"
+                                defaultValue={user?.email}
                                 className="bg-white p-3 border rounded-md"
                                 {...register('email')}
                                 placeholder="Enter your email"
@@ -186,6 +189,7 @@ const MyProfile = () => {
                             <label className="text-sm font-semibold mb-2">Phone Number</label>
                             <input
                                 type="text"
+                                defaultValue={user?.contactNumber}
                                 className="bg-white p-3 border rounded-md"
                                 {...register('contactNumber')}
                                 placeholder="Enter your phone number"
@@ -195,6 +199,7 @@ const MyProfile = () => {
                             <label className="text-sm font-semibold mb-2">Location</label>
                             <input
                                 type="text"
+                                defaultValue={user?.address}
                                 className="bg-white p-3 border rounded-md"
                                 {...register('address')}
                                 placeholder="Enter your location"
@@ -204,8 +209,13 @@ const MyProfile = () => {
                             <button
                                 type="submit"
                                 className="bg-violet-400 text-white px-6 py-2 rounded-md hover:bg-violet-500 transition"
+                                disabled={isLoading}
                             >
-                                Save Changes
+                                {isLoading ? (
+                                    <FaSpinner className="animate-spin" />
+                                ) : (
+                                    "Save Changes"
+                                )}
                             </button>
                             <button
                                 type="button"
