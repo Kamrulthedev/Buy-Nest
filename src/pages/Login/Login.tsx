@@ -33,7 +33,6 @@ const Login = () => {
 
         try {
             const res = await login(loginData);
-            console.log(res)
             if (res.data.error) {
                 throw new Error(res?.data?.message || "Login failed!");
             }

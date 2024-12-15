@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -6,21 +7,59 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
-
+import { useCreateCustomerMutation } from "@/Redux/features/customer/customer.api";
+import { toast } from "react-toastify";
+import { setUser } from "@/Redux/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [createCustomer, { isLoading, isError, isSuccess }] = useCreateCustomerMutation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+    const onSubmit = async (formData: any) => {
+        const toastId = toast.loading("Creating account...");
+        const { name, email, contactNumber, password, photo } = formData;
+
+        const formPayload = new FormData();
+        formPayload.append("data", JSON.stringify({ name, email, contactNumber, password }));
+
+        if (photo && photo[0]) {
+            formPayload.append("file", photo[0]);
+        }
+        try {
+            const res = await createCustomer(formPayload).unwrap();
+            if (res?.error) {
+                throw new Error(res?.message || "Account creation failed!");
+            }
+
+            // Dispatch user data to the store
+            dispatch(setUser({ user: res?.data, token: res?.data?.data?.accessToken }));
+
+            // Success toast
+            toast.update(toastId, {
+                render: res?.message || "Account created successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+
+            navigate("/");
+        } catch (res: any) {
+            toast.update(toastId, {
+                render: res?.message || "Account creation failed! Please try again.",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        }
     };
-
     return (
         <div className="bg-gray-50 p-6">
             <HeadLink tag="Home" tag1="Register"></HeadLink>
@@ -84,11 +123,26 @@ const Register = () => {
                             <div>
                                 <input
                                     type="phone"
-                                    {...register("phone", {
+                                    {...register("contactNumber", {
                                         required: "Phone Number is required",
                                     })}
                                     className="w-full p-3 border rounded-lg bg-white text-black"
                                     placeholder="Your Phone Number *"
+                                />
+                                {errors.phone && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.phone.message?.toString()}
+                                    </p>
+                                )}
+                            </div>
+                            <div>
+                                <input
+                                    type="file"
+                                    {...register("photo", {
+                                        required: "Profile Photo is required",
+                                    })}
+                                    className="w-full p-3 border rounded-lg bg-white text-black"
+                                    placeholder="Profile Photo *"
                                 />
                                 {errors.phone && (
                                     <p className="text-red-500 text-sm">
@@ -130,9 +184,37 @@ const Register = () => {
                             )}
                             <button
                                 type="submit"
-                                className="w-full p-3 bg-violet-500 text-white rounded-lg"
+                                disabled={isLoading}
+                                className={`w-full p-3 text-white rounded-lg flex items-center justify-center ${isLoading ? "bg-gray-400" : "bg-violet-500"
+                                    }`}
                             >
-                                Continue
+                                {isLoading ? (
+                                    <>
+                                        <svg
+                                            className="w-5 h-5 mr-2 animate-spin"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C6.477 0 2 4.477 2 10h2z"
+                                            ></path>
+                                        </svg>
+                                        Creating Account...
+                                    </>
+                                ) : (
+                                    "Continue"
+                                )}
                             </button>
                         </form>
                         <div className="text-center text-black">
