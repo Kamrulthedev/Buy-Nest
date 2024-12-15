@@ -9,12 +9,12 @@ import NavberBrandLink from "./NavberBrandLink";
 import NavigationLinks from "./NavigationLinks";
 import MobaileNaber from "./MobaileNaber";
 import { FaRegUser } from "react-icons/fa";
-import { useAppSelector } from "@/Redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { logout } from "@/Redux/features/auth/authSlice";
 
 function Navbar() {
   const user = useAppSelector((state) => state.auth.user);
-
-console.log(user)
+  const dispacth = useAppDispatch();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -23,6 +23,11 @@ console.log(user)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+
+  const handleLogOut = () => {
+    dispacth(logout());
+  };
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -126,7 +131,7 @@ console.log(user)
                     <li>
                       <button
                         className="w-full text-left px-4 py-2 text-red-700 hover:bg-gray-600 hover:text-red-500 rounded-lg"
-                        onClick={() => console.log("Logged out")}
+                        onClick={handleLogOut}
                       >
                         Log out
                       </button>

@@ -12,15 +12,12 @@ const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
     const role = useAppSelector((state) => state.auth.user?.role) ||'';
     const location = useLocation();
 
-    console.log("Token:", token);
-    console.log("Role:", role);  
 
     if (!token) {
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
 
     if (!allowedRoles.includes(role)) {
-        console.log("Role not allowed:", role); 
         return <Navigate to="/" replace />;
     }
 

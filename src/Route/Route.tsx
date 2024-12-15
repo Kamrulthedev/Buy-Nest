@@ -20,6 +20,7 @@ import VendorLayout from "@/pages/Vendor/VendorLayout";
 import VendorDashborad from "@/pages/Vendor/VendorDashborad/VendorDashborad";
 import CustomerLayout from "@/pages/Customer/CustomerLayout";
 import CustomerDashboard from "@/pages/Customer/Dashboard/CustomerDashboard";
+import ProtectedRoute from "@/components/MainLayout/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +61,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <WishlistPage></WishlistPage>
+        element: (
+          <ProtectedRoute allowedRoles={["CUSTOMER", "VENDOR", "ADMIN"]}>
+            <WishlistPage></WishlistPage>
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",
@@ -78,7 +83,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout></AdminLayout>,
+    element: (
+      <ProtectedRoute allowedRoles={["ADMIN"]}>
+        <AdminLayout></AdminLayout>
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: 'adminDashboard',
@@ -88,7 +97,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/vendor",
-    element: <VendorLayout></VendorLayout>,
+    element: (
+      <ProtectedRoute allowedRoles={["VENDOR"]}>
+        <VendorLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: 'vendorDashboard',
@@ -98,7 +111,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/customer",
-    element: <CustomerLayout></CustomerLayout>,
+    element: (
+      <ProtectedRoute allowedRoles={["CUSTOMER"]}>
+        <CustomerLayout></CustomerLayout>
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "customerDashboard",
@@ -108,7 +125,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/Profile",
-    element: <Profile></Profile>,
+    element: (
+      <ProtectedRoute allowedRoles={["CUSTOMER", "VENDOR", "ADMIN"]}>
+        <Profile />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "myProfile",
@@ -119,74 +140,3 @@ export const router = createBrowserRouter([
 ]);
 
 
-
-
-// export const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <MainLayout />,
-//     children: [
-//       { path: "/", element: <Home /> },
-//       { path: "/product/:id", element: <ProductsDetails /> },
-//       { path: "/products", element: <Products /> },
-//       { path: "/about", element: <AboutUs /> },
-//       { path: "/contact", element: <ContactUs /> },
-//       { path: "/cards", element: <Cards /> },
-//       { path: "/login", element: <Login /> },
-//       { path: "/register", element: <Register /> },
-//       {
-//         path: "/checkout",
-//         element: (
-//           <ProtectedRoute allowedRoles={["customer"]}>
-//             <Checkout />
-//           </ProtectedRoute>
-//         ),
-//       },
-//       {
-//         path: "/wishlist",
-//         element: (
-//           <ProtectedRoute allowedRoles={["customer"]}>
-//             <WishlistPage />
-//           </ProtectedRoute>
-//         ),
-//       },
-//     ],
-//   },
-//   {
-//     path: "/admin",
-//     element: (
-//       <ProtectedRoute allowedRoles={["admin"]}>
-//         <AdminLayout />
-//       </ProtectedRoute>
-//     ),
-//     children: [
-//       { path: "adminDashboard", element: <Dashboard /> },
-//     ],
-//   },
-//   {
-//     path: "/vendor",
-//     element: (
-//       <ProtectedRoute allowedRoles={["vendor"]}>
-//         <VendorLayout />
-//       </ProtectedRoute>
-//     ),
-//     children: [
-//       { path: "vendorDashboard", element: <VendorDashborad /> },
-//     ],
-//   },
-//   {
-//     path: "/profile",
-//     element: (
-//       <ProtectedRoute allowedRoles={["customer", "vendor", "admin"]}>
-//         <Profile />
-//       </ProtectedRoute>
-//     ),
-//     children: [
-//       { path: "myProfile", element: <MyProfile /> },
-//     ],
-//   },
-//   {
-//     path: "*",
-//     element: <NotFound />,
-//   },
-// ]);
