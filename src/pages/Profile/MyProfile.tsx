@@ -22,12 +22,12 @@ const MyProfile = () => {
 
     const onSubmit = async (data: any) => {
         const toastId = toast.loading("Updating My Profile...");
-        const { name, email, contactNumber, address, photo } = data;
+        const { name, contactNumber, address, photo } = data;
 
         const formPayload = new FormData();
         // Only include data if it's present
-        if (name || email || contactNumber || address) {
-            formPayload.append("data", JSON.stringify({ name, email, contactNumber, address }));
+        if (name || contactNumber || address) {
+            formPayload.append("data", JSON.stringify({ name, contactNumber, address }));
         } else {
             formPayload.append("data", JSON.stringify({}));
         }
@@ -173,16 +173,6 @@ const MyProfile = () => {
                                 className="bg-white p-3 border rounded-md"
                                 {...register('name')}
                                 placeholder="Enter your full name"
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <label className="text-sm font-semibold mb-2">Your Email</label>
-                            <input
-                                type="text"
-                                defaultValue={user?.email}
-                                className="bg-white p-3 border rounded-md"
-                                {...register('email')}
-                                placeholder="Enter your email"
                             />
                         </div>
                         <div className="flex flex-col">

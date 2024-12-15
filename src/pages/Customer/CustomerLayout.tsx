@@ -14,6 +14,8 @@ import {
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { logout } from "@/Redux/features/auth/authSlice";
 
 
 const CustomerLayout = () => {
@@ -22,10 +24,8 @@ const CustomerLayout = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const user = {
-        role: "CUSTOMER",
-        profileImg: "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
-    };
+    const user = useAppSelector((state) => state.auth.user);
+    const dispacth = useAppDispatch();
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -36,11 +36,10 @@ const CustomerLayout = () => {
         setIsSidebarOpen(false);
     };
 
-    const handleLogout = () => {
-        if (window.confirm("Are you sure you want to log out?")) {
-            window.location.href = "/login";
-        }
-    };
+    const handleLogOut = () => {
+        dispacth(logout());
+      };
+
 
     // Profile Dropdown Toggle
     const toggleDropdown = () => {
@@ -123,7 +122,7 @@ const CustomerLayout = () => {
                         onClick={() => handleMenuItemClick("Logout")}
                     >
                         <CiLogout className="mr-3" />
-                        <button onClick={handleLogout}>Log Out</button>
+                        <button onClick={handleLogOut}>Log Out</button>
                     </li>
                 </ul>
             </div>
@@ -151,7 +150,7 @@ const CustomerLayout = () => {
                 {/* Profile Section */}
                 <div className="relative" ref={dropdownRef}>
                     <img
-                        src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
+                        src={user?.profilePhoto || "https://i.ibb.co/44vhj8G/image.png"}
                         alt="Profile"
                         className="lg:h-12 lg:w-12 w-10 h-10 rounded-full border border-gray-300 object-cover cursor-pointer"
                         onClick={toggleDropdown}
@@ -170,7 +169,7 @@ const CustomerLayout = () => {
                                 <li>
                                     <button
                                         className="w-full text-left px-4 py-2 text-red-500 hover:text-red-700 hover:bg-violet-400 hover:rounded-lg"
-                                        onClick={handleLogout}
+                                        onClick={handleLogOut}
                                     >
                                         Log Out
                                     </button>
@@ -182,7 +181,7 @@ const CustomerLayout = () => {
             </nav>
 
             {/* Main Content Area */}
-            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto">
+            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto p-5">
                 <Outlet />
             </main>
 
