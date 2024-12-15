@@ -21,6 +21,7 @@ import VendorDashborad from "@/pages/Vendor/VendorDashborad/VendorDashborad";
 import CustomerLayout from "@/pages/Customer/CustomerLayout";
 import CustomerDashboard from "@/pages/Customer/Dashboard/CustomerDashboard";
 import ProtectedRoute from "@/components/MainLayout/ProtectedRoute";
+import AllUsers from "@/pages/Admin/users/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
       {
         path: 'adminDashboard',
         element: <Dashboard></Dashboard>
+      },
+      {
+        path: 'users',
+        element: <AllUsers></AllUsers>
       }
     ]
   },

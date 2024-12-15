@@ -16,6 +16,8 @@ import {
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
+import { logout } from "@/Redux/features/auth/authSlice";
 
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,10 +25,10 @@ const AdminLayout = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const user = {
-        role: "ADMIN",
-        profileImg: "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
-    };
+  const user = useAppSelector((state) => state.auth.user);
+  const dispacth = useAppDispatch();
+
+
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -39,9 +41,11 @@ const AdminLayout = () => {
 
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
-            window.location.href = "/login";
+            dispacth(logout());
         }
     };
+
+
 
     // Profile Dropdown Toggle
     const toggleDropdown = () => {
@@ -99,7 +103,7 @@ const AdminLayout = () => {
                     {[
                         { name: "Home", icon: <FaHome />, path: "/" },
                         { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-                        { name: "User Management", icon: <FaUsers />, path: "/admin/customers" },
+                        { name: "User Management", icon: <FaUsers />, path: "/admin/users" },
                         { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
                         { name: "Category Management", icon: <FaListAlt />, path: "/admin/categories" },
                         { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
@@ -148,14 +152,14 @@ const AdminLayout = () => {
                 >
                     {isSidebarOpen ? <FaTimes /> : <FaBars />}
                 </button>
-                <h1 className="text-2xl font-bold lg:-ml-4">Admin Panel</h1>
+                <h1 className="text-base lg:text-2xl font-bold lg:-ml-4">Admin Panel</h1>
                 <div>
                     <SearchBar />
                 </div>
                 {/* Profile Section */}
                 <div className="relative" ref={dropdownRef}>
                     <img
-                        src={user?.profileImg || "https://i.ibb.co/44vhj8G/image.png"}
+                        src={user?.profilePhoto || "https://i.ibb.co/44vhj8G/image.png"}
                         alt="Profile"
                         className="h-12 w-12 rounded-full border border-gray-300 object-cover cursor-pointer"
                         onClick={toggleDropdown}

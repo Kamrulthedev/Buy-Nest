@@ -38,7 +38,6 @@ const MyProfile = () => {
 
         try {
             const res = await UpdateMe(formPayload);
-            console.log(res);
             if (res?.data?.error) {
                 throw new Error(res?.data?.message || "Profile Update failed!");
             }
