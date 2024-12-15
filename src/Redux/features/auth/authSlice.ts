@@ -3,8 +3,6 @@ import { TUser } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-
-
 type TAuthState = {
     user?: TUser;
     token?: string;

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 
-const Photo = () => {
+const Photo = ({profile} : any) => {
     return (
         <div className='relative'>
         <img
@@ -10,9 +11,9 @@ const Photo = () => {
         />
         <div className='absolute bottom-0 left-0 flex items-center ml-4 mb-4'>
             <img
-                src="https://i.ibb.co.com/44vhj8G/image.png"
+                src={profile || "https://i.ibb.co.com/44vhj8G/image.png"}
                 alt="Profile Avatar"
-                className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+                className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
             />
         </div>
     </div>

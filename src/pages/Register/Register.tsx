@@ -38,7 +38,7 @@ const Register = () => {
             }
 
             // Dispatch user data to the store
-            dispatch(setUser({ user: res?.data, token: res?.data?.data?.accessToken }));
+            dispatch(setUser({ user: res?.data?.result, token: res?.data?.accessToken }));
 
             // Success toast
             toast.update(toastId, {

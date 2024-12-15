@@ -6,6 +6,7 @@ export type TUser = {
   profilePhoto: string;
   role: "ADMIN" | "VENDOR" | "CUSTOMER";
   status: "ACTIVE" | "BLOCKED" | "DELETED";
+  address: string,
   isDeleted: boolean;
   createdAt: string;
   updatedAt: string;

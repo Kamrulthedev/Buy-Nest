@@ -2,30 +2,31 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Photo from '@/components/Profile/Photo';
+import { useAppSelector } from '@/Redux/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const MyProfile = () => {
+    const user = useAppSelector((state) => state.auth.user);
+
+
     const { register, handleSubmit } = useForm();
     const [isEditing, setIsEditing] = useState(false);
-    const [profileImage, setProfileImage] = useState<string | null>(null); 
-    const [fileInput, setFileInput] = useState<File | null>(null); 
+    const [profileImage, setProfileImage] = useState<string | null>(null);
+    const [fileInput, setFileInput] = useState<File | null>(null);
+
 
     const onSubmit = (data: any) => {
         const formData = new FormData();
-        if (fileInput) {
-            formData.append('profileImage', fileInput);
-        }
 
-        // Append the rest of the form data
+        if (fileInput) {
+            formData.append('profilePhoto', fileInput);
+        }
         Object.keys(data).forEach((key) => {
             formData.append(key, data[key]);
         });
-
-        // Log the FormData to the console
-        for (let [key, value] of formData.entries()) {
-            console.log("Profile Data", `${key}:`, value );
-        }
+        console.log("data", data);
+        console.log("file",fileInput)
 
         setIsEditing(false);
     };
@@ -37,19 +38,21 @@ const MyProfile = () => {
             setProfileImage(URL.createObjectURL(file));
         }
     };
+
     return (
         <div className='mb-20 p-5 animate__animated animate__fadeInDown font-serif'>
             <div className='max-w-screen-lg mx-auto p-6 bg-white shadow-md rounded-lg'>
                 {/* Cover Photo and Profile */}
-                <Photo></Photo>
+                <Photo profile={user?.profilePhoto}></Photo>
                 <div className="py-6 animate__animated animate__fadeInDown">
                     {/* Profile Info and Edit Button */}
                     <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
                         <div>
-                            <h1 className="text-2xl sm:text-3xl font-semibold">Kamrul Hassan</h1>
-                            <p className="text-gray-600">Travel Blogger</p>
-                            <p className="text-gray-600">01877722222</p>
-                            <p className="text-gray-600">Address: Dhaka</p>
+                            <h1 className="text-2xl sm:text-3xl font-semibold">{user?.name}</h1>
+                            <p className="text-gray-600">{user?.email}</p>
+                            <p className="text-gray-600">{user?.role}</p>
+                            <p className="text-gray-600">{user?.contactNumber}</p>
+                            <p className="text-gray-600">Address: {user?.address}</p>
                         </div>
                         <button
                             onClick={() => setIsEditing(true)}
@@ -60,20 +63,60 @@ const MyProfile = () => {
                     </div>
 
                     {/* Stats */}
-                    <div className="flex justify-between mt-6 sm:mt-4">
-                        <div className="text-center">
-                            <h2 className="text-xl font-semibold">120</h2>
-                            <p className="text-gray-500">Posts</p>
-                        </div>
-                        <div className="text-center">
-                            <h2 className="text-xl font-semibold">300</h2>
-                            <p className="text-gray-500">Followers</p>
-                        </div>
-                        <div className="text-center">
-                            <h2 className="text-xl font-semibold">180</h2>
-                            <p className="text-gray-500">Following</p>
-                        </div>
-                    </div>
+                    {
+                        user?.role === "ADMIN" && (
+                            <div className="flex justify-between mt-6 sm:mt-4">
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">120</h2>
+                                    <p className="text-gray-500">Products</p>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">300</h2>
+                                    <p className="text-gray-500">Customer</p>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">180</h2>
+                                    <p className="text-gray-500">Shop</p>
+                                </div>
+                            </div>
+                        )
+                    }
+                    {
+                        user?.role === "VENDOR" && (
+                            <div className="flex justify-between mt-6 sm:mt-4">
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">120</h2>
+                                    <p className="text-gray-500">Products</p>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">300</h2>
+                                    <p className="text-gray-500">Followers</p>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">180</h2>
+                                    <p className="text-gray-500">Following</p>
+                                </div>
+                            </div>
+                        )
+                    }
+                    {
+                        user?.role === "CUSTOMER" && (
+                            <div className="flex justify-between mt-6 sm:mt-4">
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">120</h2>
+                                    <p className="text-gray-500">Order</p>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">300</h2>
+                                    <p className="text-gray-500">Followers</p>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="text-xl font-semibold">180</h2>
+                                    <p className="text-gray-500">Following</p>
+                                </div>
+                            </div>
+                        )
+                    }
                 </div>
 
                 {/* Edit Profile Form */}
