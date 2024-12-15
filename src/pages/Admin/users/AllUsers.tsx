@@ -18,7 +18,7 @@ const AllUsers = () => {
     const [changeStatus, { isLoading: statusChangeLoading }] = useChangeStatusMutation();
 
 
-    const [DeleteUser, { isLoading: userDeleteLoading }] = useDeleteUserMutation();
+    const [DeleteUser] = useDeleteUserMutation();
 
 
     const handleRoleToggle = (userId: number, role: string) => {

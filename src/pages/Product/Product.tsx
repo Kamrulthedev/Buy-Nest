@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 
-import { TProductProps } from "@/types/types";
 import { IoIosArrowForward } from "react-icons/io";
 
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import "animate.css";
 import "../../components/Navber/navber.css";
 import { renderStars } from "@/components/Reating/Reating";
-const Product = ({ product }: { product: TProductProps }) => {
+const Product = ({ product }: { product: any }) => {
   return (
     <div className="animate__animated animate__fadeInUpf">
       <div className="card bg-base-300 mx-auto  image-container md:w-96 h-[500px]  ">

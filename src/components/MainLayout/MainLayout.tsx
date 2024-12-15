@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Navber from "../Navber/Navber";
 import Footer from "../Footer/Footer";
-import usePageRefreshWarning from "../usePageRefreshWarning/UsePageRefreshWarning";
 import { useEffect, useState } from "react";
 
 const MainLayout = () => {
-  usePageRefreshWarning();
+  // usePageRefreshWarning();
 
   // State for showing the button
   const [showButton, setShowButton] = useState(false);
