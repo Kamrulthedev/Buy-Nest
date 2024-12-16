@@ -83,7 +83,7 @@ const VendorsManagement = () => {
                     to="/admin/create-vendor"
                     className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm md:text-base"
                 >
-                    Create Vendor
+                    Create Vendor & Shop
                 </Link>
             </div>
 
