@@ -22,7 +22,6 @@ const VendorsManagement = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [sortField, setSortField] = useState<keyof TVendor | "">("");
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-    const [id, setId] = useState(0)
 
     // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
@@ -30,13 +29,6 @@ const VendorsManagement = () => {
     const { data = { data: [] as TVendor[], meta: {} }, isLoading } = useGetAllVendorsQuery([
         { name: 'page', value: currentPage },
     ]);
-
-    console.log(id)
-
-    const handleDetails = (id: number) => {
-        setId(id)
-    }
-
 
 
     const handleBlock = (id: number) => console.log("Block clicked for vendor ID:", id);
@@ -132,12 +124,13 @@ const VendorsManagement = () => {
                                 <td className="border border-gray-300 px-4 py-2">{vendor.shop?.name || "N/A"}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.status}</td>
                                 <td className="border border-gray-300 px-4 py-2 text-center flex flex-col md:flex-row md:justify-center gap-2 items-center">
-                                    <button
-                                        onClick={() => handleDetails(vendor.id)}
+                                    <Link
+                                        to={`/admin/vendor-details/${vendor.id}`}
                                         className="w-24 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm lg:text-base"
                                     >
                                         Details
-                                    </button>
+                                    </Link>
+
                                     <button
                                         onClick={() => handleBlock(vendor.id)}
                                         className="w-24 bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 text-sm lg:text-base"
