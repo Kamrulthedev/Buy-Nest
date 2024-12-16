@@ -21,6 +21,7 @@ import ProtectedRoute from "@/components/MainLayout/ProtectedRoute";
 import AllUsers from "@/pages/Admin/users/AllUsers";
 import ShopManagement from "@/pages/Admin/ShopManagement/ShopManagement";
 import VendorsManagement from "@/pages/Admin/VendorsManagement/VendorsManagement";
+import CreateVendor from "@/pages/Admin/VendorsManagement/CreateVendor";
 
 export const router = createBrowserRouter([
   {
@@ -90,7 +91,11 @@ export const router = createBrowserRouter([
         element: <VendorsManagement></VendorsManagement>
       },
       {
-        path:'shops-management',
+        path: "create-vendor",
+        element: <CreateVendor></CreateVendor>
+      },
+      {
+        path: 'shops-management',
         element: <ShopManagement></ShopManagement>
       }
     ]

@@ -130,17 +130,17 @@ const AllUsers = () => {
 
     return (
         <div className="p-6 font-serif mb-10">
-            <h1 className="text-2xl font-bold mb-4 text-center">All Users</h1>
+            <h1 className="text-2xl font-bold mb-4">All Users</h1>
 
-            <div className="flex justify-between">
+            <div className="lg:flex justify-between space-y-3 mb-3">
                 <input
                     type="text"
                     placeholder="Search by name or email..."
-                    className="mb-4 px-4 py-2 border rounded md:w-[400px] lg:w-1/2 bg-gray-100"
+                    className="mb-4 px-4 py-2 border rounded w-full lg:w-1/2 bg-gray-100 border-violet-400"
                     value={searchTerm}
                     onChange={handleSearch}
                 />
-                <p className="px-6">Users: {users?.meta?.total || 0}</p>
+                <p>Users: {users?.meta?.total || 0}</p>
             </div>
 
             <div className="overflow-x-auto">
