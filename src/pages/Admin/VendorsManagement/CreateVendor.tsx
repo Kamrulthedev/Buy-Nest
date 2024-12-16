@@ -2,14 +2,16 @@
 import { useCreatevendorMutation } from "@/Redux/features/user/userApi";
 import React, { useRef } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { AiOutlineLoading } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const CreateVendor = () => {
     const profilePhotoRef = useRef<HTMLInputElement>(null);
     const logoRef = useRef<HTMLInputElement>(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
-    const [createVendor] = useCreatevendorMutation();
+    const [createVendor, { isLoading }] = useCreatevendorMutation();
 
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
@@ -61,7 +63,6 @@ const CreateVendor = () => {
         // API Call
         try {
             const response = await createVendor(formData).unwrap();
-            console.log("API Response:", response);
             // Success toast
             toast.update(toastId, {
                 render: response?.message || "Vendor & Shop created successfully!",
@@ -70,8 +71,10 @@ const CreateVendor = () => {
                 autoClose: 3000,
                 position: "top-right",
             });
+
+            // Reset the form after successful submission
+            formRef.current?.reset();
         } catch (response: any) {
-            console.error("Error submitting data:", response?.message);
             toast.update(toastId, {
                 render: response?.message || "Vendor & Shop creation failed! Please try again.",
                 type: "error",
@@ -89,7 +92,7 @@ const CreateVendor = () => {
             </Link>
             <div className="max-w-2xl mx-auto p-2">
                 <h1 className="text-2xl font-bold mb-4">Create Vendor and Shop</h1>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} ref={formRef} className="space-y-6"> {/* Attach ref here */}
                     {/* Vendor Section */}
                     <div>
                         <h2 className="text-lg font-semibold mb-2">Vendor Details</h2>
@@ -169,8 +172,16 @@ const CreateVendor = () => {
                     <button
                         type="submit"
                         className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                        disabled={isLoading} // Disable button while loading
                     >
-                        Submit
+                        {isLoading ? (
+                            <div className="flex justify-center items-center space-x-2">
+                                <AiOutlineLoading className="animate-spin" />
+                                <span>Submitting...</span>
+                            </div>
+                        ) : (
+                            "Submit"
+                        )}
                     </button>
                 </form>
             </div>
