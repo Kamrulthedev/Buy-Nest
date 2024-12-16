@@ -13,6 +13,7 @@ import {
     FaListAlt,
     FaChartPie,
 } from "react-icons/fa";
+import { FaUserGroup } from "react-icons/fa6";
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
@@ -103,8 +104,9 @@ const AdminLayout = () => {
                     {[
                         { name: "Home", icon: <FaHome />, path: "/" },
                         { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-                        { name: "User Management", icon: <FaUsers />, path: "/admin/users" },
-                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
+                        { name: "User Management", icon: <FaUsers />, path: "/admin/users-management" },
+                        { name: "Vendor Management", icon: <FaUserGroup />, path: "/admin/vendors-management" },
+                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops-management" },
                         { name: "Category Management", icon: <FaListAlt />, path: "/admin/categories" },
                         { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
                         { name: "Customer Management", icon: <FaUsers />, path: "/admin/customers" },
