@@ -10,7 +10,6 @@ import {
     FaMoneyBillWave,
     FaCogs,
     FaStore,
-    FaListAlt,
     FaChartPie,
 } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
@@ -107,8 +106,7 @@ const AdminLayout = () => {
                         { name: "User Management", icon: <FaUsers />, path: "/admin/users-management" },
                         { name: "Vendor Management", icon: <FaUserGroup />, path: "/admin/vendors-management" },
                         { name: "Shop Management", icon: <FaStore />, path: "/admin/shops-management" },
-                        { name: "Category Management", icon: <FaListAlt />, path: "/admin/categories" },
-                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
+                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products-management" },
                         { name: "Customer Management", icon: <FaUsers />, path: "/admin/customers" },
                         { name: "Order Monitoring", icon: <FaClipboardList />, path: "/admin/orders" },
                         { name: "Transaction History", icon: <FaMoneyBillWave />, path: "/admin/payments" },
