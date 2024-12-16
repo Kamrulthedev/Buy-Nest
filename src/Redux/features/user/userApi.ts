@@ -50,8 +50,25 @@ const userApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags: ['Users'],
+        }),
+        createvendor: builder.mutation({
+            query: (data) => {
+                console.log(data)
+                return {
+                    url: '/user/create-vendor',
+                    method: "POST",
+                    body: data
+                }
+            },
+            invalidatesTags: ["Users"]
         })
     }),
 });
 
-export const { useUpdateMeMutation, useGetAllUsersQuery, useChangeStatusMutation, useDeleteUserMutation  }: any = userApi; 
+export const {
+    useUpdateMeMutation,
+    useGetAllUsersQuery,
+    useChangeStatusMutation,
+    useDeleteUserMutation,
+    useCreatevendorMutation
+}: any = userApi; 
