@@ -21,7 +21,7 @@ const VendorsApi = baseApi.injectEndpoints({
                     method: "GET",
                 };
             },
-            // providesTags: ['Vendors'],
+            providesTags: ['Vendors'],
         }),
 
     }),

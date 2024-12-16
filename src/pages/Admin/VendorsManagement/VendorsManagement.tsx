@@ -8,18 +8,29 @@ type TVendor = {
     id: number;
     name: string;
     email: string;
-    shopName: string;
     status: string;
+    role: string
+    shop: {
+        id: number;
+        name: string;
+        logoUrl: string;
+    }
 };
 
 const VendorsManagement = () => {
-    const { data = { data: [] as TVendor[], meta: {} }, isLoading } = useGetAllVendorsQuery(undefined);
-
-    console.log(data)
 
     const [searchTerm, setSearchTerm] = useState("");
     const [sortField, setSortField] = useState<keyof TVendor | "">("");
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+
+    const { data = { data: [] as TVendor[], meta: {} }, isLoading } = useGetAllVendorsQuery([
+        { name: 'page', value: currentPage },
+    ]);
+
 
     const handleDetails = (id: number) => console.log("Details clicked for vendor ID:", id);
     const handleBlock = (id: number) => console.log("Block clicked for vendor ID:", id);
@@ -36,7 +47,8 @@ const VendorsManagement = () => {
             .includes(searchTerm.toLowerCase())
     );
 
-    const sortedVendors = filteredVendors.sort((a : any, b: any) => {
+
+    const sortedVendors = filteredVendors.sort((a: any, b: any) => {
         if (!sortField) return 0;
         if (sortDirection === "asc") {
             return a[sortField]! > b[sortField]! ? 1 : -1;
@@ -45,6 +57,9 @@ const VendorsManagement = () => {
         }
     });
 
+    // Calculate total pages
+    const totalPages = Math.ceil(data?.meta?.total / itemsPerPage);
+
     const handleSort = (field: keyof TVendor) => {
         if (sortField === field) {
             setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -52,6 +67,14 @@ const VendorsManagement = () => {
             setSortField(field);
             setSortDirection("asc");
         }
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+    };
+
+    const handleNext = () => {
+        if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
     };
 
     return (
@@ -74,7 +97,7 @@ const VendorsManagement = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <p>Vendors: {filteredVendors.length}</p>
+                <p>Vendors: {data?.meta?.total}</p>
             </div>
 
             <div className="overflow-x-auto">
@@ -100,7 +123,7 @@ const VendorsManagement = () => {
                                 <td className="border border-gray-300 px-4 py-2">{vendor.id}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.name}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.email}</td>
-                                <td className="border border-gray-300 px-4 py-2">{vendor.shop.name}</td>
+                                <td className="border border-gray-300 px-4 py-2">{vendor.shop?.name || "N/A"}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.status}</td>
                                 <td className="border border-gray-300 px-4 py-2 text-center flex flex-col md:flex-row md:justify-center gap-2 items-center">
                                     <button
@@ -125,7 +148,29 @@ const VendorsManagement = () => {
                             </tr>
                         ))}
                     </tbody>
+
                 </table>
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between items-center mt-4">
+                <button
+                    onClick={handlePrevious}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 bg-gray-200 rounded ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"}`}
+                >
+                    Previous
+                </button>
+                <p>
+                    Page {currentPage} of {totalPages}
+                </p>
+                <button
+                    onClick={handleNext}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 bg-gray-200 rounded ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"}`}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
