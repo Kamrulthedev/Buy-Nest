@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetAllShopsQuery } from "@/Redux/features/shops/shopsApi";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const ShopManagement = () => {
@@ -19,14 +20,7 @@ const ShopManagement = () => {
     const filteredShops = shops.filter((shop: any) => 
         shop.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-
     const totalPages = Math.ceil(data?.meta?.total / itemsPerPage);
-    console.log(totalPages)
-
-    const handleDetailsClick = (id: number) => {
-        console.log('Details Clicked for Shop ID:', id);
-    };
 
     const handleDeleteClick = (id: number) => {
         console.log('Delete Clicked for Shop ID:', id);
@@ -75,12 +69,12 @@ const ShopManagement = () => {
                                 <td className="px-7 py-2">{shop.name}</td>
                                 <td className="px-9 py-2">{shop?.vendor?.email}</td>
                                 <td className="px-4 py-2 lg:space-y-0 space-y-3">
-                                    <button
-                                        onClick={() => handleDetailsClick(shop.id)}
+                                    <Link
+                                        to={`/admin/shop-details/${shop.id}`}
                                         className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
                                     >
                                         Details
-                                    </button>
+                                    </Link>
                                     <button
                                         onClick={() => handleDeleteClick(shop.id)}
                                         className="bg-red-500 text-white px-4 py-2 rounded"
