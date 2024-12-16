@@ -22,17 +22,23 @@ const VendorsManagement = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [sortField, setSortField] = useState<keyof TVendor | "">("");
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+    const [id, setId] = useState(0)
 
     // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
-
     const { data = { data: [] as TVendor[], meta: {} }, isLoading } = useGetAllVendorsQuery([
         { name: 'page', value: currentPage },
     ]);
 
+    console.log(id)
 
-    const handleDetails = (id: number) => console.log("Details clicked for vendor ID:", id);
+    const handleDetails = (id: number) => {
+        setId(id)
+    }
+
+
+
     const handleBlock = (id: number) => console.log("Block clicked for vendor ID:", id);
     const handleDelete = (id: number) => console.log("Delete clicked for vendor ID:", id);
 
@@ -103,14 +109,14 @@ const VendorsManagement = () => {
             <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse border border-gray-200">
                     <thead>
-                        <tr className="bg-gray-100">
-                            {["id", "name", "email", "shopName", "status"].map((field) => (
+                        <tr className="bg-gray-100 w-full">
+                            {["id", "Name", "Email", "ShopName", "Status"].map((field) => (
                                 <th
                                     key={field}
                                     onClick={() => handleSort(field as keyof TVendor)}
                                     className="border border-gray-300 px-4 py-2 text-left cursor-pointer"
                                 >
-                                    {field.toUpperCase()}{" "}
+                                    {field}{" "}
                                     {sortField === field && (sortDirection === "asc" ? "↑" : "↓")}
                                 </th>
                             ))}

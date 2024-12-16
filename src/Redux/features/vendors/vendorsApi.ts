@@ -23,8 +23,14 @@ const VendorsApi = baseApi.injectEndpoints({
             },
             providesTags: ['Vendors'],
         }),
+        GetByIdVendors: builder.query({
+            query: (id: string) => ({
+                url: `/vendors/${id}`,
+                method: 'GET',
+            }),
+        }),
 
     }),
 });
 
-export const { useGetAllVendorsQuery } = VendorsApi;
+export const { useGetAllVendorsQuery, useGetByIdVendorsQuery } = VendorsApi;
