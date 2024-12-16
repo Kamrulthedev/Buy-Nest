@@ -86,7 +86,7 @@ const CreateVendor = () => {
     };
 
     return (
-        <div className="p-4">
+        <div className="p-4 animate__animated animate__fadeInDown">
             <Link to="/admin/vendors-management" className="text-start text-xl">
                 <IoMdArrowRoundBack />
             </Link>

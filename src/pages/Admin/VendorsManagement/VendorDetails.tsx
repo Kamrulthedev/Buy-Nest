@@ -11,7 +11,7 @@ const VendorDetails = () => {
     const { data } = userData;
 
     return (
-        <div className="max-w-4xl mx-auto p-6 h-full">
+        <div className="max-w-4xl mx-auto p-6 h-full animate__animated animate__fadeInDown">
             <Link to="/admin/vendors-management" className="text-start text-xl">
                 <IoMdArrowRoundBack />
             </Link>

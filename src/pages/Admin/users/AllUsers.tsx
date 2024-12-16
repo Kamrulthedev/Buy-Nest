@@ -129,7 +129,7 @@ const AllUsers = () => {
     if (isLoading) return <div>Loading...</div>;
 
     return (
-        <div className="p-6 font-serif mb-10">
+        <div className="p-6 font-serif mb-10 animate__animated animate__fadeInDown">
             <h1 className="text-2xl font-bold mb-4">All Users</h1>
 
             <div className="lg:flex justify-between space-y-3 mb-3">

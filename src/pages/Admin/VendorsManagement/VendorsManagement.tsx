@@ -76,7 +76,7 @@ const VendorsManagement = () => {
     };
 
     return (
-        <div className="p-4 md:p-6">
+        <div className="p-4 md:p-6 animate__animated animate__fadeInDown">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl text-center md:text-3xl font-bold">Vendors Management</h1>
                 <Link
