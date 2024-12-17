@@ -2,7 +2,7 @@ import {  FiSearch } from "react-icons/fi";
 
 const NavberSearchBar = () => {
     return (
-        <div className="hidden md:flex items-center w-1/3 mx-4 bg-white relative hover:scale-110 transition-transform">
+        <div className="hidden md:flex items-center w-1/4 lg:w-1/3 mx-4 bg-white relative hover:scale-110 transition-transform">
         <input
           type="text"
           placeholder="Search for products"

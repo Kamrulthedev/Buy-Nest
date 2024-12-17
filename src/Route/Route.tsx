@@ -31,6 +31,7 @@ import ProductsDetails from "@/pages/Admin/ProductsManagement/ProductsDetails";
 import CustomerDetails from "@/pages/Admin/CustomerManagement/CustomerDetails";
 import TransactionHistory from "@/pages/Admin/TransactionHistory/TransactionHistory";
 import Details from "@/pages/Product/Details";
+import Cards from "@/pages/Cards/Cards";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs />,
+      },
+      {
+        path: "/cards",
+        element: <Cards></Cards>
       },
       {
         path: "/success",
@@ -141,7 +146,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "transaction-history",
-        element:<TransactionHistory></TransactionHistory>
+        element: <TransactionHistory></TransactionHistory>
       }
     ]
   },
