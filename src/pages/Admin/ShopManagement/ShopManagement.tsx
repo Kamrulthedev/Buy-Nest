@@ -36,7 +36,7 @@ const ShopManagement = () => {
 
     return (
         <div className="p-4 md:p-6 animate__animated animate__fadeInDown">
-            <h1 className="text-2xl text-center md:text-3xl font-bold mb-6">Shop Management Page</h1>
+            <h1 className="text-2xl text-start md:text-3xl font-bold mb-6">Shop Management</h1>
             <div className="mb-6 lg:flex justify-between space-y-4 lg:space-y-0">
                 <input
                     type="text"

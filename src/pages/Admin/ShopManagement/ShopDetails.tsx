@@ -15,7 +15,7 @@ const ShopDetails = () => {
     const { logoUrl, name, description, createdAt } = shopData.data;
 
     return (
-        <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
+        <div className="p-4 md:p-8 bg-gray-50 min-h-screen animate__animated animate__fadeInDown">
             <Link to="/admin/shops-management" className="text-start text-xl">
                 <IoMdArrowRoundBack />
             </Link>

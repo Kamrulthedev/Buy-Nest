@@ -78,10 +78,10 @@ const VendorsManagement = () => {
     return (
         <div className="p-4 md:p-6 animate__animated animate__fadeInDown">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl text-center md:text-3xl font-bold">Vendors Management</h1>
-                <Link
+                <h1 className="md:text-2xl text-base text-center lg:text-3xl font-bold">Vendors Management</h1>
+            <Link
                     to="/admin/create-vendor"
-                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm md:text-base"
+                    className="bg-green-500 text-white px-2 lg:px-4 py-2 rounded hover:bg-green-600 text-xs md:text-sm lg:text-base"
                 >
                     Create Vendor & Shop
                 </Link>
