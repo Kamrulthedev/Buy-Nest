@@ -139,9 +139,7 @@ const Register = () => {
                             <div>
                                 <input
                                     type="file"
-                                    {...register("photo", {
-                                        required: "Profile Photo is required",
-                                    })}
+                                    {...register("photo")}
                                     className="w-full p-3 border rounded-lg bg-white text-black"
                                     placeholder="Profile Photo *"
                                 />

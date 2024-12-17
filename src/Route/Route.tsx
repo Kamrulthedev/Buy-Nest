@@ -29,6 +29,7 @@ import CustomerManagement from "@/pages/Admin/CustomerManagement/CustomerManagem
 import CreateProduct from "@/pages/Admin/ProductsManagement/CreateProduct";
 import ProductsDetails from "@/pages/Admin/ProductsManagement/ProductsDetails";
 import CustomerDetails from "@/pages/Admin/CustomerManagement/CustomerDetails";
+import TransactionHistory from "@/pages/Admin/TransactionHistory/TransactionHistory";
 
 export const router = createBrowserRouter([
   {
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
       {
         path: "create-product",
         element: <CreateProduct></CreateProduct>
+      },
+      {
+        path: "transaction-istory",
+        element:<TransactionHistory></TransactionHistory>
       }
     ]
   },

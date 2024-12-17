@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetByIdCustomerQuery } from "@/Redux/features/customer/customer.api";
-import { useParams } from "react-router-dom";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link, useParams } from "react-router-dom";
 
 const CustomerDetails = () => {
     const { id } = useParams();
@@ -15,7 +16,7 @@ const CustomerDetails = () => {
         return <div className="text-center mt-4 text-red-500">Failed to load customer details!</div>;
     }
 
-    const CustomersInfo = customer.data
+    const CustomersInfo = customer.data;
 
     const {
         profilePhoto,
@@ -29,6 +30,9 @@ const CustomerDetails = () => {
 
     return (
         <div className="container mx-auto p-6">
+             <Link to="/admin/customers-management" className="text-start text-xl">
+                <IoMdArrowRoundBack />
+            </Link>
             <h1 className="text-2xl font-bold mb-4">Customer Details</h1>
 
       
@@ -68,10 +72,10 @@ const CustomerDetails = () => {
                         <tbody>
                             {CustomersInfo?.Review.map((review: any) => (
                                 <tr key={review.id} className="hover:bg-gray-50">
-                                    <td className="border px-4 py-2">{review.id}</td>
-                                    <td className="border px-4 py-2">{review.title}</td>
-                                    <td className="border px-4 py-2">{review.rating}</td>
-                                    <td className="border px-4 py-2">{review.comment}</td>
+                                    <td className="border px-4 py-2">{review?.id}</td>
+                                    <td className="border px-4 py-2">{review?.title}</td>
+                                    <td className="border px-4 py-2">{review?.rating}</td>
+                                    <td className="border px-4 py-2">{review?.comment}</td>
                                 </tr>
                             ))}
                         </tbody>
