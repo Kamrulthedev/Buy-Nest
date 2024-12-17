@@ -31,6 +31,7 @@ const Register = () => {
         if (photo && photo[0]) {
             formPayload.append("file", photo[0]);
         }
+
         try {
             const res = await createCustomer(formPayload).unwrap();
             if (res?.error) {
