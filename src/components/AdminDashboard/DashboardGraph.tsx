@@ -9,6 +9,7 @@ import {
     Tooltip,
     Legend
 } from 'chart.js';
+import { useGetAllCustomerQuery } from "@/Redux/features/customer/customer.api";
 
 ChartJS.register(
     CategoryScale,
@@ -20,6 +21,31 @@ ChartJS.register(
 );
 
 const DashboardGraph = ({ stats }: any) => {
+
+    const { data: allcustomers } = useGetAllCustomerQuery();
+
+    console.log(allcustomers?.meta?.total)
+
+    // const { data = { data: [] as TVendor[], meta: {} }, isLoading } = useGetAllVendorsQuery([
+    // //     { name: 'page', value: currentPage },
+    // // ]);
+
+
+    // const { data } = useGetAllShopsQuery([
+    //     { name: 'page', value: currentPage },
+    // ]);
+
+
+    // const { data, error, isLoading } = useGetAllProductsQuery([
+    //     { name: 'page', value: currentPage },
+    // ]);
+
+    // const { data: customers } = useGetAllCustomerQuery([
+    //     { name: 'page', value: currentPage },
+    // ]);
+
+
+
     const chartData = {
         labels: ['Users', 'Products', 'Orders', 'Transactions'],
         datasets: [

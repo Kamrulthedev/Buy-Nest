@@ -109,7 +109,7 @@ const AdminLayout = () => {
                         { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products-management" },
                         { name: "Customer Management", icon: <FaUsers />, path: "/admin/customers-management" },
                         { name: "Order Monitoring", icon: <FaClipboardList />, path: "/admin/orders" },
-                        { name: "Transaction History", icon: <FaMoneyBillWave />, path: "/admin/transaction-istory" },
+                        { name: "Transaction History", icon: <FaMoneyBillWave />, path: "/admin/transaction-history" },
                         { name: "Reports & Analytics", icon: <FaChartPie />, path: "/admin/reports" },
                         { name: "Settings", icon: <FaCogs />, path: "/admin/settings" },
                     ].map((menu) => (

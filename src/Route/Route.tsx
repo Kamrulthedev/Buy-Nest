@@ -135,7 +135,7 @@ export const router = createBrowserRouter([
         element: <CreateProduct></CreateProduct>
       },
       {
-        path: "transaction-istory",
+        path: "transaction-history",
         element:<TransactionHistory></TransactionHistory>
       }
     ]

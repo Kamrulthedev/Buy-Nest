@@ -31,8 +31,11 @@ const Login = () => {
             password: data.password,
         };
 
+        console.log(loginData)
+
         try {
             const res = await login(loginData);
+            console.log(res)
             if (res.data.error) {
                 throw new Error(res?.data?.message || "Login failed!");
             }

@@ -177,9 +177,8 @@ const CreateProduct = () => {
                     <input
                         type="file"
                         className="w-full border rounded-lg p-2 bg-gray-200"
-                        {...register("file", { required: "Image is required" })}
+                        {...register("file")}
                     />
-                    {errors.file && <span className="text-red-500 text-sm">File is required</span>}
                 </div>
 
                 <button
