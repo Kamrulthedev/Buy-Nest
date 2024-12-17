@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/Redux/features/auth/authApi";
 
 const Login = () => {
-    const [login, {isLoading}] = useLoginMutation();
+    const [login, { isLoading }] = useLoginMutation();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -31,11 +31,8 @@ const Login = () => {
             password: data.password,
         };
 
-        console.log(loginData)
-
         try {
             const res = await login(loginData);
-            console.log(res)
             if (res.data.error) {
                 throw new Error(res?.data?.message || "Login failed!");
             }
