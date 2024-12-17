@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetByIdShopsQuery } from "@/Redux/features/shops/shopsApi";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
@@ -11,6 +12,7 @@ const ShopDetails = () => {
     if (!shopData) {
         return <div className="text-center text-red-500 mt-10">Shop not found.</div>;
     }
+    console.log(shopData)
 
     const { logoUrl, name, description, createdAt } = shopData.data;
 
@@ -58,6 +60,28 @@ const ShopDetails = () => {
                             <h3 className="text-md font-semibold text-gray-700">Vendor Email</h3>
                             <p className="text-gray-600">{shopData?.data?.vendor?.email || "N/A"}</p>
                         </div>
+                    </div>
+                </div>
+
+                {/* Products Section */}
+                <div className="p-6 md:p-8">
+                    <h2 className="text-xl font-semibold text-gray-800 mb-4">Products from this Shop ({shopData?.data?.products?.length})</h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {shopData?.data?.products?.map((product: any) => (
+                            <div key={product.id} className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition">
+                                <img
+                                    src={product.imageUrl || "/placeholder.jpg"}
+                                    alt={product.name}
+                                    className="w-full h-40 object-cover rounded-t-lg mb-4"
+                                />
+                                <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+                                <p className="text-gray-600 text-sm mt-2">{product.description}</p>
+                             <div className="flex justify-between">
+                             <p className="text-base lg:text-lg font-bold text-gray-900 mt-4">${product.price}</p>
+                             <p className="text-sm font-bold text-gray-900 mt-4">Stock : {product.stock}</p>
+                             </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

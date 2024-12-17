@@ -56,6 +56,7 @@ const ShopManagement = () => {
                             <th className="px-6 py-2">Shop ID</th>
                             <th className="px-6 py-2">Shop Name</th>
                             <th className="px-8 py-2">Vendor Email</th>
+                            <th className="px-4 py-2">Products</th>
                             <th className="px-4 py-2 text-center">Action</th>
                         </tr>
                     </thead>
@@ -68,6 +69,7 @@ const ShopManagement = () => {
                                 <td className="px-4 py-2">{shop.id}</td>
                                 <td className="px-7 py-2">{shop.name}</td>
                                 <td className="px-9 py-2">{shop?.vendor?.email}</td>
+                                <td className="px-9 py-2">{shop?.products?.length}</td>
                                 <td className="px-4 py-2 lg:space-y-0 space-y-3">
                                     <Link
                                         to={`/admin/shop-details/${shop.id}`}

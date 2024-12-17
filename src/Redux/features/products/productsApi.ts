@@ -15,22 +15,22 @@ const ProductsApi = baseApi.injectEndpoints({
         //     }),
         //     invalidatesTags: ['Users'],
         // }),
-        // GetAllUsers: builder.query({
-        //     query: (args?: TQueryParams[]) => {
-        //         const params = new URLSearchParams();
+        GetAllProducts: builder.query({
+            query: (args?: TQueryParams[]) => {
+                const params = new URLSearchParams();
 
-        //         if (args) {
-        //             args.forEach((item) => {
-        //                 params.append(item.name, item.value as string);
-        //             });
-        //         }
-        //         return {
-        //             url: `/user/all-users?${params.toString()}`,
-        //             method: "GET"
-        //         }
-        //     },
-        //     providesTags: ['Users']
-        // }),
+                if (args) {
+                    args.forEach((item) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
+                return {
+                    url: `/user/all-users?${params.toString()}`,
+                    method: "GET"
+                }
+            },
+            providesTags: ['Products']
+        }),
         // ChangeStatus: builder.mutation({
         //     query: (statusInfo) => {
         //         return {

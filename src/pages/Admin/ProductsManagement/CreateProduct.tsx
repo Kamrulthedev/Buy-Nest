@@ -36,7 +36,6 @@ const CreateProduct = () => {
 
         try {
             const res = await createProduct(formPayload).unwrap();
-            console.log(res);
             if (res?.error) {
                 throw new Error(res?.message || "Product creation failed!");
             }
@@ -49,7 +48,7 @@ const CreateProduct = () => {
                 autoClose: 3000,
                 position: "top-right",
             });
-            reset();  // Reset the form after successful submission
+            reset(); 
         } catch (res: any) {
             toast.update(toastId, {
                 render: res?.message || "Product creation failed! Please try again.",
