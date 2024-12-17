@@ -1,5 +1,6 @@
 
 const FilterPageSearch = () => {
+
     return (
         <div className="mb-4">
             <h2 className="font-bold text-lg">Search Products</h2>
