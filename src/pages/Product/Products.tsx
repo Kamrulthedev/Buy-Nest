@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductHero from "./ProductHero";
 import VendorFilter from "@/components/ui/Filter/VendorFilter";
 import SortProducts from "@/components/ui/Filter/SortProducts";
@@ -11,6 +11,8 @@ const Products = () => {
   const user = useAppSelector((state) => state.auth.user);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
   const productsPerPage = 8;
 
   const { data: AllProducts, isLoading } = useGetAllProductsQuery([
@@ -30,6 +32,14 @@ const Products = () => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleAddToFollow = (productId : string) => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      console.log("Add to Follow:", productId, "User:", user?.id);
+    }
   };
 
   return (
@@ -98,7 +108,7 @@ const Products = () => {
                     />
                     <button
                       className="px-3 py-1 text-green-500 rounded text-xs "
-                      onClick={() => console.log(product.shop.id, user?.id)}
+                      onClick={() => handleAddToFollow(product.id)}
                     >
                       Follow
                     </button>

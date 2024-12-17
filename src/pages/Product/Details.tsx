@@ -50,7 +50,7 @@ const Details = () => {
                         <img
                             src={product?.imageUrl}
                             alt={product?.name}
-                            className="w-full max-w-sm rounded-lg shadow-lg"
+                            className="w-full max-w-sm rounded-lg shadow-lg object-cover"
                         />
                     </div>
 
