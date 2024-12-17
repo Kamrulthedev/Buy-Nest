@@ -146,7 +146,7 @@ const AllUsers = () => {
             <div className="overflow-x-auto">
                 <table className="w-full table-auto border-collapse shadow-lg">
                     <thead>
-                        <tr className="bg-gray-200 text-left">
+                        <tr className="bg-gray-200 text-left text-sm">
                             <th className="p-4">ID</th>
                             <th className="p-4">Name</th>
                             <th className="p-4">Email</th>
@@ -157,7 +157,7 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {sortedUsers.map((user: any) => (
-                            <tr key={user.id} className="border-b text-base">
+                            <tr key={user.id} className="border-b text-sm">
                                 <td className="p-4">{user.id}</td>
                                 <td className="p-4">{user.name}</td>
                                 <td className="p-4">{user.email}</td>
@@ -172,7 +172,7 @@ const AllUsers = () => {
                                                     dropdownOpen === user.id ? null : user.id
                                                 )
                                             }
-                                            className="w-32 px-2 py-1 lg:px-4 lg:py-2 text-sm lg:text-base bg-blue-500 text-white rounded hover:bg-blue-600"
+                                            className="w-28 px-3 py-1 lg:px-2 lg:py-2 text-xs lg:text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
                                         >
                                             Toggle Role
                                         </button>
@@ -202,7 +202,7 @@ const AllUsers = () => {
                                             handleStatusToggle(user.id, newStatus);
                                         }}
                                         disabled={isLoading}
-                                        className={`w-32 lg:px-4 lg:py-2 text-sm lg:text-base ${user.status === 'ACTIVE'
+                                        className={`w-28 px-3 py-1 lg:px-2 lg:py-2 text-xs lg:text-sm ${user.status === 'ACTIVE'
                                             ? 'bg-green-500 hover:bg-green-600'
                                             : 'bg-yellow-500 hover:bg-yellow-600'
                                             } text-white rounded`}
@@ -214,7 +214,7 @@ const AllUsers = () => {
                                     {/* Delete Button */}
                                     <button
                                         onClick={() => handleDeleteUser(user.id)}
-                                        className="w-32 lg:px-4 lg:py-2 text-sm lg:text-base bg-red-500 text-white rounded hover:bg-red-600"
+                                        className="w-28 px-3 py-1 lg:px-2 lg:py-2 text-xs lg:text-sm bg-red-500 text-white rounded hover:bg-red-600"
                                     >
                                         Delete
                                     </button>

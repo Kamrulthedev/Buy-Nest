@@ -101,7 +101,7 @@ const VendorsManagement = () => {
             <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse border border-gray-200">
                     <thead>
-                        <tr className="bg-gray-100 w-full">
+                        <tr className="bg-gray-100 w-full text-sm">
                             {["id", "Name", "Email", "ShopName", "Status"].map((field) => (
                                 <th
                                     key={field}
@@ -117,7 +117,7 @@ const VendorsManagement = () => {
                     </thead>
                     <tbody>
                         {sortedVendors.map((vendor: any) => (
-                            <tr key={vendor.id} className="hover:bg-gray-50">
+                            <tr key={vendor.id} className="hover:bg-gray-50 text-sm">
                                 <td className="border border-gray-300 px-4 py-2">{vendor.id}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.name}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.email}</td>

@@ -30,6 +30,7 @@ const ShopDetails = () => {
                         className="w-32 h-32 mx-auto rounded-full border-4 border-white shadow-md object-cover"
                     />
                     <h1 className="text-2xl md:text-3xl font-bold text-white mt-4">{name}</h1>
+                    <h1 className="text-lg md:text-xl text-white mt-4">Followers : {shopData?.data?.followers?.length}</h1>
                 </div>
 
                 {/* Shop Details */}

@@ -51,25 +51,29 @@ const ShopManagement = () => {
             <div className="overflow-x-auto">
                 <table className="min-w-full table-auto">
                     <thead>
-                        <tr className="bg-gray-200 text-left">
+                        <tr className="bg-gray-200 text-left text-sm">
                             <th className="px-4 py-2">Logo</th>
-                            <th className="px-6 py-2">Shop ID</th>
-                            <th className="px-6 py-2">Shop Name</th>
-                            <th className="px-8 py-2">Vendor Email</th>
+                            <th className="px-4 py-2">Shop ID</th>
+                            <th className="px-4 py-2">Shop Name</th>
+                            <th className="px-4 py-2">Vendor Email</th>
                             <th className="px-4 py-2">Products</th>
+                            <th className="px-4 py-2">Order</th>
+                            <th className="px-4 py-2">Followers</th>
                             <th className="px-4 py-2 text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredShops.map((shop: any) => (
-                            <tr key={shop.id}>
+                            <tr className="text-xs" key={shop.id}>
                                 <td className="px-6 py-2">
                                     <img src={shop.logoUrl} alt={`${shop.name} Logo`} className="w-16 h-16 object-cover rounded-full" />
                                 </td>
                                 <td className="px-4 py-2">{shop.id}</td>
-                                <td className="px-7 py-2">{shop.name}</td>
-                                <td className="px-9 py-2">{shop?.vendor?.email}</td>
-                                <td className="px-9 py-2">{shop?.products?.length}</td>
+                                <td className="px-4 py-2">{shop.name}</td>
+                                <td className="px-4 py-2">{shop?.vendor?.email}</td>
+                                <td className="px-4 py-2">{shop?.products?.length}</td>
+                                <td className="px-4 py-2">{shop?.orders?.length}</td>
+                                <td className="px-4 py-2">{shop?.followers?.length}</td>
                                 <td className="px-4 py-2 lg:space-y-0 space-y-3">
                                     <Link
                                         to={`/admin/shop-details/${shop.id}`}
