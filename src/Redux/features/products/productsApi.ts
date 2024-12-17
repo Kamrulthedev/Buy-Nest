@@ -31,16 +31,12 @@ const ProductsApi = baseApi.injectEndpoints({
             },
             providesTags: ['Products']
         }),
-        // ChangeStatus: builder.mutation({
-        //     query: (statusInfo) => {
-        //         return {
-        //             url: '/user/change-status',
-        //             method: 'PATCH',
-        //             body: statusInfo
-        //         }
-        //     },
-        //     invalidatesTags: ['Users'],
-        // }),
+        GetByIdProducts: builder.query({
+            query: (id: string) => ({
+                url: `/products/${id}`,
+                method: 'GET',
+            }),
+        }),
         // DeleteUser: builder.mutation({
         //     query: (data) => {
         //         console.log(data)
@@ -67,6 +63,7 @@ const ProductsApi = baseApi.injectEndpoints({
 
 export const {
     useGetAllProductsQuery,
-    useCreateProductMutation
+    useCreateProductMutation,
+    useGetByIdProductsQuery
 }: any = ProductsApi;
 

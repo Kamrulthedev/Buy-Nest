@@ -14,7 +14,6 @@ const ProductsManagement = () => {
     ]);
 
 
-    // Handle loading, error, and fetched data
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products</div>;
 
@@ -25,13 +24,6 @@ const ProductsManagement = () => {
 
 
     const totalPages = Math.ceil(data?.meta?.total / productsPerPage);
-
-    console.log(totalPages)
-
-    // Handlers for action buttons
-    const handleDetails = (ProductId: string) => {
-        console.log(`Details clicked for product ID: ${ProductId}`);
-    };
 
     const handleUpdate = (ProductId: string) => {
         console.log(`Update clicked for product ID: ${ProductId}`);
@@ -59,7 +51,7 @@ const ProductsManagement = () => {
             <div className="mb-4 lg:flex justify-between lg:space-y-0 space-y-4">
                 <input
                     type="text"
-                    placeholder="Search products..."
+                    placeholder="Search products Name..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border rounded-lg p-2 w-full lg:w-1/2 bg-gray-100 border-violet-500"
@@ -73,24 +65,25 @@ const ProductsManagement = () => {
             <div className="overflow-x-auto">
                 <table className="min-w-full border-collapse border border-gray-200">
                     <thead>
-                        <tr className="bg-gray-100">
+                        <tr className="bg-gray-100 text-sm">
                             <th className="border border-gray-200 px-4 py-2">Image</th>
                             <th className="border border-gray-200 px-4 py-2">Name</th>
                             <th className="border border-gray-200 px-4 py-2">Category</th>
                             <th className="border border-gray-200 px-4 py-2">Price ($)</th>
                             <th className="border border-gray-200 px-4 py-2">Stock</th>
                             <th className="border border-gray-200 px-4 py-2">Discount (%)</th>
+                            <th className="border border-gray-200 px-4 py-2">Shop Name</th>
                             <th className="border border-gray-200 px-4 py-2">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredProducts.map((product : any) => (
-                            <tr key={product.id} className="hover:bg-gray-50">
+                            <tr key={product.id} className="hover:bg-gray-50 text-sm">
                                 <td className="border border-gray-200 px-4 py-2 text-center">
                                     <img
                                         src={product.imageUrl}
                                         alt={product.name}
-                                        className="w-16 h-16 object-cover rounded-md"
+                                        className="w-12 h-12 object-cover rounded-md"
                                     />
                                 </td>
                                 <td className="border border-gray-200 px-4 py-2">{product.name}</td>
@@ -98,13 +91,14 @@ const ProductsManagement = () => {
                                 <td className="border border-gray-200 px-4 py-2">{product.price.toFixed(2)}</td>
                                 <td className="border border-gray-200 px-4 py-2">{product.stock}</td>
                                 <td className="border border-gray-200 px-4 py-2">{product.discount}</td>
+                                <td className="border border-gray-200 px-4 py-2">{product?.shop?.name}</td>
                                 <td className="border border-gray-200 px-4 py-2 space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row justify-center">
-                                    <button
-                                        onClick={() => handleDetails(product.id)}
+                                <Link
+                                        to={`/admin/product-details/${product.id}`}
                                         className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 w-full md:w-auto"
                                     >
                                         Details
-                                    </button>
+                                    </Link>
                                     <button
                                         onClick={() => handleUpdate(product.id)}
                                         className="bg-yellow-500 text-white px-4 py-1 rounded-lg hover:bg-yellow-600 w-full md:w-auto"

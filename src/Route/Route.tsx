@@ -27,6 +27,7 @@ import ShopDetails from "@/pages/Admin/ShopManagement/ShopDetails";
 import ProductsManagement from "@/pages/Admin/ProductsManagement/ProductsManagement";
 import CustomerManagement from "@/pages/Admin/CustomerManagement/CustomerManagement";
 import CreateProduct from "@/pages/Admin/ProductsManagement/CreateProduct";
+import ProductsDetails from "@/pages/Admin/ProductsManagement/ProductsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ export const router = createBrowserRouter([
       {
         path: 'products-management',
         element: <ProductsManagement></ProductsManagement>
+      },
+      {
+        path: 'product-details/:id',
+        element: <ProductsDetails></ProductsDetails>
       },
       {
         path: "customers-management",

@@ -94,7 +94,7 @@ const AdminLayout = () => {
         <div className="relative font-serif min-h-screen flex w-full text-black bg-gray-50 animate__animated animate__fadeInDown">
             {/* Sidebar */}
             <div
-                className={`fixed top-0 left-0 h-[800px] w-64 bg-gray-200 mt-20 p-6 z-40 transform 
+                className={`fixed top-0 left-0 h-screen w-64 bg-gray-200 mt-20 p-6 z-40 transform 
         ${isSidebarOpen ? "translate-x-0 animate__animated animate__fadeInDown" : "-translate-x-full "} 
         md:relative md:translate-x-0 transition-transform duration-300 ease-in-out`}
             >
@@ -190,7 +190,7 @@ const AdminLayout = () => {
             </nav>
 
             {/* Main Content Area */}
-            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto" style={{position: "sticky"}}>
+            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto max-h-screen" style={{position: "sticky"}}>
                 <Outlet />
             </main>
 
