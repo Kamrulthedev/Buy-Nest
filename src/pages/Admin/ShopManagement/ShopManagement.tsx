@@ -64,7 +64,7 @@ const ShopManagement = () => {
                     </thead>
                     <tbody>
                         {filteredShops.map((shop: any) => (
-                            <tr className="text-xs" key={shop.id}>
+                            <tr className="text-xs animate__animated animate__fadeInDown" key={shop.id}>
                                 <td className="px-6 py-2">
                                     <img src={shop.logoUrl} alt={`${shop.name} Logo`} className="w-16 h-16 object-cover rounded-full" />
                                 </td>

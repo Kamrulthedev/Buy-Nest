@@ -117,7 +117,7 @@ const VendorsManagement = () => {
                     </thead>
                     <tbody>
                         {sortedVendors.map((vendor: any) => (
-                            <tr key={vendor.id} className="hover:bg-gray-50 text-sm">
+                            <tr key={vendor.id} className="hover:bg-gray-50 text-sm animate__animated animate__fadeInDown">
                                 <td className="border border-gray-300 px-4 py-2">{vendor.id}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.name}</td>
                                 <td className="border border-gray-300 px-4 py-2">{vendor.email}</td>

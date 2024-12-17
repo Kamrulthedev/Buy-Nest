@@ -158,7 +158,7 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {sortedUsers.map((user: any) => (
-                            <tr key={user.id} className="border-b text-sm">
+                            <tr key={user.id} className="border-b text-sm animate__animated animate__fadeInDown">
                                 <td className="p-4">{user.id}</td>
                                 <td className="p-4">{user.name}</td>
                                 <td className="p-4">{user.email}</td>

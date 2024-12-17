@@ -78,7 +78,7 @@ const ProductsManagement = () => {
                     </thead>
                     <tbody>
                         {filteredProducts.map((product : any) => (
-                            <tr key={product.id} className="hover:bg-gray-50 text-sm">
+                            <tr key={product.id} className="hover:bg-gray-50 text-sm animate__animated animate__fadeInDown">
                                 <td className="border border-gray-200 px-4 py-2 text-center">
                                     <img
                                         src={product.imageUrl}
