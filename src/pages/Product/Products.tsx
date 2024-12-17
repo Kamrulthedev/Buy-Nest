@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ProductHero from "./ProductHero";
 import VendorFilter from "@/components/ui/Filter/VendorFilter";
 import SortProducts from "@/components/ui/Filter/SortProducts";
@@ -8,43 +9,34 @@ import { useAppSelector } from "@/Redux/hooks";
 
 const Products = () => {
   const user = useAppSelector((state) => state.auth.user);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const productsPerPage = 8;
 
   const { data: AllProducts, isLoading } = useGetAllProductsQuery([
-    { name: 'page', value: currentPage },
+    { name: "page", value: currentPage },
   ]);
+
   const products = AllProducts?.data || [];
-
-  const filteredProducts = products.filter((user: any) =>
-    (user.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-    (user.email?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+  const filteredProducts = products.filter((product: any) =>
+    (product.name?.toLowerCase() || "").includes(searchTerm.toLowerCase())
   );
-
 
   const sortedProducts = filteredProducts.sort((a: any, b: any) =>
-    (a.name || '').localeCompare(b.name || '')
+    (a.name || "").localeCompare(b.name || "")
   );
-
 
   const paginate = Math.ceil(AllProducts?.meta?.total / productsPerPage);
 
-
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-};
+  };
 
   return (
     <main className="bg-white min-h-screen py-8 animate__animated animate__fadeInDown">
       <ProductHero />
       <div className="container mx-auto mt-8 grid gap-6 px-4 sm:grid-cols-1 lg:grid-cols-[250px_1fr]">
         <aside className="bg-white p-6 rounded-lg shadow-lg">
-          {/* <FilterPageSearch
-            value={searchTerm}
-            setSearchTerm={setSearchTerm}
-          /> */}
           <div className="mb-4">
             <h2 className="font-bold text-lg">Search Products</h2>
             <input
@@ -67,14 +59,14 @@ const Products = () => {
           {isLoading ? (
             <div className="text-center text-gray-500">Loading...</div>
           ) : sortedProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6 animate__animated animate__fadeInDown">
               {sortedProducts.map((product: any) => (
                 <div
                   key={product.id}
-                  className="p-4 border rounded-lg shadow hover:shadow-lg"
+                  className="relative p-4 border rounded-lg shadow hover:shadow-lg group h-[350px] flex flex-col justify-between"
                 >
                   <img
-                    src={product.image || "https://via.placeholder.com/150"}
+                    src={product.imageUrl || "https://via.placeholder.com/150"}
                     alt={product.name}
                     className="w-full h-40 object-cover rounded"
                   />
@@ -83,26 +75,29 @@ const Products = () => {
                   {product.discount && (
                     <p className="text-red-500">Discount: {product.discount}%</p>
                   )}
-                  <button
-                    className="mt-2 w-full py-1 bg-violet-500 text-white rounded hover:bg-violet-600"
-                    onClick={() => console.log(product.id)}
-                  >
-                    Add to Cart
-                  </button>
-                  <button
-                    className="mt-2 w-full py-1 bg-gray-300 rounded hover:bg-gray-400"
-                    onClick={() => console.log(product.id)}
-                  >
-                    View Details
-                  </button>
+
+                  {/* Hover Buttons */}
+                  <div className="absolute left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity px-4">
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="w-28 text-center h-8 items-center text-xs lg:text-base bg-blue-500 text-white rounded-md hover:bg-gray-600"
+                    >
+                      View Details
+                    </Link>
+                    <button className="w-28 text-center h-8  text-xs lg:text-base bg-violet-400 text-white rounded-md hover:bg-gray-600"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+
                   <div className="mt-2 flex items-center gap-2 justify-between">
                     <img
                       src={product.shop.logoUrl || "https://via.placeholder.com/50"}
                       alt="Shop Logo"
-                      className="w-8 h-8 rounded-full"
+                      className="w-9 h-9 p-[1px] rounded-full border border-violet-500"
                     />
                     <button
-                      className="px-3 py-1 bg-blue-500 text-white rounded text-xs hover:bg-blue-600"
+                      className="px-3 py-1 text-green-500 rounded text-xs "
                       onClick={() => console.log(product.shop.id, user?.id)}
                     >
                       Follow
