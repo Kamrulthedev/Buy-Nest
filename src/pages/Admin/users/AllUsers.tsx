@@ -126,6 +126,7 @@ const AllUsers = () => {
     );
 
     const totalPages = Math.ceil(users?.meta?.total / usersPerPage);
+    
     if (isLoading) return <div>Loading...</div>;
 
     return (

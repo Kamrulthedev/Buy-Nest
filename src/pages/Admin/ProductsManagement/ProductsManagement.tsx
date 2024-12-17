@@ -1,45 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-// Example Product Data
-const initialProducts = [
-    {
-        id: "1",
-        imageUrl: "https://via.placeholder.com/100",
-        name: "Classic Denim Jacket",
-        category: "FASHION",
-        price: 59.99,
-        stock: 25,
-        discount: 10,
-    },
-    {
-        id: "2",
-        imageUrl: "https://via.placeholder.com/100",
-        name: "Elegant Evening Gown",
-        category: "FASHION",
-        price: 149.99,
-        stock: 10,
-        discount: 20,
-    },
-    {
-        id: "3",
-        imageUrl: "https://via.placeholder.com/100",
-        name: "Casual Cotton T-Shirt",
-        category: "FASHION",
-        price: 19.99,
-        stock: 50,
-        discount: 5,
-    },
-];
-
 const ProductsManagement = () => {
-    const [products, setProducts] = useState(initialProducts);
     const [searchQuery, setSearchQuery] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 5;
+
+    // Fetching products from the API with pagination parameters
+    const { data, error, isLoading } = useGetAllProductsQuery([
+        { name: 'page', value: currentPage },
+    ]);
+
+
+    // Handle loading, error, and fetched data
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading products</div>;
 
     // Filter products based on search query
-    const filteredProducts = products.filter((product) =>
+    const filteredProducts = data?.data.filter((product: any) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    ) || [];
+
+
+    const totalPages = Math.ceil(data?.meta?.total / productsPerPage);
+
+    console.log(totalPages)
 
     // Handlers for action buttons
     const handleDetails = (ProductId: string) => {
@@ -53,6 +40,8 @@ const ProductsManagement = () => {
     const handleDelete = (ProductId: string) => {
         console.log(`Delete clicked for product ID: ${ProductId}`);
     };
+
+
 
     return (
         <div className="p-6 animate__animated animate__fadeInDown">
@@ -75,14 +64,10 @@ const ProductsManagement = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border rounded-lg p-2 w-full lg:w-1/2 bg-gray-100 border-violet-500"
                 />
-
-
                 <div className="mb-4 text-lg font-medium">
-                    Products: {filteredProducts.length}
+                    Products: {data?.meta?.total}
                 </div>
             </div>
-
-
 
             {/* Product Table */}
             <div className="overflow-x-auto">
@@ -99,7 +84,7 @@ const ProductsManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredProducts.map((product) => (
+                        {filteredProducts.map((product : any) => (
                             <tr key={product.id} className="hover:bg-gray-50">
                                 <td className="border border-gray-200 px-4 py-2 text-center">
                                     <img
@@ -137,6 +122,25 @@ const ProductsManagement = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Pagination */}
+            <div className="flex justify-between mt-4">
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
+                >
+                    Previous
+                </button>
+                <span className="px-4 py-2">Page {currentPage} of {totalPages || 1}</span>
+                <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded disabled:opacity-50"
+                >
+                    Next
+                </button>
             </div>
         </div>
     );

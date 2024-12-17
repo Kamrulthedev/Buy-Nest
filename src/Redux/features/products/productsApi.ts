@@ -25,7 +25,7 @@ const ProductsApi = baseApi.injectEndpoints({
                     });
                 }
                 return {
-                    url: `/user/all-users?${params.toString()}`,
+                    url: `/products/all-products?${params.toString()}`,
                     method: "GET"
                 }
             },
@@ -66,5 +66,7 @@ const ProductsApi = baseApi.injectEndpoints({
 });
 
 export const {
+    useGetAllProductsQuery,
     useCreateProductMutation
-}: any = ProductsApi; 
+}: any = ProductsApi;
+
