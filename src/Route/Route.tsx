@@ -33,6 +33,7 @@ import TransactionHistory from "@/pages/Admin/TransactionHistory/TransactionHist
 import Details from "@/pages/Product/Details";
 import Cards from "@/pages/Cards/Cards";
 import CustomerOders from "@/pages/Customer/CustomerOrders/CustomerOders";
+import CustomerRecent from "@/pages/Customer/CustomerRecent/CustomerRecent";
 
 export const router = createBrowserRouter([
   {
@@ -182,6 +183,10 @@ export const router = createBrowserRouter([
         path: "customer-orders",
         element: <CustomerOders></CustomerOders>
       },
+      {
+        path: 'customer-recent',
+        element : <CustomerRecent></CustomerRecent>
+      }
     ]
   },
   {
