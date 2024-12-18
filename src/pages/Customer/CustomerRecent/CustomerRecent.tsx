@@ -34,8 +34,8 @@ const CustomerRecent = () => {
     }, []);
 
     return (
-        <div className="p-6 bg-white text-gray-800">
-            <h1 className="text-3xl font-semibold text-violet-600 mb-6">Recent Activity</h1>
+        <div className="p-6 bg-white text-gray-800 animate__animated animate__fadeInDown">
+            <h1 className="text-3xl font-semibold text-violet-600 mb-6 animate__animated animate__fadeInDown">Recent Activity</h1>
 
             {/* Recent Orders Section */}
             <section className="mb-8">
@@ -43,7 +43,7 @@ const CustomerRecent = () => {
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                         <thead>
-                            <tr className="bg-gray-100 text-violet-600">
+                            <tr className="bg-gray-100 text-violet-600 animate__animated animate__fadeInDown">
                                 <th className="p-3 border">Product</th>
                                 <th className="p-3 border">Order Date</th>
                                 <th className="p-3 border">Status</th>
@@ -52,7 +52,7 @@ const CustomerRecent = () => {
                         </thead>
                         <tbody>
                             {recentOrders.map((order) => (
-                                <tr key={order.id} className="hover:bg-gray-50">
+                                <tr key={order.id} className="hover:bg-gray-50 animate__animated animate__fadeInDown">
                                     <td className="p-3 border">{order.product}</td>
                                     <td className="p-3 border">{order.orderDate}</td>
                                     <td className="p-3 border">{order.status}</td>
@@ -66,8 +66,8 @@ const CustomerRecent = () => {
 
             {/* Recent Activities Section */}
             <section>
-                <h2 className="text-2xl font-semibold text-violet-500 mb-4">Recent Activities</h2>
-                <ul className="space-y-4">
+                <h2 className="text-2xl font-semibold text-violet-500 mb-4 animate__animated animate__fadeInDown">Recent Activities</h2>
+                <ul className="space-y-4 animate__animated animate__fadeInDown">
                     {recentActivities.map((activity) => (
                         <li key={activity.id} className="p-4 bg-gray-50 rounded-lg shadow-md">
                             <p className="text-lg font-medium text-gray-800">{activity.activity}</p>

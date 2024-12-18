@@ -13,6 +13,9 @@ import {
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
+import { useAppDispatch } from "@/Redux/hooks";
+import { logout } from "@/Redux/features/auth/authSlice";
+import { resetCart } from "@/Redux/features/cart/cartSlice";
 
 const VendorLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -20,8 +23,10 @@ const VendorLayout = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    const dispacth = useAppDispatch();
+
     const user = {
-        role: "ADMIN",
+        role: "VENDOR",
         profileImg: "https://i.ibb.co/1zF6LNG/PXL-20241028-1123399178-PORTRAIT.jpg",
     };
 
@@ -36,7 +41,8 @@ const VendorLayout = () => {
 
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
-            window.location.href = "/login";
+            dispacth(logout());
+            dispacth(resetCart());
         }
     };
 
@@ -94,14 +100,14 @@ const VendorLayout = () => {
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
                 <ul className="space-y-2">
                     {[
-               { name: "Home", icon: <FaHome />, path: "/" },
-               { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-               { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
-               { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
-               { name: "Order History", icon: <FaClipboardList />, path: "/admin/orders" },
-               { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
-               { name: "Product Duplication", icon: <FaChartPie />, path: "/admin/reports" },
-               { name: "Account Settings", icon: <FaCogs />, path: "/admin/settings" },
+                        { name: "Home", icon: <FaHome />, path: "/" },
+                        { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
+                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
+                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
+                        { name: "Order History", icon: <FaClipboardList />, path: "/admin/orders" },
+                        { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
+                        { name: "Product Duplication", icon: <FaChartPie />, path: "/admin/reports" },
+                        { name: "Account Settings", icon: <FaCogs />, path: "/admin/settings" },
                     ].map((menu) => (
                         <Link className="text-sm" to={menu.path} key={menu.name}>
                             <li

@@ -15,6 +15,7 @@ import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { logout } from "@/Redux/features/auth/authSlice";
+import { resetCart } from "@/Redux/features/cart/cartSlice";
 
 
 const CustomerLayout = () => {
@@ -36,7 +37,10 @@ const CustomerLayout = () => {
     };
 
     const handleLogOut = () => {
-        dispacth(logout());
+    if (window.confirm("Are you sure you want to log out?")) {
+              dispacth(logout());
+              dispacth(resetCart());
+          }
     };
 
 
