@@ -101,8 +101,8 @@ const VendorLayout = () => {
                 <ul className="space-y-2">
                     {[
                         { name: "Home", icon: <FaHome />, path: "/" },
-                        { name: "Dashboard", icon: <FaChartLine />, path: "/admin/adminDashboard" },
-                        { name: "Shop Management", icon: <FaStore />, path: "/admin/shops" },
+                        { name: "Dashboard", icon: <FaChartLine />, path: "/vendor/vendorDashboard" },
+                        { name: "Shop Management", icon: <FaStore />, path: "/vendor/shop-management" },
                         { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
                         { name: "Order History", icon: <FaClipboardList />, path: "/admin/orders" },
                         { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
@@ -187,7 +187,7 @@ const VendorLayout = () => {
             </nav>
 
             {/* Main Content Area */}
-            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto">
+            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto h-screen" style={{position : "sticky"}}>
                 <Outlet />
             </main>
 

@@ -34,6 +34,7 @@ import Details from "@/pages/Product/Details";
 import Cards from "@/pages/Cards/Cards";
 import CustomerOders from "@/pages/Customer/CustomerOrders/CustomerOders";
 import CustomerRecent from "@/pages/Customer/CustomerRecent/CustomerRecent";
+import ShopManagementWithVendor from "@/pages/Vendor/ShopManagementWithVendor/ShopManagementWithVendor";
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +61,7 @@ export const router = createBrowserRouter([
         path: "/contact",
         element: <ContactUs />,
       },
-     
+
       {
         path: "/cards/:id",
         element: <Cards></Cards>
@@ -164,6 +165,10 @@ export const router = createBrowserRouter([
       {
         path: 'vendorDashboard',
         element: <VendorDashborad></VendorDashborad>
+      },
+      {
+        path: "shop-management",
+        element: <ShopManagementWithVendor></ShopManagementWithVendor>
       }
     ]
   },
@@ -185,7 +190,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'customer-recent',
-        element : <CustomerRecent></CustomerRecent>
+        element: <CustomerRecent></CustomerRecent>
       }
     ]
   },
