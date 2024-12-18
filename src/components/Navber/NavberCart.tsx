@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
 import { useAppSelector } from "@/Redux/hooks";
 import { useGetAllShopsNameandIdQuery } from "@/Redux/features/shops/shopsApi";
 import { useState } from "react";
+import { useCreateCartMutation } from "@/Redux/features/cart/cartApi";
+import { toast } from "react-toastify";
 
 const NavberCart = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -12,6 +15,9 @@ const NavberCart = () => {
   const [showSelector, setShowSelector] = useState(false);
   const [selectedShop, setSelectedShop] = useState<string>("");
 
+
+  const [CreateCart] = useCreateCartMutation()
+
   const handleCreateCart = () => {
     if (!user) {
       navigate("/login");
@@ -20,12 +26,50 @@ const NavberCart = () => {
     }
   };
 
-  const handleConfirmCart = () => {
+  const handleConfirmCart = async () => {
+    const toastId = toast.loading("Creating Cart...");
+
     if (!selectedShop) {
       console.log("Please select a shop.");
-    } else {
-      console.log("Create Cart:", selectedShop, "User:", user?.id);
+      return;
+    }
+
+    if (!user?.id) {
+      console.log("User ID is missing.");
+      return;
+    }
+
+    const CreateCartData = {
+      userId: user.id,
+      shopId: selectedShop,
+    };
+
+    try {
+      console.log(CreateCartData);
+      const res = await CreateCart(CreateCartData).unwrap();
+      console.log(res);
+      if (res?.error) {
+        throw new Error(res?.message || "Cart creation failed!");
+      }
+
+      // Success toast
+      toast.update(toastId, {
+        render: res?.message || "Cart created successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        position: "top-right",
+      });
       setShowSelector(false);
+    } catch (res : any) {
+      console.error("Error creating cart:", res?.error);
+      toast.update(toastId, {
+        render: res?.message || "Cart creation failed! Please try again.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        position: "top-right",
+    });
     }
   };
 
