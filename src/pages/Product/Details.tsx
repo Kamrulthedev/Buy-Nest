@@ -48,7 +48,7 @@ const Details = () => {
                     {/* Product Image */}
                     <div className="flex justify-center">
                         <img
-                            src={product?.imageUrl}
+                            src={product.imageUrl || "https://via.placeholder.com/150"}
                             alt={product?.name}
                             className="w-full max-w-sm rounded-lg shadow-lg object-cover"
                         />

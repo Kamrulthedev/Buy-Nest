@@ -34,6 +34,17 @@ const Products = () => {
     setSearchTerm(e.target.value);
   };
 
+
+  const handleAddToCart = (productId : string) => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      console.log("Add to Cart:", productId, "UserId:", user?.id);
+    }
+  };
+  
+
+
   const handleAddToFollow = (productId : string) => {
     if (!user) {
       navigate("/login");
@@ -73,7 +84,7 @@ const Products = () => {
               {sortedProducts.map((product: any) => (
                 <div
                   key={product.id}
-                  className="relative p-4 border rounded-lg shadow hover:shadow-lg group h-[350px] flex flex-col justify-between"
+                  className="relative p-4 border rounded-lg shadow hover:shadow-lg group h-[310px] flex flex-col justify-between"
                 >
                   <img
                     src={product.imageUrl || "https://via.placeholder.com/150"}
@@ -95,6 +106,7 @@ const Products = () => {
                       View Details
                     </Link>
                     <button className="w-28 text-center h-8  text-xs lg:text-base bg-violet-400 text-white rounded-md hover:bg-gray-600"
+                    onClick={() => handleAddToCart(product?.id)}
                     >
                       Add to Cart
                     </button>

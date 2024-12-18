@@ -29,7 +29,18 @@ const ShopsApi = baseApi.injectEndpoints({
             }),
         }),
 
+        GetAllShopsNameandId: builder.query({
+            query: () => ({
+                url: `/shops/all-shops-create-carts`,
+                method: 'GET',
+            }),
+        }),
+
     }),
 });
 
-export const { useGetAllShopsQuery, useGetByIdShopsQuery } = ShopsApi;
+export const {
+    useGetAllShopsQuery,
+    useGetByIdShopsQuery,
+    useGetAllShopsNameandIdQuery
+} = ShopsApi;
