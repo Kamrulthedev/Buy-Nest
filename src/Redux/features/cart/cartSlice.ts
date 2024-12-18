@@ -64,8 +64,11 @@ const cartSlice = createSlice({
         card.items = card.items.filter((item) => item.id !== itemId);
       }
     },
+    resetCart: (state) => {
+      state.cards = []; 
+    },
   },
 });
 
-export const { addCard, updateCardName, addToCart, removeFromCart } = cartSlice.actions;
+export const { addCard, updateCardName, addToCart, removeFromCart, resetCart  } = cartSlice.actions;
 export default cartSlice.reducer;

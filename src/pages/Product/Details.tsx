@@ -23,7 +23,7 @@ const Details = () => {
         if (!user) {
             navigate("/login");
         } else {
-            console.log("Add to Cart:", product?.id, "User:", user?.id);
+            console.log("productId:", product?.id, "User:", user?.id);
         }
     };
 
@@ -31,7 +31,7 @@ const Details = () => {
         if (!user) {
             navigate("/login");
         } else {
-            console.log("Buy Now:", product?.id, "User:", user?.id);
+            console.log("productId:", product?.id, "User:", user?.id);
         }
     };
 
@@ -48,7 +48,7 @@ const Details = () => {
                     {/* Product Image */}
                     <div className="flex justify-center">
                         <img
-                            src={product.imageUrl || "https://via.placeholder.com/150"}
+                            src={product?.imageUrl || "https://via.placeholder.com/150"}
                             alt={product?.name}
                             className="w-full max-w-sm rounded-lg shadow-lg object-cover"
                         />

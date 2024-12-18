@@ -11,6 +11,7 @@ import MobaileNaber from "./MobaileNaber";
 import { FaRegUser } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { logout } from "@/Redux/features/auth/authSlice";
+import { resetCart } from "@/Redux/features/cart/cartSlice";
 
 function Navbar() {
   const user = useAppSelector((state) => state.auth.user);
@@ -27,6 +28,7 @@ function Navbar() {
 
   const handleLogOut = () => {
     dispacth(logout());
+    dispacth(resetCart());
   };
 
   // Close dropdown on outside click

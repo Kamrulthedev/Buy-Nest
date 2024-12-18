@@ -58,8 +58,9 @@ export const router = createBrowserRouter([
         path: "/contact",
         element: <ContactUs />,
       },
+     
       {
-        path: "/cards",
+        path: "/cards/:id",
         element: <Cards></Cards>
       },
       {

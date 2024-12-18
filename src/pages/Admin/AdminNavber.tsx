@@ -18,6 +18,7 @@ import { Link, Outlet } from "react-router-dom";
 import SearchBar from "@/components/AdminDashboard/SearchBar";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { logout } from "@/Redux/features/auth/authSlice";
+import { resetCart } from "@/Redux/features/cart/cartSlice";
 
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,8 +26,8 @@ const AdminLayout = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const user = useAppSelector((state) => state.auth.user);
-  const dispacth = useAppDispatch();
+    const user = useAppSelector((state) => state.auth.user);
+    const dispacth = useAppDispatch();
 
 
 
@@ -42,6 +43,7 @@ const AdminLayout = () => {
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
             dispacth(logout());
+            dispacth(resetCart());
         }
     };
 
@@ -190,7 +192,7 @@ const AdminLayout = () => {
             </nav>
 
             {/* Main Content Area */}
-            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto max-h-screen" style={{position: "sticky"}}>
+            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto max-h-screen" style={{ position: "sticky" }}>
                 <Outlet />
             </main>
 

@@ -87,20 +87,20 @@ const Products = () => {
                   className="relative p-4 border rounded-lg shadow hover:shadow-lg group h-[310px] flex flex-col justify-between"
                 >
                   <img
-                    src={product.imageUrl || "https://via.placeholder.com/150"}
-                    alt={product.name}
+                    src={product?.imageUrl || "https://via.placeholder.com/150"}
+                    alt={product?.name}
                     className="w-full h-40 object-cover rounded"
                   />
-                  <h3 className="mt-2 font-semibold">{product.name}</h3>
-                  <p className="text-gray-600">${product.price}</p>
-                  {product.discount && (
-                    <p className="text-red-500">Discount: {product.discount}%</p>
+                  <h3 className="mt-2 font-semibold">{product?.name}</h3>
+                  <p className="text-gray-600">${product?.price}</p>
+                  {product?.discount && (
+                    <p className="text-red-500">Discount: {product?.discount}%</p>
                   )}
 
                   {/* Hover Buttons */}
                   <div className="absolute left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity px-4">
                     <Link
-                      to={`/products/${product.id}`}
+                      to={`/products/${product?.id}`}
                       className="w-28 text-center h-8 items-center text-xs lg:text-base bg-blue-500 text-white rounded-md hover:bg-gray-600"
                     >
                       View Details
@@ -114,13 +114,13 @@ const Products = () => {
 
                   <div className="mt-2 flex items-center gap-2 justify-between">
                     <img
-                      src={product.shop.logoUrl || "https://via.placeholder.com/50"}
+                      src={product?.shop?.logoUrl || "https://via.placeholder.com/50"}
                       alt="Shop Logo"
                       className="w-9 h-9 p-[1px] rounded-full border border-violet-500"
                     />
                     <button
                       className="px-3 py-1 text-green-500 rounded text-xs "
-                      onClick={() => handleAddToFollow(product.id)}
+                      onClick={() => handleAddToFollow(product?.id)}
                     >
                       Follow
                     </button>
