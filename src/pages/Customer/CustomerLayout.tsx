@@ -38,7 +38,7 @@ const CustomerLayout = () => {
 
     const handleLogOut = () => {
         dispacth(logout());
-      };
+    };
 
 
     // Profile Dropdown Toggle
@@ -95,14 +95,14 @@ const CustomerLayout = () => {
                 <h2 className="text-lg font-semibold mb-4">Menu</h2>
                 <ul className="space-y-2">
                     {[
-                { name: "Home", icon: <FaHome />, path: "/" },
-                { name: "Dashboard", icon: <FaChartLine />, path: "/customer/customer-dashboard" },
-                { name: "Orders", icon: <FaClipboardList />, path: "/orders" },
-                { name: "Product Comparison", icon: <FaTag />, path: "/compare" },
-                   { name: "Recent Products", icon: <FaHistory />, path: "/recent" },
-                { name: "Account Settings", icon: <FaUserCircle />, path: "/settings" },
-                { name: "Notifications", icon: <FaBell />, path: "/notifications" },
-                { name: "Reviews & Ratings", icon: <FaStar />, path: "/reviews" },
+                        { name: "Home", icon: <FaHome />, path: "/" },
+                        { name: "Dashboard", icon: <FaChartLine />, path: "/customer/customer-dashboard" },
+                        { name: "Orders History", icon: <FaClipboardList />, path: "/customer/customer-orders" },
+                        { name: "Product Comparison", icon: <FaTag />, path: "/compare" },
+                        { name: "Recent Products", icon: <FaHistory />, path: "/recent" },
+                        { name: "Account Settings", icon: <FaUserCircle />, path: "/settings" },
+                        { name: "Notifications", icon: <FaBell />, path: "/notifications" },
+                        { name: "Reviews & Ratings", icon: <FaStar />, path: "/reviews" },
                     ].map((menu) => (
                         <Link className="text-sm" to={menu.path} key={menu.name}>
                             <li
@@ -181,7 +181,7 @@ const CustomerLayout = () => {
             </nav>
 
             {/* Main Content Area */}
-            <main className="flex-1 mt-[80px] sticky top-20 z-20 h-screen overflow-y-auto p-5" style={{position: "sticky"}}>
+            <main className="flex-1 mt-[80px] sticky top-20 z-20 h-screen overflow-y-auto p-5" style={{ position: "sticky" }}>
                 <Outlet />
             </main>
 

@@ -54,15 +54,15 @@ const CustomerDashboard = () => {
     };
 
     return (
-        <div className="p-6 bg-white text-gray-800">
-            <h1 className="text-3xl font-semibold text-violet-600 mb-6">Welcome to Your Dashboard</h1>
+        <div className="p-6 bg-white text-gray-800 animate__animated animate__fadeInDown">
+            <h1 className="text-3xl font-semibold text-violet-600 mb-6 animate__animated animate__fadeInDown">Welcome to Your Dashboard</h1>
 
             {/* Customer Orders Section */}
-            <section className="mb-8">
+            <section className="mb-8 animate__animated animate__fadeInDown">
                 <h2 className="text-2xl font-semibold text-violet-500 mb-4">Your Orders</h2>
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                     <thead>
-                        <tr className="bg-gray-100 text-violet-600">
+                        <tr className="bg-gray-100 text-violet-600 animate__animated animate__fadeInDown" >
                             <th className="p-3 border">Order ID</th>
                             <th className="p-3 border">Product</th>
                             <th className="p-3 border">Status</th>
@@ -70,7 +70,7 @@ const CustomerDashboard = () => {
                     </thead>
                     <tbody>
                         {orders.map((order) => (
-                            <tr key={order.id} className="hover:bg-gray-50">
+                            <tr key={order.id} className="hover:bg-gray-50 animate__animated animate__fadeInDown">
                                 <td className="p-3 border">{order.id}</td>
                                 <td className="p-3 border">{order.product}</td>
                                 <td className="p-3 border">{order.status}</td>
@@ -81,7 +81,7 @@ const CustomerDashboard = () => {
             </section>
 
             {/* Followers Section with Graph */}
-            <section>
+            <section className="animate__animated animate__fadeInDown">
                 <h2 className="text-2xl font-semibold text-violet-500 mb-4">Your Followers</h2>
                 <div className="w-full h-96 bg-white border border-gray-300 rounded-md p-4 shadow-lg">
                     <Line data={chartData} options={chartOptions} />

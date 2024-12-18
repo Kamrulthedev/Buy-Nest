@@ -32,6 +32,7 @@ import CustomerDetails from "@/pages/Admin/CustomerManagement/CustomerDetails";
 import TransactionHistory from "@/pages/Admin/TransactionHistory/TransactionHistory";
 import Details from "@/pages/Product/Details";
 import Cards from "@/pages/Cards/Cards";
+import CustomerOders from "@/pages/Customer/CustomerOrders/CustomerOders";
 
 export const router = createBrowserRouter([
   {
@@ -176,7 +177,11 @@ export const router = createBrowserRouter([
       {
         path: "customer-dashboard",
         element: <CustomerDashboard></CustomerDashboard>
-      }
+      },
+      {
+        path: "customer-orders",
+        element: <CustomerOders></CustomerOders>
+      },
     ]
   },
   {
