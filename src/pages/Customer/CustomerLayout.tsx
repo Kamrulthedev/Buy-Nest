@@ -4,12 +4,12 @@ import {
     FaTimes,
     FaHome,
     FaClipboardList,
-    FaShoppingCart,
     FaTag,
     FaHistory,
     FaUserCircle,
     FaBell,
     FaStar,
+    FaChartLine,
 } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import { Link, Outlet } from "react-router-dom";
@@ -96,7 +96,7 @@ const CustomerLayout = () => {
                 <ul className="space-y-2">
                     {[
                 { name: "Home", icon: <FaHome />, path: "/" },
-                { name: "Cart", icon: <FaShoppingCart />, path: "/cart" },
+                { name: "Dashboard", icon: <FaChartLine />, path: "/customer/customer-dashboard" },
                 { name: "Orders", icon: <FaClipboardList />, path: "/orders" },
                 { name: "Product Comparison", icon: <FaTag />, path: "/compare" },
                    { name: "Recent Products", icon: <FaHistory />, path: "/recent" },
@@ -181,7 +181,7 @@ const CustomerLayout = () => {
             </nav>
 
             {/* Main Content Area */}
-            <main className="flex-1 mt-[80px] sticky top-20 z-20 overflow-y-auto p-5">
+            <main className="flex-1 mt-[80px] sticky top-20 z-20 h-screen overflow-y-auto p-5" style={{position: "sticky"}}>
                 <Outlet />
             </main>
 

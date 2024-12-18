@@ -174,7 +174,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "customerDashboard",
+        path: "customer-dashboard",
         element: <CustomerDashboard></CustomerDashboard>
       }
     ]
