@@ -18,3 +18,20 @@ export type TQueryParams = {
   name: string,
   value: boolean | React.Key
 }
+
+interface Shop {
+  id: string;
+  name: string;
+  description: string;
+  logoUrl: string;
+  vendorId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AddToCartPayload {
+  cardId: string;
+  quantity: number
+  shop: Shop;
+}
+

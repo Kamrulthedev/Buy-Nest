@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingCart } from "react-icons/fi";
-import { useAppSelector } from "@/Redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { useGetAllShopsNameandIdQuery } from "@/Redux/features/shops/shopsApi";
 import { useState } from "react";
 import { useCreateCartMutation } from "@/Redux/features/cart/cartApi";
 import { toast } from "react-toastify";
+import { addCard } from "@/Redux/features/cart/cartSlice";
 
 const NavberCart = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -14,6 +15,7 @@ const NavberCart = () => {
   const { data: shops } = useGetAllShopsNameandIdQuery(undefined);
   const [showSelector, setShowSelector] = useState(false);
   const [selectedShop, setSelectedShop] = useState<string>("");
+  const dispatch = useAppDispatch();
 
 
   const [CreateCart] = useCreateCartMutation()
@@ -51,6 +53,7 @@ const NavberCart = () => {
       if (res?.error) {
         throw new Error(res?.message || "Cart creation failed!");
       }
+      dispatch(addCard({ cardId: res?.data?.id, cardName: res?.data?.shop?.name }));
 
       // Success toast
       toast.update(toastId, {
@@ -60,8 +63,9 @@ const NavberCart = () => {
         autoClose: 3000,
         position: "top-right",
       });
+
       setShowSelector(false);
-    } catch (res : any) {
+    } catch (res: any) {
       console.error("Error creating cart:", res?.error);
       toast.update(toastId, {
         render: res?.message || "Cart creation failed! Please try again.",
@@ -69,9 +73,12 @@ const NavberCart = () => {
         isLoading: false,
         autoClose: 3000,
         position: "top-right",
-    });
+      });
     }
   };
+
+  const cards = useAppSelector((state) => state.carts.cards);
+  console.log(cards)
 
   return (
     <div className="text-gray-600 relative group">
@@ -85,11 +92,11 @@ const NavberCart = () => {
 
       <div className="absolute top-full right-0 hidden group-hover:block bg-white shadow-lg rounded-lg w-64 mt-1 z-10 animate__animated animate__fadeInDown">
         <ul className="p-4">
-          {shops?.data?.map((shop: { id: string; name: string }) => (
+          {cards?.map((shop: { id: string; name: string }) => (
             <li key={shop.id}>
               <Link
-                className="block px-4 py-2 hover:bg-slate-100 rounded-lg text-gray-700"
-                to={`/notifications/${shop.id}`}
+                className="block px-4 py-2 mb-4 hover:bg-slate-100 rounded-lg text-gray-700"
+                 to={`/notifications/${shop.id}`}
               >
                 {shop.name}
               </Link>
