@@ -38,7 +38,7 @@ const ProductsManagement = () => {
     return (
         <div className="p-6 animate__animated animate__fadeInDown">
             <div className="flex justify-between mb-4">
-                <h1 className="lg:text-3xl md:text-2xl text-base font-bold">Product Management</h1>
+                <h1 className="lg:text-3xl md:text-2xl text-base font-bold animate__animated animate__fadeInDown">Product Management</h1>
                 <Link
                     to="/admin/create-product"
                     className="bg-green-500 text-white px-2 lg:px-4 py-2 rounded hover:bg-green-600 text-xs md:text-sm lg:text-base"
@@ -62,10 +62,10 @@ const ProductsManagement = () => {
             </div>
 
             {/* Product Table */}
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto animate__animated animate__fadeInDown">
                 <table className="min-w-full border-collapse border border-gray-200">
                     <thead>
-                        <tr className="bg-gray-100 text-sm">
+                        <tr className="bg-gray-100 text-sm animate__animated animate__fadeInDown">
                             <th className="border border-gray-200 px-4 py-2">Image</th>
                             <th className="border border-gray-200 px-4 py-2">Name</th>
                             <th className="border border-gray-200 px-4 py-2">Category</th>

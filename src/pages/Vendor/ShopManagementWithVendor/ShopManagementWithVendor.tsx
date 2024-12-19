@@ -48,7 +48,7 @@ console.log(formPayload)
                 {isUpdateFormVisible && (
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="mt-4 bg-gray-200 p-4 rounded-md shadow-md space-y-4"
+                        className="mt-4 bg-gray-200 p-4 rounded-md shadow-md space-y-4 animate__animated animate__fadeInDown"
                     >
                         <div>
                             <label className="block text-gray-700 font-semibold mb-2">Logo</label>

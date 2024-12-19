@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { useCreateProductMutation } from '@/Redux/features/products/productsApi';
-import { IoMdArrowRoundBack } from 'react-icons/io';
-import { Link } from 'react-router-dom';
-import { useGetAllShopsQuery } from '@/Redux/features/shops/shopsApi';
-import { AiOutlineLoading } from 'react-icons/ai';
+import { useCreateProductMutation } from "@/Redux/features/products/productsApi";
+import { useGetAllShopsQuery } from "@/Redux/features/shops/shopsApi";
+import { useForm } from "react-hook-form";
+import { AiOutlineLoading } from "react-icons/ai";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const CreateProduct = () => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+const CreateProductWithVendor = () => {
+ const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [createProduct, { isLoading }] = useCreateProductMutation();
     const { data: allShops } = useGetAllShopsQuery(undefined);
 
@@ -62,7 +62,7 @@ const CreateProduct = () => {
 
     return (
         <div className="p-6 max-w-4xl mx-auto animate__animated animate__fadeInDown">
-            <Link to="/admin/products-management" className="text-start text-xl">
+            <Link to="/vendor/products-management" className="text-start text-xl">
                 <IoMdArrowRoundBack />
             </Link>
             <h1 className="text-3xl font-bold mb-4 text-center">Create Product</h1>
@@ -173,7 +173,7 @@ const CreateProduct = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-1">Image  <span className="text-gray-500">(optional)</span></label>
+                    <label className="block text-sm font-medium mb-1">Image <span className="text-gray-500">(optional)</span></label>
                     <input
                         type="file"
                         className="w-full border rounded-lg p-2 bg-gray-200"
@@ -199,5 +199,4 @@ const CreateProduct = () => {
         </div>
     );
 };
-
-export default CreateProduct;
+export default CreateProductWithVendor;

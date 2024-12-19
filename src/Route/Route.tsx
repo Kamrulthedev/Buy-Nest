@@ -36,6 +36,7 @@ import CustomerOders from "@/pages/Customer/CustomerOrders/CustomerOders";
 import CustomerRecent from "@/pages/Customer/CustomerRecent/CustomerRecent";
 import ShopManagementWithVendor from "@/pages/Vendor/ShopManagementWithVendor/ShopManagementWithVendor";
 import ProductManagementWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductManagementWithVendor";
+import CreateProductWithVendor from "@/pages/Vendor/ProductManagementWithVendor/CreateProductWithVendor";
 
 export const router = createBrowserRouter([
   {
@@ -174,6 +175,10 @@ export const router = createBrowserRouter([
       {
         path: "products-management",
         element: <ProductManagementWithVendor></ProductManagementWithVendor>
+      },
+      {
+        path: "create-product-with-vendor",
+        element: <CreateProductWithVendor></CreateProductWithVendor>
       }
     ]
   },
