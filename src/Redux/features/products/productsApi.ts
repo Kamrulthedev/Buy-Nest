@@ -31,6 +31,22 @@ const ProductsApi = baseApi.injectEndpoints({
             },
             providesTags: ['Products']
         }),
+        GetAllProductsWithVendor: builder.query({
+            query: (id: string, args?: TQueryParams[]) => {
+                const params = new URLSearchParams();
+
+                if (args) {
+                    args.forEach((item) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
+
+                return {
+                    url: `/products/all-products-with-vendor/${id}?${params.toString()}`,
+                    method: "GET"
+                };
+            }
+        }),
         GetByIdProducts: builder.query({
             query: (id: string) => ({
                 url: `/products/${id}`,
@@ -64,6 +80,7 @@ const ProductsApi = baseApi.injectEndpoints({
 export const {
     useGetAllProductsQuery,
     useCreateProductMutation,
-    useGetByIdProductsQuery
+    useGetByIdProductsQuery,
+    useGetAllProductsWithVendorQuery
 }: any = ProductsApi;
 

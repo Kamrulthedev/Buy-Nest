@@ -1,5 +1,6 @@
 export type TUser = {
   id: string,
+  userId: string,
   name: string;
   email: string;
   contactNumber: string;

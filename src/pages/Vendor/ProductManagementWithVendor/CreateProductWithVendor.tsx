@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCreateProductMutation } from "@/Redux/features/products/productsApi";
-import { useGetAllShopsQuery } from "@/Redux/features/shops/shopsApi";
+import { useGetAllShopsNameandIdQuery } from "@/Redux/features/shops/shopsApi";
 import { useForm } from "react-hook-form";
 import { AiOutlineLoading } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -10,8 +10,7 @@ import { toast } from "react-toastify";
 const CreateProductWithVendor = () => {
  const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [createProduct, { isLoading }] = useCreateProductMutation();
-    const { data: allShops } = useGetAllShopsQuery(undefined);
-
+    const { data: allShops } = useGetAllShopsNameandIdQuery(undefined);
     const onSubmit = async (formData: any) => {
         const toastId = toast.loading("Creating product...");
         const { name, description, price, discount, stock, category, shop, file } = formData;

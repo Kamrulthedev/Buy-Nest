@@ -1,30 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
+import { useGetAllProductsWithVendorQuery } from "@/Redux/features/products/productsApi";
+import { useAppSelector } from "@/Redux/hooks";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
 const ProductManagementWithVendor = () => {
+    const user = useAppSelector((state) => state.auth.user);
+
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 5;
 
+
     // Fetching products from the API with pagination parameters
-    const { data, error, isLoading } = useGetAllProductsQuery([
+    const { data, error, isLoading } = useGetAllProductsWithVendorQuery(user?.userId, [
         { name: 'page', value: currentPage },
     ]);
-
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products</div>;
 
     // Filter products based on search query
-    const filteredProducts = data?.data?.filter((product: any) =>
+    const filteredProducts = data?.data?.data?.filter((product: any) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
     ) || [];
 
 
-    const totalPages = Math.ceil(data?.meta?.total / productsPerPage);
+    const totalPages = Math.ceil(data?.data?.meta?.total / productsPerPage);
 
     const handleUpdate = (ProductId: string) => {
         console.log(`Update clicked for product ID: ${ProductId}`);
@@ -58,7 +61,7 @@ const ProductManagementWithVendor = () => {
                     className="border rounded-lg p-2 w-full lg:w-1/2 bg-gray-100 border-violet-500"
                 />
                 <div className="mb-4 text-lg font-medium">
-                    Products: {data?.meta?.total}
+                    Products: {data?.data?.meta?.total}
                 </div>
             </div>
 
@@ -77,7 +80,7 @@ const ProductManagementWithVendor = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredProducts.map((product : any) => (
+                        {filteredProducts.map((product: any) => (
                             <tr key={product.id} className="hover:bg-gray-50 text-sm animate__animated animate__fadeInDown">
                                 <td className="border border-gray-200 px-4 py-2 text-center">
                                     <img
@@ -92,7 +95,7 @@ const ProductManagementWithVendor = () => {
                                 <td className="border border-gray-200 px-4 py-2">{product.stock}</td>
                                 <td className="border border-gray-200 px-4 py-2">{product.discount}</td>
                                 <td className="border border-gray-200 px-4 py-2 space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row justify-center">
-                                <Link
+                                    <Link
                                         to={`/admin/product-details/${product.id}`}
                                         className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 w-full md:w-auto"
                                     >
