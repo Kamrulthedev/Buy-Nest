@@ -103,7 +103,7 @@ const VendorLayout = () => {
                         { name: "Home", icon: <FaHome />, path: "/" },
                         { name: "Dashboard", icon: <FaChartLine />, path: "/vendor/vendorDashboard" },
                         { name: "Shop Management", icon: <FaStore />, path: "/vendor/shop-management" },
-                        { name: "Product Management", icon: <FaProductHunt />, path: "/admin/products" },
+                        { name: "Product Management", icon: <FaProductHunt />, path: "/vendor/products-management" },
                         { name: "Order History", icon: <FaClipboardList />, path: "/admin/orders" },
                         { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
                         { name: "Product Duplication", icon: <FaChartPie />, path: "/admin/reports" },

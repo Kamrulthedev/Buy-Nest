@@ -91,40 +91,40 @@ const VendorDashboard = () => {
     const { shopName, totalProducts, totalOrders, totalFollowers, averageRating } = dashboardData;
 
     return (
-        <div className="p-6 bg-white text-gray-800">
-            <h1 className="text-3xl font-semibold text-violet-600 mb-6">
+        <div className="p-6 bg-white text-gray-800 animate__animated animate__fadeInDown">
+            <h1 className="text-3xl font-semibold text-violet-600 mb-6 animate__animated animate__fadeInDown">
                 Welcome to {shopName}'s Dashboard
             </h1>
 
             {/* Dashboard Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate__animated animate__fadeInDown">
                 {/* Total Products */}
-                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md">
+                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md animate__animated animate__fadeInDown">
                     <h2 className="text-xl font-semibold text-violet-500">Total Products</h2>
                     <p className="text-4xl font-bold text-gray-800">{totalProducts}</p>
                 </div>
 
                 {/* Total Orders */}
-                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md">
+                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md animate__animated animate__fadeInDown">
                     <h2 className="text-xl font-semibold text-violet-500">Total Orders</h2>
                     <p className="text-4xl font-bold text-gray-800">{totalOrders}</p>
                 </div>
 
                 {/* Total Followers */}
-                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md">
+                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md animate__animated animate__fadeInDown">
                     <h2 className="text-xl font-semibold text-violet-500">Total Followers</h2>
                     <p className="text-4xl font-bold text-gray-800">{totalFollowers}</p>
                 </div>
 
                 {/* Average Rating */}
-                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md">
+                <div className="bg-gray-100 text-center p-6 rounded-lg shadow-md animate__animated animate__fadeInDown">
                     <h2 className="text-xl font-semibold text-violet-500">Average Rating</h2>
                     <p className="text-4xl font-bold text-gray-800">{averageRating.toFixed(1)}</p>
                 </div>
             </div>
 
             {/* Chart Section */}
-            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+            <div className="bg-gray-100 p-6 rounded-lg shadow-md animate__animated animate__fadeInDown">
                 <h2 className="text-2xl font-semibold text-violet-500 mb-4">Sales Overview</h2>
                 <Line data={chartData} options={chartOptions} />
             </div>
