@@ -103,17 +103,18 @@ const ProductManagementWithVendor = () => {
                                 <td className="border border-gray-200 px-4 py-2">{product.discount}</td>
                                 <td className="border border-gray-200 px-4 py-2 space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row justify-center">
                                     <Link
-                                        to={`/vendor/product-details/${product.id}`}
+                                        to={`/vendor/product-details/${product?.id}`}
                                         className="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-600 w-full md:w-auto"
                                     >
                                         Details
                                     </Link>
-                                    <button
+                                    <Link
+                                        to={`/vendor/product-update/${product?.id}`}
                                         onClick={() => handleUpdate(product.id)}
                                         className="bg-yellow-500 text-white px-4 py-1 rounded-lg hover:bg-yellow-600 w-full md:w-auto"
                                     >
                                         Update
-                                    </button>
+                                    </Link>
                                     <button
                                         onClick={() => handleDelete(product.id)}
                                         className="bg-red-500 text-white px-4 py-1 rounded-lg hover:bg-red-600 w-full md:w-auto"

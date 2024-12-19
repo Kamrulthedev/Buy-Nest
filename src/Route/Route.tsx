@@ -38,6 +38,7 @@ import ShopManagementWithVendor from "@/pages/Vendor/ShopManagementWithVendor/Sh
 import ProductManagementWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductManagementWithVendor";
 import CreateProductWithVendor from "@/pages/Vendor/ProductManagementWithVendor/CreateProductWithVendor";
 import ProductDetailsWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductDetailsWithVendor";
+import ProductUpdateWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductUpdateWithVendor";
 
 export const router = createBrowserRouter([
   {
@@ -182,8 +183,12 @@ export const router = createBrowserRouter([
         element: <CreateProductWithVendor></CreateProductWithVendor>
       },
       {
-        path: "/vendor/product-details/:id",
+        path: "product-details/:id",
         element: <ProductDetailsWithVendor></ProductDetailsWithVendor>
+      },
+      {
+        path: "product-update/:id",
+        element: <ProductUpdateWithVendor></ProductUpdateWithVendor>
       }
     ]
   },

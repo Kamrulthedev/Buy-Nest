@@ -7,14 +7,15 @@ import { TQueryParams } from "@/types/types";
 
 const ProductsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        // UpdateMe: builder.mutation({
-        //     query: (userInfo) => ({
-        //         url: "/user/update-me",
-        //         method: "PATCH",
-        //         body: userInfo,
-        //     }),
-        //     invalidatesTags: ['Users'],
-        // }),
+        UpdateProduct: builder.mutation({
+            query: ({ id, userInfo }: { id: string, userInfo: any }) => ({
+                url: `/products/update-product/${id}`,
+                method: "PATCH",
+                body: userInfo,
+            }),
+            invalidatesTags: ['Products'],
+        }),
+
         GetAllProducts: builder.query({
             query: (args?: TQueryParams[]) => {
                 const params = new URLSearchParams();
@@ -50,17 +51,16 @@ const ProductsApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
-        // DeleteUser: builder.mutation({
-        //     query: (data) => {
-        //         console.log(data)
-        //         return {
-        //             url: '/user/delete-user',
-        //             method: 'DELETE',
-        //             body: data
-        //         }
-        //     },
-        //     invalidatesTags: ['Users'],
-        // }),
+        DeleteProduct: builder.mutation({
+            query: (id: string) => {
+                return {
+                    url: `/products/delete-product/${id}`,
+                    method: 'DELETE',
+                };
+            },
+            invalidatesTags: ['Products'],
+        }),
+
         createProduct: builder.mutation({
             query: (data) => {
                 return {
@@ -78,6 +78,8 @@ export const {
     useGetAllProductsQuery,
     useCreateProductMutation,
     useGetByIdProductsQuery,
-    useGetAllProductsWithVendorQuery
+    useGetAllProductsWithVendorQuery,
+    useUpdateProductMutation,
+    useDeleteProductMutation 
 }: any = ProductsApi;
 
