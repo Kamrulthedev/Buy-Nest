@@ -39,6 +39,7 @@ import ProductManagementWithVendor from "@/pages/Vendor/ProductManagementWithVen
 import CreateProductWithVendor from "@/pages/Vendor/ProductManagementWithVendor/CreateProductWithVendor";
 import ProductDetailsWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductDetailsWithVendor";
 import ProductUpdateWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductUpdateWithVendor";
+import OrderHistoryWithVendor from "@/pages/Vendor/OrderHistoryWithVendor/OrderHistoryWithVendor";
 
 export const router = createBrowserRouter([
   {
@@ -189,6 +190,10 @@ export const router = createBrowserRouter([
       {
         path: "product-update/:id",
         element: <ProductUpdateWithVendor></ProductUpdateWithVendor>
+      },
+      {
+        path: "order-history-with-vendor",
+        element: <OrderHistoryWithVendor></OrderHistoryWithVendor>
       }
     ]
   },

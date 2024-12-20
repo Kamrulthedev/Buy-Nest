@@ -104,7 +104,7 @@ const VendorLayout = () => {
                         { name: "Dashboard", icon: <FaChartLine />, path: "/vendor/vendorDashboard" },
                         { name: "Shop Management", icon: <FaStore />, path: "/vendor/shop-management" },
                         { name: "Product Management", icon: <FaProductHunt />, path: "/vendor/products-management" },
-                        { name: "Order History", icon: <FaClipboardList />, path: "/admin/orders" },
+                        { name: "Order History", icon: <FaClipboardList />, path: "/vendor/order-history-with-vendor" },
                         { name: "Reviews & Ratings", icon: <FaChartPie />, path: "/admin/reports" },
                         { name: "Product Duplication", icon: <FaChartPie />, path: "/admin/reports" },
                         { name: "Account Settings", icon: <FaCogs />, path: "/admin/settings" },
@@ -149,7 +149,7 @@ const VendorLayout = () => {
                 >
                     {isSidebarOpen ? <FaTimes /> : <FaBars />}
                 </button>
-                <h1 className="text-2xl font-bold lg:-ml-4">Vendor Dashborad</h1>
+                <h1 className="text-base lg:text-2xl font-bold lg:-ml-4">Vendor Panel</h1>
                 <div>
                     <SearchBar />
                 </div>
