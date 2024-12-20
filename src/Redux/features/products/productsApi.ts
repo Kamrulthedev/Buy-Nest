@@ -8,11 +8,13 @@ import { TQueryParams } from "@/types/types";
 const ProductsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         UpdateProduct: builder.mutation({
-            query: ({ id, userInfo }: { id: string, userInfo: any }) => ({
-                url: `/products/update-product/${id}`,
-                method: "PATCH",
-                body: userInfo,
-            }),
+            query: ({ id, userInfo }: { id: string, userInfo: any }) => {
+                return {
+                    url: `/products/update-product/${id}`,
+                    method: "PATCH",
+                    body: userInfo,
+                }
+            },
             invalidatesTags: ['Products'],
         }),
 
@@ -80,6 +82,6 @@ export const {
     useGetByIdProductsQuery,
     useGetAllProductsWithVendorQuery,
     useUpdateProductMutation,
-    useDeleteProductMutation 
+    useDeleteProductMutation
 }: any = ProductsApi;
 

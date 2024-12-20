@@ -38,10 +38,6 @@ const ProductManagementWithVendor = () => {
 
     const totalPages = Math.ceil(data?.data?.meta?.total / productsPerPage);
 
-    const handleUpdate = (ProductId: string) => {
-        console.log(`Update clicked for product ID: ${ProductId}`);
-    };
-
     const handleDelete = (ProductId: string) => {
         console.log(`Delete clicked for product ID: ${ProductId}`);
     };
@@ -110,7 +106,6 @@ const ProductManagementWithVendor = () => {
                                     </Link>
                                     <Link
                                         to={`/vendor/product-update/${product?.id}`}
-                                        onClick={() => handleUpdate(product.id)}
                                         className="bg-yellow-500 text-white px-4 py-1 rounded-lg hover:bg-yellow-600 w-full md:w-auto"
                                     >
                                         Update

@@ -14,7 +14,7 @@ const ProductUpdateWithVendor = () => {
     const navigate = useNavigate();
     const { data, isLoading } = useGetByIdProductsQuery(id as string);
 
-    const [UdpateProduct] = useUpdateProductMutation()
+    const [UpdateProduct] = useUpdateProductMutation();
 
     useEffect(() => {
         if (data?.data) {
@@ -30,23 +30,35 @@ const ProductUpdateWithVendor = () => {
         }
     }, [data, reset]);
 
+
+    
     const onSubmit = async (formData: any) => {
-        console.log("Final Form Data:", formData);
         const toastId = toast.loading("Updating product...");
         const { name, imageUrl, stock, discount, price, description, category } = formData;
 
         const formPayload = new FormData();
-        formPayload.append("data", JSON.stringify({name, imageUrl, stock, discount, price, description, category}), {});
-
+        const data = { name, price, category, discount, stock, description };
+        formPayload.append("data", JSON.stringify(data));  
         if (imageUrl && imageUrl[0]) {
-            formPayload.append("file", imageUrl[0]);
+            formPayload.append("filename", imageUrl[0]);  
         }
 
-
         try {
-            // Mock API call or use your mutation function
-            const res = await UdpateProduct(formPayload).unwrap();
-            console.log(res)
+            // Use the id from URL params
+            const userInfo = {
+                data: JSON.stringify({
+                    name,
+                    stock,
+                    discount,
+                    price,
+                    description,
+                    category,
+                }),
+                file: [imageUrl[0] ? imageUrl[0] : null],
+            };
+
+            // Pass the FormData directly to the mutation if needed
+            const res = await UpdateProduct({ id, userInfo }).unwrap();
             if (res?.error) throw new Error(res?.message);
 
             toast.update(toastId, {
@@ -67,6 +79,9 @@ const ProductUpdateWithVendor = () => {
         }
     };
 
+
+
+
     return (
         <div className="p-6 max-w-4xl mx-auto animate__animated animate__fadeInDown">
             <Link to="/vendor/products-management" className="text-start text-xl">
@@ -85,8 +100,8 @@ const ProductUpdateWithVendor = () => {
                             placeholder="Enter product name"
                             className="w-full border rounded-lg p-2 bg-gray-200"
                             {...register("name")}
-                        />                 
-                          </div>
+                        />
+                    </div>
 
                     <div>
                         <label className="block text-sm font-medium mb-1">Price</label>
