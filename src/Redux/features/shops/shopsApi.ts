@@ -28,6 +28,13 @@ const ShopsApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
+        GetByIdWithVendorShops: builder.query({
+            query: (id: string) => ({
+                url: `/shops/get-shop-with-vendor/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ["Shops"]
+        }),
 
         GetAllShopsNameandId: builder.query({
             query: () => ({
@@ -35,12 +42,23 @@ const ShopsApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
         }),
-
+        UpdateShop: builder.mutation({
+            query: ({ id, UpdateData }: { id: string; UpdateData: any }) => {
+                return {
+                    url: `/shops/update-shop/${id}`,
+                    method: "PATCH",
+                    body: UpdateData,
+                };
+            },
+            invalidatesTags: ["Shops"],
+        }),
     }),
 });
 
 export const {
     useGetAllShopsQuery,
     useGetByIdShopsQuery,
-    useGetAllShopsNameandIdQuery
+    useGetByIdWithVendorShopsQuery,
+    useGetAllShopsNameandIdQuery,
+    useUpdateShopMutation
 } = ShopsApi;

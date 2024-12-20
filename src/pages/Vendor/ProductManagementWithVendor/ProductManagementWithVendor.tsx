@@ -22,11 +22,14 @@ const ProductManagementWithVendor = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 8;
 
-    // Fetching products from the API with pagination parameters
-    const { data, error, isLoading } = useGetAllProductsWithVendorQuery(user?.userId, [
-        { name: "page", value: currentPage.toString() },
-        { name: 'limit', value: productsPerPage.toString() },
-    ]);
+
+    const { data, error, isLoading } = useGetAllProductsWithVendorQuery({
+        id: user?.userId, 
+        args: [
+            { name: "page", value: currentPage.toString() }
+        ]
+    });
+    
 
     const [DeleteProduct] = useDeleteProductMutation()
 

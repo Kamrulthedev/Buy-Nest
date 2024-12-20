@@ -1,14 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useGetByIdWithVendorShopsQuery, useUpdateShopMutation } from "@/Redux/features/shops/shopsApi";
+import { useAppSelector } from "@/Redux/hooks";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const ShopManagementWithVendor = () => {
+    const user = useAppSelector((state) => state.auth.user);
+
     const { register, handleSubmit } = useForm();
     const [isUpdateFormVisible, setIsUpdateFormVisible] = useState(false);
+
+    const { data } = useGetByIdWithVendorShopsQuery(user?.userId as string);
+    const ShopData = data?.data;
+
+    const [UpdateData] = useUpdateShopMutation()
 
     const handleUpdateClick = () => {
         setIsUpdateFormVisible(!isUpdateFormVisible);
     };
+
 
     const onSubmit = async (formData: any) => {
         const { name, description, logoUrl } = formData;
@@ -19,8 +30,28 @@ const ShopManagementWithVendor = () => {
         if (logoUrl && logoUrl[0]) {
             formPayload.append("file", logoUrl[0]);
         }
-console.log(formPayload)
-        // Perform further actions with formPayload if needed
+
+        try {
+            const id = ShopData?.id;
+
+            // Display a loading toast
+            const toastId = toast.loading("Updating shop...");
+            const res = await UpdateData({ id, UpdateData: formPayload }).unwrap();
+
+            // Update toast to success state
+            toast.update(toastId, {
+                render: res.message || "Shop updated successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+            });
+
+        } catch (err: any) {
+            console.error("Update failed:", err);
+
+            // Show an error toast
+            toast.error(err.message || "Failed to update shop. Please try again.");
+        }
     };
 
     return (
@@ -29,14 +60,14 @@ console.log(formPayload)
             <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-8 animate__animated animate__fadeInDown">
                 <div className="flex items-center mb-4">
                     <img
-                        src={''}
+                        src={ShopData?.logoUrl || "https://i.ibb.co/44vhj8G/image.png"}
                         alt="Shop Logo"
                         className="w-16 h-16 rounded-full mr-4"
                     />
                     <div>
-                        <h2 className="text-2xl font-semibold text-violet-600">Kamrul Hassan</h2>
-                        <p className="text-gray-600">jjjjjjjjjjjjjjjjj</p>
-                        <p className="text-gray-500 text-sm">330 Followers</p>
+                        <h2 className="text-2xl font-semibold text-violet-600">{ShopData?.name}</h2>
+                        <p className="text-gray-600">{ShopData?.description}</p>
+                        <p className="text-gray-500 text-sm">{ShopData?.followers?.length}</p>
                     </div>
                 </div>
                 <button
@@ -65,6 +96,7 @@ console.log(formPayload)
                                 {...register("name")}
                                 type="text"
                                 name="name"
+                                defaultValue={ShopData?.name}
                                 className="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-600"
                             />
                         </div>
@@ -72,6 +104,7 @@ console.log(formPayload)
                             <label className="block text-gray-700 font-semibold mb-2">Description</label>
                             <textarea
                                 {...register("description")}
+                                defaultValue={ShopData?.description}
                                 className="w-full px-3 py-2 border rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-600"
                                 rows={4}
                             ></textarea>
@@ -91,18 +124,18 @@ console.log(formPayload)
                 <h2 className="text-2xl font-semibold text-violet-600 mb-4">Vendor Details</h2>
                 <div className="space-y-2">
                     <p>
-                        <span className="font-bold text-gray-700">Name:</span> Kamrul
+                        <span className="font-bold text-gray-700">Name:</span> {ShopData?.vendor?.name}
                     </p>
                     <p>
-                        <span className="font-bold text-gray-700">Email:</span> kame@gmail.com
+                        <span className="font-bold text-gray-700">Email:</span> {ShopData?.vendor?.email}
                     </p>
                     <p>
                         <span className="font-bold text-gray-700">Contact Number:</span>{" "}
-                        100111111122
+                        {ShopData?.vendor?.contactNumber}
                     </p>
                     <p>
                         <span className="font-bold text-gray-700">Address:</span>{" "}
-                        cox`s bazar
+                        {ShopData?.vendor?.address}
                     </p>
                 </div>
             </div>
@@ -113,11 +146,11 @@ console.log(formPayload)
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="text-center bg-white p-4 rounded-lg shadow-md">
                         <h3 className="text-xl font-semibold text-gray-700">Total Products</h3>
-                        <p className="text-4xl font-bold text-violet-600">20202</p>
+                        <p className="text-4xl font-bold text-violet-600">{ShopData?.products?.length}</p>
                     </div>
                     <div className="text-center bg-white p-4 rounded-lg shadow-md">
                         <h3 className="text-xl font-semibold text-gray-700">Total Orders</h3>
-                        <p className="text-4xl font-bold text-violet-600">2033</p>
+                        <p className="text-4xl font-bold text-violet-600">{ShopData?.orders?.length}</p>
                     </div>
                 </div>
             </div>
