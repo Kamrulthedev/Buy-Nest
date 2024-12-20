@@ -1,7 +1,9 @@
-import { useGetAllProductsWithVendorQuery } from "@/Redux/features/products/productsApi";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useDeleteProductMutation, useGetAllProductsWithVendorQuery } from "@/Redux/features/products/productsApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Product {
     id: string;
@@ -26,6 +28,8 @@ const ProductManagementWithVendor = () => {
         { name: 'limit', value: productsPerPage.toString() },
     ]);
 
+    const [DeleteProduct] = useDeleteProductMutation()
+
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products</div>;
@@ -38,10 +42,54 @@ const ProductManagementWithVendor = () => {
 
     const totalPages = Math.ceil(data?.data?.meta?.total / productsPerPage);
 
-    const handleDelete = (ProductId: string) => {
-        console.log(`Delete clicked for product ID: ${ProductId}`);
-    };
 
+    const handleDelete = (ProductId: string) => {
+        // Show a custom confirmation toast
+        const toastId = toast(
+            <div>
+                <p>Are you sure you want to delete this product?</p>
+                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
+                    <button
+                        onClick={async () => {
+                            try {
+                                toast.update(toastId, { render: "Deleting product...", type: "info", isLoading: true });
+    
+                                // Call the delete mutation
+                                const res = await DeleteProduct(ProductId).unwrap();
+        
+                                toast.update(toastId, {
+                                    render: res.message || "Product deleted successfully!",
+                                    type: "success",
+                                    isLoading: false,
+                                    autoClose: 3000,
+                                });
+                            } catch (err: any) {
+                                console.error("Error deleting product:", err);
+                                toast.update(toastId, {
+                                    render: err.message || "Failed to delete the product.",
+                                    type: "error",
+                                    isLoading: false,
+                                    autoClose: 3000,
+                                });
+                            }
+                        }}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        onClick={() => {
+                            toast.dismiss(toastId);
+                            console.log("Delete operation canceled.");
+                        }}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>,
+            { autoClose: false }
+        );
+    };
+    
     return (
         <div className="p-6 animate__animated animate__fadeInDown">
             <div className="flex justify-between mb-4">
