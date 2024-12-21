@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Heading from "@/Heading/Heading";
+import { setCart } from "@/Redux/features/cart/cardSlice";
 import { useGetCartItemsQuery } from "@/Redux/features/cart/cartItem";
+import { useAppDispatch } from "@/Redux/hooks";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
 import { useParams } from "react-router-dom";
@@ -10,6 +12,8 @@ const Cards = () => {
   const { id } = useParams();
   const { data } = useGetCartItemsQuery(id as string);
   const CartItems = data?.data || [];
+  const dispacth = useAppDispatch();
+
 
   // Calculate summary data
   const totalQuantity = CartItems.reduce((sum: any, item: any) => sum + item.quantity, 0);
@@ -28,18 +32,24 @@ const Cards = () => {
     });
   };
 
+
+  
   // Handle checkout action
   const handleCheckout = () => {
-    console.log("Checkout Data:", {
+    const checkoutData = {
       CartItems,
       totalQuantity,
       totalPrice,
-    });
+    };
+
+    dispacth(setCart(checkoutData));
+    // Show success toast notification
     toast.success("Checkout successful!", {
       position: "top-right",
       autoClose: 3000,
     });
   };
+
 
   return (
     <div className="px-4 md:px-6 lg:px-12 py-6">
@@ -55,7 +65,7 @@ const Cards = () => {
           <div className="overflow-x-auto col-span-4">
             <table className="table w-full border border-gray-200">
               <thead>
-                <tr className="bg-gray-100 text-left">
+                <tr className="bg-gray-100 text-left animate__animated animate__fadeInDown">
                   <th className="p-2">Image</th>
                   <th className="p-2">Name</th>
                   <th className="p-2">Price</th>
@@ -66,8 +76,8 @@ const Cards = () => {
               </thead>
               <tbody>
                 {CartItems.map((item: any) => (
-                  <tr key={item.id} className="hover:bg-gray-50">
-                    <td className="p-2">
+                  <tr key={item.id} className="hover:bg-gray-50 animate__animated animate__fadeInDown">
+                    <td className="p-2 ">
                       <img
                         src={item.product.imageUrl}
                         alt={item.product.name}
@@ -93,42 +103,42 @@ const Cards = () => {
               </tbody>
             </table>
           </div>
-
           {/* Summary Section */}
-          <div className="col-span-2 border p-6 rounded-lg shadow-md bg-gray-100">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">
+          <div className="col-span-2 border p-6 rounded-lg shadow-md bg-gray-100 mx-auto lg:mx-0 lg:col-span-2 w-full lg:w-auto animate__animated animate__fadeInDown">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800 text-center animate__animated animate__fadeInDown">
               Order Summary
             </h2>
-            <div className="space-y-3 text-gray-700">
-              <div className="flex justify-between">
+            <div className="space-y-3 text-gray-700 animate__animated animate__fadeInDown">
+              <div className="flex justify-between animate__animated animate__fadeInDown">
                 <span>Total Unique Products:</span>
                 <span>{uniqueProducts}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between animate__animated animate__fadeInDown">
                 <span>Total Quantity:</span>
                 <span>{totalQuantity}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between animate__animated animate__fadeInDown">
                 <span>Total Price:</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between animate__animated animate__fadeInDown">
                 <span>Shipping:</span>
                 <span>Free</span>
               </div>
-              <div className="border-t border-gray-300 my-3"></div>
-              <div className="flex justify-between font-bold text-lg">
+              <div className="border-t border-gray-300 my-3 animate__animated animate__fadeInDown"></div>
+              <div className="flex justify-between font-bold text-lg animate__animated animate__fadeInDown">
                 <span>Grand Total:</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
             </div>
             <button
-              className="mt-4 w-full bg-violet-400 text-white py-2 rounded-md hover:bg-violet-500"
+              className="mt-4 w-full bg-violet-400 text-white py-2 rounded-md hover:bg-violet-500 animate__animated animate__fadeInDown"
               onClick={handleCheckout}
             >
               Checkout
             </button>
           </div>
+
         </div>
         <div>
           <Line />
