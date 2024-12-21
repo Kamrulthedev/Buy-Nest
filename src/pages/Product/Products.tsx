@@ -6,6 +6,7 @@ import VendorFilter from "@/components/ui/Filter/VendorFilter";
 import SortProducts from "@/components/ui/Filter/SortProducts";
 import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
 import { useAppSelector } from "@/Redux/hooks";
+import { useUserCarsQuery } from "@/Redux/features/cart/cartApi";
 
 const Products = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -35,16 +36,20 @@ const Products = () => {
   };
 
 
-  const handleAddToCart = (productId : string) => {
-    if (!user) {
-      navigate("/login");
-    } else {
-      console.log("Add to Cart:", productId, "UserId:", user?.id);
-    }
-  };
-  
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  const handleAddToFollow = (productId : string) => {
+  const { data: UserCarts } = useUserCarsQuery(user?.id as string)
+  const Carts = UserCarts?.data;
+
+
+  const handleAddToCart = (productId: string, cartId: string) => {
+    console.log("Product ID:", productId);
+    console.log("Selected Cart ID:", cartId);
+  };
+
+
+
+  const handleAddToFollow = (productId: string) => {
     if (!user) {
       navigate("/login");
     } else {
@@ -100,15 +105,38 @@ const Products = () => {
                   <div className="absolute left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity px-4">
                     <Link
                       to={`/products/${product?.id}`}
-                      className="w-28 text-center h-8 items-center text-xs lg:text-base bg-blue-500 text-white rounded-md hover:bg-gray-600"
+                      className="w-28 h-8 flex justify-center items-center text-xs lg:text-base bg-blue-500 text-white rounded-md hover:bg-gray-600"
                     >
                       View Details
                     </Link>
-                    <button className="w-28 text-center h-8  text-xs lg:text-base bg-violet-400 text-white rounded-md hover:bg-gray-600"
-                    onClick={() => handleAddToCart(product?.id)}
-                    >
-                      Add to Cart
-                    </button>
+
+                    <div className="relative">
+                      <button
+                        className="w-28 text-center h-8 text-xs lg:text-base bg-violet-400 text-white rounded-md hover:bg-gray-600"
+                        onClick={() => setShowDropdown((prev) => !prev)}
+                      >
+                        Add to Cart
+                      </button>
+
+                      {showDropdown && (
+                        <div className="absolute mt-2 w-32 bg-white border rounded-md shadow-lg">
+                          <ul className="py-2">
+                            {Carts.map((cart: any) => (
+                              <li
+                                key={cart.id}
+                                className="px-4 py-2 text-gray-700 hover:bg-gray-200 text-[8px] cursor-pointer"
+                                onClick={() => {
+                                  setShowDropdown(false);
+                                  handleAddToCart(product.id, cart.id);
+                                }}
+                              >
+                                {cart?.shop?.name}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div className="mt-2 flex items-center gap-2 justify-between">
