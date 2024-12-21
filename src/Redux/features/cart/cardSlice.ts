@@ -18,8 +18,8 @@ const initialState: TCartSummary = {
     totalPrice: 0,
 };
 
-const cartSlice = createSlice({
-    name: "cart",
+const cardItemSlice = createSlice({
+    name: "CartItem",
     initialState,
     reducers: {
         setCart: (state, action: PayloadAction<TCartSummary>) => {
@@ -35,5 +35,5 @@ const cartSlice = createSlice({
     },
 });
 
-export const { setCart, resetCart } = cartSlice.actions;
-export default cartSlice.reducer;
+export const { setCart, resetCart } = cardItemSlice.actions;
+export default cardItemSlice.reducer;

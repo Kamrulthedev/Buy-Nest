@@ -5,7 +5,7 @@ import { useGetCartItemsQuery } from "@/Redux/features/cart/cartItem";
 import { useAppDispatch } from "@/Redux/hooks";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Cards = () => {
@@ -13,7 +13,7 @@ const Cards = () => {
   const { data } = useGetCartItemsQuery(id as string);
   const CartItems = data?.data || [];
   const dispacth = useAppDispatch();
-
+  const navigate = useNavigate();
 
   // Calculate summary data
   const totalQuantity = CartItems.reduce((sum: any, item: any) => sum + item.quantity, 0);
@@ -32,8 +32,6 @@ const Cards = () => {
     });
   };
 
-
-  
   // Handle checkout action
   const handleCheckout = () => {
     const checkoutData = {
@@ -48,6 +46,8 @@ const Cards = () => {
       position: "top-right",
       autoClose: 3000,
     });
+
+    navigate("/checkout"); 
   };
 
 

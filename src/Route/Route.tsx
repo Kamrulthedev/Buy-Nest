@@ -40,6 +40,7 @@ import CreateProductWithVendor from "@/pages/Vendor/ProductManagementWithVendor/
 import ProductDetailsWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductDetailsWithVendor";
 import ProductUpdateWithVendor from "@/pages/Vendor/ProductManagementWithVendor/ProductUpdateWithVendor";
 import OrderHistoryWithVendor from "@/pages/Vendor/OrderHistoryWithVendor/OrderHistoryWithVendor";
+import Checkout from "@/pages/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -66,7 +67,10 @@ export const router = createBrowserRouter([
         path: "/contact",
         element: <ContactUs />,
       },
-
+      {
+        path: '/checkout',
+        element: <Checkout></Checkout>
+      },
       {
         path: "/cards/:id",
         element: <Cards></Cards>
