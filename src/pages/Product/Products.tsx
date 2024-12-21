@@ -7,12 +7,16 @@ import SortProducts from "@/components/ui/Filter/SortProducts";
 import { useGetAllProductsQuery } from "@/Redux/features/products/productsApi";
 import { useAppSelector } from "@/Redux/hooks";
 import { useUserCarsQuery } from "@/Redux/features/cart/cartApi";
+import { useCreateCartItemMutation } from "@/Redux/features/cart/cartItem";
+import { toast } from "react-toastify";
 
 const Products = () => {
   const user = useAppSelector((state) => state.auth.user);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const [CreateCartItem] = useCreateCartItemMutation()
 
   const productsPerPage = 8;
 
@@ -42,10 +46,30 @@ const Products = () => {
   const Carts = UserCarts?.data;
 
 
-  const handleAddToCart = (productId: string, cartId: string) => {
-    console.log("Product ID:", productId);
-    console.log("Selected Cart ID:", cartId);
-  };
+
+  const handleAddToCart = async (productId: string, cartId: string) => {
+    try {
+        const res = await CreateCartItem({ productId, cartId }).unwrap();
+        console.log(res);
+        if (res.error) {
+          throw new Error(res.message || "An unexpected error occurred.");
+      }
+
+        // Show success toast
+        toast.success( res.message || "Item added to cart successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+        });
+    } catch (res: any) {
+        console.error("Error adding item to cart:", res?.error);
+
+        // Show error toast
+        toast.error( res.message ||"Failed to add item to cart. Please try again.", {
+            position: "top-right",
+            autoClose: 3000,
+        });
+    }
+};
 
 
 
