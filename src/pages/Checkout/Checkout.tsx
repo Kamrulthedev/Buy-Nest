@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
@@ -22,10 +24,25 @@ const Checkout = () => {
     const CartItems = useAppSelector((state) => state.cardsItem.CartItems);
     const ItemsQuantity = useAppSelector((state) => state.cardsItem.totalQuantity);
     const ItemsTotalPrice = useAppSelector((state) => state.cardsItem.totalPrice);
-    console.log(CartItems, ItemsQuantity, ItemsTotalPrice)
 
+    // Calculate the final price with the shipping fee
+    const shippingFee = 20;
+    const finalPrice = ItemsTotalPrice + shippingFee;
 
-    const onSubmit: SubmitHandler<Inputs> = () => {
+    const onSubmit: SubmitHandler<Inputs> = (data: any) => {
+        CartItems.forEach((item: any) => {
+        });
+        console.log("Order Data:", data);
+
+        const OrderData = {
+            TotalPrice: finalPrice,
+            userId: CartItems.length > 0 ? CartItems[0]?.cart?.userId : null,
+            shopId: CartItems.length > 0 ? CartItems[0]?.cart?.shopId : null,
+            carId: CartItems.length > 0 ? CartItems[0]?.cartId : null,
+        };
+
+        console.log(OrderData);
+
         Swal.fire({
             position: "center",
             icon: "success",
@@ -33,9 +50,11 @@ const Checkout = () => {
             showConfirmButton: false,
             timer: 1500,
         });
+
         dispatch(resetCart());
         navigate("/success");
     };
+
 
     return (
         <div className="w-5/6 mx-auto my-20 animate__animated animate__fadeInDown">
@@ -97,7 +116,7 @@ const Checkout = () => {
                         <div className="col-span-2 space-y-5 border p-5">
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">
-                                    <h1 className="font-bold">Shipping Fee: $20</h1>
+                                    <h1 className="font-bold">Shipping Fee: ${shippingFee}</h1>
                                     <div className="flex items-center space-x-2">
                                         <Checkbox id="terms-shipping" required />
                                         <label htmlFor="terms-shipping" className="text-sm font-medium leading-none">Cash on Delivery</label>
@@ -106,7 +125,7 @@ const Checkout = () => {
 
                                 <div className="flex justify-between border-t border-b">
                                     <h1>Total Price With Shipping:</h1>
-                                    <h1 className="font-bold">444444444</h1>
+                                    <h1 className="font-bold">${finalPrice}</h1>
                                 </div>
 
                                 <div className="flex items-center space-x-2">
@@ -114,12 +133,30 @@ const Checkout = () => {
                                     <label htmlFor="terms" className="text-sm font-medium leading-none">Accept terms and conditions</label>
                                 </div>
                             </div>
+
                             <Button type="submit" className="bg-primary-gradient w-full">
                                 Place Your Order
                             </Button>
                         </div>
                     </div>
                 </form>
+
+                {/* Cart Items Display */}
+                {CartItems.length > 0 && (
+                    <div className="cart-summary mt-10">
+                        <h3 className="text-xl font-semibold mb-4">Cart Summary</h3>
+                        <ul>
+                            {CartItems.map((item) => (
+                                <li key={item?.id} className="flex justify-between">
+                                    <span>{item?.product.name}</span>
+                                    <span>${item?.product.price} x {item.quantity}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="mt-2">Total Quantity: {ItemsQuantity}</p>
+                        <p className="font-bold">Total Price: ${ItemsTotalPrice}</p>
+                    </div>
+                )}
             </div>
         </div>
     );

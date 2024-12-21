@@ -15,7 +15,6 @@ const CartItemApi = baseApi.injectEndpoints({
         // Query to get cart items
         GetCartItems: builder.query({
             query: (id: string) => {
-                console.log("API ID",id)
                 return {
                     url: `/cart/user-cart-items/${id}`,
                     method: 'GET',
