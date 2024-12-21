@@ -44,7 +44,6 @@ const Products = () => {
   };
   
 
-
   const handleAddToFollow = (productId : string) => {
     if (!user) {
       navigate("/login");

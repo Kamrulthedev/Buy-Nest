@@ -4,9 +4,9 @@ import { FiMoreVertical, FiShoppingCart } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { useGetAllShopsNameandIdQuery } from "@/Redux/features/shops/shopsApi";
 import { useState } from "react";
-import { useCreateCartMutation } from "@/Redux/features/cart/cartApi";
+import { useCreateCartMutation, useDeleteCartMutation, useUserCarsQuery } from "@/Redux/features/cart/cartApi";
 import { toast } from "react-toastify";
-import { addCard } from "@/Redux/features/cart/cartSlice";
+import { addCard, removeFromCart } from "@/Redux/features/cart/cartSlice";
 
 const NavberCart = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -16,8 +16,10 @@ const NavberCart = () => {
   const [showSelector, setShowSelector] = useState(false);
   const [selectedShop, setSelectedShop] = useState<string>("");
   const dispatch = useAppDispatch();
-  const [showDropdown, setShowDropdown] = useState<string | null>(null); 
+  const [showDropdown, setShowDropdown] = useState<string | null>(null);
 
+  const {data: UserCarts} = useUserCarsQuery(user?.id as string)
+  const Carts = UserCarts?.data;
 
   const [CreateCart] = useCreateCartMutation()
 
@@ -38,19 +40,18 @@ const NavberCart = () => {
     }
 
     if (!user?.id) {
+      navigate("/login");
       console.log("User ID is missing.");
       return;
     }
 
     const CreateCartData = {
-      userId: user.id,
+      userId: user?.id,
       shopId: selectedShop,
     };
 
     try {
-      console.log(CreateCartData);
       const res = await CreateCart(CreateCartData).unwrap();
-      console.log(res);
       if (res?.error) {
         throw new Error(res?.message || "Cart creation failed!");
       }
@@ -78,15 +79,27 @@ const NavberCart = () => {
     }
   };
 
-  const cards = useAppSelector((state) => state.carts.cards);
 
+  const [deleteCart] = useDeleteCartMutation();
 
   const handleDropdownToggle = (id: string) => {
     setShowDropdown(showDropdown === id ? null : id);
   };
 
-  const handleDelete = (CartId: string) => {
-    console.log(`Delete shop with ID: ${CartId}`);
+  const handleDelete = async (cartId: string) => {
+    try {
+      await deleteCart(cartId).unwrap();
+      dispatch(removeFromCart(cartId));
+      toast.success("Cart deleted successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error("Failed to delete cart. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   };
 
   const handleUpdate = (CartId: string) => {
@@ -105,47 +118,47 @@ const NavberCart = () => {
 
       <div className="absolute top-full right-0 hidden group-hover:block bg-white shadow-lg rounded-lg w-64 mt-1 z-10 animate__animated animate__fadeInDown">
         <ul className="p-4">
-          {cards?.map((shop: { id: string; name: string }) => (
-             <li key={shop.id} className="relative">
-             <Link
-               className="block px-4 py-2 mb-4 hover:bg-slate-100 rounded-lg text-gray-700"
-               to={`/cards/${shop.id}`}
-             >
-               {shop.name}
-             </Link>
-             
-             {/* 3-dot icon for dropdown */}
-             <button
-               className="absolute right-2 top-1/2 transform -translate-y-1/2"
-               onClick={() => handleDropdownToggle(shop.id)}
-             >
-               <FiMoreVertical size={20} />
-             </button>
-   
-             {/* Dropdown menu */}
-             {showDropdown === shop.id && (
-               <div className="absolute right-0 mt-1 bg-white shadow-lg rounded-lg w-40 z-10">
-                 <ul className="p-2">
-                   <li>
-                     <button
-                       className="block px-4 py-2 hover:bg-gray-100 text-gray-700 rounded-lg"
-                       onClick={() => handleUpdate(shop.id)}
-                     >
-                       Update
-                     </button>
-                   </li>
-                   <li>
-                     <button
-                       className="block px-4 py-2 hover:bg-gray-100 text-red-500 rounded-lg"
-                       onClick={() => handleDelete(shop.id)}
-                     >
-                       Delete
-                     </button>
-                   </li>
-                 </ul>
-               </div>
-             )}
-           </li>
+          {Carts?.map((shop: { id: string; name: string, shop:any }) => (
+            <li key={shop.id} className="relative">
+              <Link
+                className="block px-4 py-2 mb-4 hover:bg-slate-100 rounded-lg text-gray-700"
+                to={`/cards/${shop.id}`}
+              >
+                {shop?.shop?.name}
+              </Link>
+
+              {/* 3-dot icon for dropdown */}
+              <button
+                className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                onClick={() => handleDropdownToggle(shop.id)}
+              >
+                <FiMoreVertical size={20} />
+              </button>
+
+              {/* Dropdown menu */}
+              {showDropdown === shop.id && (
+                <div className="absolute right-0 mt-1 bg-white shadow-lg rounded-lg w-40 z-10">
+                  <ul className="p-2">
+                    <li>
+                      <button
+                        className="block px-4 py-2 hover:bg-gray-100 text-gray-700 rounded-lg"
+                        onClick={() => handleUpdate(shop.id)}
+                      >
+                        Update
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="block px-4 py-2 hover:bg-gray-100 text-red-500 rounded-lg"
+                        onClick={() => handleDelete(shop.id)}
+                      >
+                        Delete
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </li>
           ))}
 
           {showSelector ? (

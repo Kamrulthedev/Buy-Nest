@@ -57,13 +57,11 @@ const cartSlice = createSlice({
         }
       }
     },
-    removeFromCart: (state, action: PayloadAction<{ cardId: string; itemId: string }>) => {
-      const { cardId, itemId } = action.payload;
-      const card = state.cards.find((card) => card.id === cardId);
-      if (card) {
-        card.items = card.items.filter((item) => item.id !== itemId);
-      }
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      const cardId = action.payload;
+      state.cards = state.cards.filter((card) => card.id !== cardId);
     },
+    
     resetCart: (state) => {
       state.cards = []; 
     },
