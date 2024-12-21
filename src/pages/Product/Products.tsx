@@ -50,7 +50,6 @@ const Products = () => {
   const handleAddToCart = async (productId: string, cartId: string) => {
     try {
         const res = await CreateCartItem({ productId, cartId }).unwrap();
-        console.log(res);
         if (res.error) {
           throw new Error(res.message || "An unexpected error occurred.");
       }

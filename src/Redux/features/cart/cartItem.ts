@@ -1,5 +1,6 @@
 import { baseApi } from "@/Redux/Api/baseApi";
 
+
 const CartItemApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         CreateCartItem: builder.mutation({
@@ -8,15 +9,18 @@ const CartItemApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: CartItemData,
             }),
-            invalidatesTags: ['CartItems'], 
+            invalidatesTags: ['CartItems'],
         }),
 
         // Query to get cart items
         GetCartItems: builder.query({
-            query: (cartId: string) => ({
-                url: `/cart/get-cart-items/${cartId}`,
-                method: 'GET',
-            }),
+            query: (id: string) => {
+                console.log("API ID",id)
+                return {
+                    url: `/cart/user-cart-items/${id}`,
+                    method: 'GET',
+                }
+            },
             providesTags: ['CartItems'],
         }),
 
