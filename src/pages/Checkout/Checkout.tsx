@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { resetCart } from "@/Redux/features/cart/cartSlice";
+import { useCreateOrderMutation } from "@/Redux/features/order/OrderApi";
 
 type Inputs = {
     name: string;
@@ -16,10 +17,13 @@ type Inputs = {
     address: string;
 };
 
+
+
 const Checkout = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const dispatch = useAppDispatch();
+    const [CreateOrder] = useCreateOrderMutation()
 
     const CartItems = useAppSelector((state) => state.cardsItem.CartItems);
     const ItemsQuantity = useAppSelector((state) => state.cardsItem.totalQuantity);
@@ -29,31 +33,57 @@ const Checkout = () => {
     const shippingFee = 20;
     const finalPrice = ItemsTotalPrice + shippingFee;
 
-    const onSubmit: SubmitHandler<Inputs> = (data: any) => {
-        CartItems.forEach((item: any) => {
-        });
-        console.log("Order Data:", data);
 
-        const OrderData = {
-            TotalPrice: finalPrice,
-            userId: CartItems.length > 0 ? CartItems[0]?.cart?.userId : null,
-            shopId: CartItems.length > 0 ? CartItems[0]?.cart?.shopId : null,
-            carId: CartItems.length > 0 ? CartItems[0]?.cartId : null,
-        };
 
-        console.log(OrderData);
+    const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
+        try {
+            // Log each cart item
+            CartItems.forEach((item: any) => {
+                console.log(item);
+            });
 
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your order has been placed successfully!",
-            showConfirmButton: false,
-            timer: 1500,
-        });
+            console.log("Form Data:", data);
 
-        dispatch(resetCart());
-        navigate("/success");
+            // Prepare order data
+            const OrderData: any = {
+                TotalPrice: finalPrice.toString(),
+                userId: CartItems.length > 0 ? CartItems[0]?.cart?.userId : null,
+                shopId: CartItems.length > 0 ? CartItems[0]?.cart?.shopId : null,
+                cardId: CartItems.length > 0 ? CartItems[0]?.cartId : null,
+            };
+
+            // Validate required fields
+            if (!OrderData.userId || !OrderData.shopId || !OrderData.cardId) {
+                throw new Error("Invalid Order Data: Missing userId, shopId, or cardId.");
+            }
+            const response = await CreateOrder(OrderData);
+            console.log("Order Response:", response);
+
+            if(response.error) {
+                throw new Error("Order Faild !")
+            }
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Your order has been placed successfully!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            dispatch(resetCart());
+
+            navigate("/success");
+        } catch (error: any) {
+            console.error("Error creating order:", error.message);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Failed to place the order. Please try again!",
+                showConfirmButton: true,
+            });
+        }
     };
+
 
 
     return (

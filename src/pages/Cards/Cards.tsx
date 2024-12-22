@@ -132,8 +132,11 @@ const Cards = () => {
               </div>
             </div>
             <button
-              className="mt-4 w-full bg-violet-400 text-white py-2 rounded-md hover:bg-violet-500 animate__animated animate__fadeInDown"
+              className={`mt-4 w-full py-2 rounded-md text-white animate__animated animate__fadeInDown ${
+                CartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-violet-400 hover:bg-violet-500"
+              }`}
               onClick={handleCheckout}
+              disabled={CartItems.length === 0}
             >
               Checkout
             </button>
