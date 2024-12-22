@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Heading from "@/Heading/Heading";
 import { setCart } from "@/Redux/features/cart/cardSlice";
-import { useGetCartItemsQuery } from "@/Redux/features/cart/cartItem";
+import { useDeleteCartItemMutation, useGetCartItemsQuery } from "@/Redux/features/cart/cartItem";
 import { useAppDispatch } from "@/Redux/hooks";
 import Line from "@/components/CetegoryProducts/Line";
-import HeadLink from "@/components/ui/HeadLink";
-import { useNavigate, useParams } from "react-router-dom";
+import { GrNext } from "react-icons/gr";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Cards = () => {
@@ -23,14 +23,66 @@ const Cards = () => {
   );
   const uniqueProducts = CartItems.length;
 
+  const [DeleteItem] = useDeleteCartItemMutation()
+
+
+
+
   // Handle delete action
-  const handleDelete = (cartItemId: string) => {
-    console.log("Deleted Item ID:", cartItemId);
-    toast.success(`Deleted cart item with ID: ${cartItemId}`, {
-      position: "top-right",
-      autoClose: 3000,
-    });
+  const handleDelete = async (cartItemId: string) => {
+    // Show a confirmation toast
+  toast(
+      ({ closeToast }) => (
+        <div>
+          <p>Are you sure you want to delete this item?</p>
+          <div className="flex justify-end space-x-3 mt-2">
+            <button
+              onClick={() => {
+                deleteItemConfirmed(cartItemId);
+                closeToast();
+              }}
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+            >
+              Yes
+            </button>
+            <button
+              onClick={closeToast}
+              className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        autoClose: false, 
+        closeOnClick: false,
+        draggable: false,
+      }
+    );
   };
+
+
+  
+  // Confirm deletion
+  const deleteItemConfirmed = async (cartItemId: string) => {
+    try {
+      const res : any = await DeleteItem(cartItemId);
+
+  
+      toast.success( res?.message || "Cart item deleted successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to delete cart item. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
+  };
+  
 
   // Handle checkout action
   const handleCheckout = () => {
@@ -41,20 +93,25 @@ const Cards = () => {
     };
 
     dispacth(setCart(checkoutData));
-    // Show success toast notification
     toast.success("Checkout successful!", {
       position: "top-right",
       autoClose: 3000,
     });
 
-    navigate("/checkout"); 
+    navigate("/checkout");
   };
 
 
   return (
     <div className="px-4 md:px-6 lg:px-12 py-6">
-      <div>
-        <HeadLink tag="Home" tag1="Shopping Cart"></HeadLink>
+      <div className="bg-gray-50 flex p-2 px-10 text-start gap-3">
+        <p className="items-center gap-3 flex">
+          <Link to="/" className="text-violet-500 hover:underline">
+            Home
+          </Link>
+          <GrNext className="text-[12px]" />
+        </p>
+        <p className="text-violet-500 hover:underline">Cards</p>
       </div>
       <div className="w-full mx-auto my-5">
         <div>
@@ -132,9 +189,8 @@ const Cards = () => {
               </div>
             </div>
             <button
-              className={`mt-4 w-full py-2 rounded-md text-white animate__animated animate__fadeInDown ${
-                CartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-violet-400 hover:bg-violet-500"
-              }`}
+              className={`mt-4 w-full py-2 rounded-md text-white animate__animated animate__fadeInDown ${CartItems.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-violet-400 hover:bg-violet-500"
+                }`}
               onClick={handleCheckout}
               disabled={CartItems.length === 0}
             >
