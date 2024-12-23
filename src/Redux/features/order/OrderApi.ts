@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/Redux/Api/baseApi";
 
 type TOrderData = {
@@ -28,9 +29,9 @@ const OrdersApi = baseApi.injectEndpoints({
         }),
 
         // Query to get all orders for a user or shop
-        GetOrders: builder.query<TOrderResponse[], string>({
+        GetOrders: builder.query<any, string>({
             query: (id) => ({
-                url: `/order/${id}`,
+                url: `/order/user-cart/${id}`,
                 method: 'GET',
             }),
             providesTags: ['Orders'],

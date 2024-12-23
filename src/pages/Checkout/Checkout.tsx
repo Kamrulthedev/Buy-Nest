@@ -74,7 +74,6 @@ const Checkout = () => {
                     quantity: item?.quantity,
                     price: item?.product?.price,
                 };
-                console.log("Order Item Data:", OrderItemData);
     
                 // Wait for the item to be created
                 await CreateOrderItem(OrderItemData);

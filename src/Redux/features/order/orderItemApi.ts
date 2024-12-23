@@ -19,9 +19,9 @@ const OrderItemApi = baseApi.injectEndpoints({
             invalidatesTags: ['OrderItem'],
         }),
 
-        GetAllOrderItems: builder.query<any[], void>({
-            query: () => ({
-                url: `/order/get-all-order-items`,
+        GetAllOrderItems: builder.query<any, string>({
+            query: (id: string) => ({
+                url: `/order-item/user-cart-items/${id}`,
                 method: 'GET',
             }),
             providesTags: ['OrderItem'], 
