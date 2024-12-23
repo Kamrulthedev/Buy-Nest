@@ -136,7 +136,7 @@ const Cards = () => {
                   <tr key={item.id} className="hover:bg-gray-50 animate__animated animate__fadeInDown">
                     <td className="p-2 ">
                       <img
-                        src={item.product.imageUrl}
+                        src={item.product.imageUrl || "https://via.placeholder.com/50"}
                         alt={item.product.name}
                         className="w-12 h-12 object-cover rounded-md"
                       />
