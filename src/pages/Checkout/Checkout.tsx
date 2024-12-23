@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { resetCart } from "@/Redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/Redux/features/order/OrderApi";
+import { useCreateOrderItemMutation } from "@/Redux/features/order/orderItemApi";
 
 type Inputs = {
     name: string;
@@ -24,6 +25,8 @@ const Checkout = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const dispatch = useAppDispatch();
     const [CreateOrder] = useCreateOrderMutation()
+    const [CreateOrderItem] = useCreateOrderItemMutation()
+
 
     const CartItems = useAppSelector((state) => state.cardsItem.CartItems);
     const ItemsQuantity = useAppSelector((state) => state.cardsItem.totalQuantity);
@@ -34,16 +37,14 @@ const Checkout = () => {
     const finalPrice = ItemsTotalPrice + shippingFee;
 
 
-
     const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
         try {
             // Log each cart item
             CartItems.forEach((item: any) => {
                 console.log(item);
             });
-
-            console.log("Form Data:", data);
-
+            console.log(data)
+    
             // Prepare order data
             const OrderData: any = {
                 TotalPrice: finalPrice.toString(),
@@ -51,18 +52,35 @@ const Checkout = () => {
                 shopId: CartItems.length > 0 ? CartItems[0]?.cart?.shopId : null,
                 cardId: CartItems.length > 0 ? CartItems[0]?.cartId : null,
             };
-
+    
             // Validate required fields
             if (!OrderData.userId || !OrderData.shopId || !OrderData.cardId) {
                 throw new Error("Invalid Order Data: Missing userId, shopId, or cardId.");
             }
-            const response = await CreateOrder(OrderData);
-            console.log("Order Response:", response);
-
-            if(response.error) {
-                throw new Error("Order Faild !")
+    
+            // Create the order
+            const response: any = await CreateOrder(OrderData);
+            if (response.error) {
+                throw new Error("Order Failed!");
             }
-
+    
+            const orderId = response?.data?.data?.id;
+    
+            // Use for...of for asynchronous operations
+            for (const item of CartItems) {
+                const OrderItemData: any = {
+                    orderId: orderId,
+                    productId: item?.product?.id,
+                    quantity: item?.quantity,
+                    price: item?.product?.price,
+                };
+                console.log("Order Item Data:", OrderItemData);
+    
+                // Wait for the item to be created
+                await CreateOrderItem(OrderItemData);
+            }
+    
+            // Success notification
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -70,10 +88,11 @@ const Checkout = () => {
                 showConfirmButton: false,
                 timer: 1500,
             });
+    
             dispatch(resetCart());
-
             navigate("/success");
         } catch (error: any) {
+            // Error notification
             console.error("Error creating order:", error.message);
             Swal.fire({
                 position: "center",
@@ -83,6 +102,7 @@ const Checkout = () => {
             });
         }
     };
+    
 
 
 
