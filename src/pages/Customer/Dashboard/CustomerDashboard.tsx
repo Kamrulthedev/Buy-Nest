@@ -21,7 +21,6 @@ const CustomerDashboard = () => {
 
     const { data } = useGetAllOrderItemsQuery(id as string);
     const OrdersData = data?.data as OrderItem[];
-    console.log(OrdersData)
 
     const chartData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],

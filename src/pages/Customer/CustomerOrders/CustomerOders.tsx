@@ -1,49 +1,47 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useGetAllOrderItemsQuery } from "@/Redux/features/order/orderItemApi";
+import { useAppSelector } from "@/Redux/hooks";
 import { useState, useEffect } from "react";
 
+interface OrderItem {
+    id: string;
+    product: {
+        name: string;
+        price: number;
+        id: string;
+        category: string;
+        imageUrl: string;
+        shop: {
+            name: string;
+        };
+    };
+    order: {
+        status: string;
+        totalPrice: number;
+    };
+}
+
 const CustomerOrders = () => {
-    const [orders, setOrders] = useState<any[]>([]);
+    const user = useAppSelector((state) => state.auth.user);
+    const [orders, setOrders] = useState<OrderItem[]>([]);
+
+    const id = user?.id;
+    const { data } = useGetAllOrderItemsQuery(id as string);
+
+    const OrdersData = data?.data as OrderItem[];
 
     useEffect(() => {
-        // Simulate fetching order data from an API
-        setOrders([
-            {
-                id: 1,
-                imageUrl: "https://via.placeholder.com/50",
-                name: "Awesome Product 1",
-                price: 30.0,
-                category: "Electronics",
-                shopName: "Shop 1",
-                orderStatus: "Delivered",
-                totalPrice: 30.0,
-            },
-            {
-                id: 2,
-                imageUrl: "https://via.placeholder.com/50",
-                name: "Cool Product 2",
-                price: 50.0,
-                category: "Home Goods",
-                shopName: "Shop 2",
-                orderStatus: "Pending",
-                totalPrice: 50.0,
-            },
-            {
-                id: 3,
-                imageUrl: "https://via.placeholder.com/50",
-                name: "Stylish Product 3",
-                price: 20.0,
-                category: "Fashion",
-                shopName: "Shop 3",
-                orderStatus: "Shipped",
-                totalPrice: 20.0,
-            },
-        ]);
-    }, []);
+        if (OrdersData) {
+            setOrders(OrdersData);
+        }
+    }, [OrdersData]);
 
     return (
         <div className="p-6 bg-white text-gray-800 animate__animated animate__fadeInDown">
-            <h1 className="text-3xl font-semibold text-violet-600 mb-6 animate__animated animate__fadeInDown">Your Order History</h1>
-            
+            <h1 className="text-3xl font-semibold text-violet-600 mb-6 animate__animated animate__fadeInDown">
+                Your Order History
+            </h1>
+
             {/* Orders Table */}
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
@@ -59,19 +57,31 @@ const CustomerOrders = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order) => (
-                            <tr key={order.id} className="hover:bg-gray-50 animate__animated animate__fadeInDown">
-                                <td className="p-3 border">
-                                    <img src={order.imageUrl} alt={order.name} className="w-12 h-12 object-cover rounded" />
+                        {orders.length > 0 ? (
+                            orders?.map((order) => (
+                                <tr key={order?.id} className="hover:bg-gray-50 animate__animated animate__fadeInDown">
+                                    <td className="p-3 border">
+                                        <img
+                                            src={order?.product?.imageUrl || "https://via.placeholder.com/50"}
+                                            alt={order.product.name}
+                                            className="w-12 h-12 object-cover rounded"
+                                        />
+                                    </td>
+                                    <td className="p-3 border">{order?.product?.name}</td>
+                                    <td className="p-3 border">${order?.product?.price.toFixed(2)}</td>
+                                    <td className="p-3 border">{order?.product?.category}</td>
+                                    <td className="p-3 border">{order?.product?.shop?.name}</td>
+                                    <td className="p-3 border">{order?.order?.status}</td>
+                                    <td className="p-3 border">${order?.order?.totalPrice.toFixed(2)}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={7} className="p-3 border text-center text-gray-500">
+                                    No orders found
                                 </td>
-                                <td className="p-3 border">{order.name}</td>
-                                <td className="p-3 border">${order.price.toFixed(2)}</td>
-                                <td className="p-3 border">{order.category}</td>
-                                <td className="p-3 border">{order.shopName}</td>
-                                <td className="p-3 border">{order.orderStatus}</td>
-                                <td className="p-3 border">${order.totalPrice.toFixed(2)}</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -80,4 +90,3 @@ const CustomerOrders = () => {
 };
 
 export default CustomerOrders;
-
