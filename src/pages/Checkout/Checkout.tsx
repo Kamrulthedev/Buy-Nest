@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import { resetCart } from "@/Redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/Redux/features/order/OrderApi";
 import { useCreateOrderItemMutation } from "@/Redux/features/order/orderItemApi";
+import { useInitalePaymentMutation } from "@/Redux/features/payment/paymentAPi";
 
 type Inputs = {
     name: string;
@@ -26,6 +27,7 @@ const Checkout = () => {
     const dispatch = useAppDispatch();
     const [CreateOrder] = useCreateOrderMutation()
     const [CreateOrderItem] = useCreateOrderItemMutation()
+    const [initalePayment] = useInitalePaymentMutation();
 
 
     const CartItems = useAppSelector((state) => state.cardsItem.CartItems);
@@ -43,8 +45,6 @@ const Checkout = () => {
             CartItems.forEach((item: any) => {
                 console.log(item);
             });
-            console.log(data)
-    
             // Prepare order data
             const OrderData: any = {
                 TotalPrice: finalPrice.toString(),
@@ -52,20 +52,42 @@ const Checkout = () => {
                 shopId: CartItems.length > 0 ? CartItems[0]?.cart?.shopId : null,
                 cardId: CartItems.length > 0 ? CartItems[0]?.cartId : null,
             };
-    
+
             // Validate required fields
             if (!OrderData.userId || !OrderData.shopId || !OrderData.cardId) {
                 throw new Error("Invalid Order Data: Missing userId, shopId, or cardId.");
             }
-    
+
             // Create the order
             const response: any = await CreateOrder(OrderData);
             if (response.error) {
                 throw new Error("Order Failed!");
             }
-    
             const orderId = response?.data?.data?.id;
-    
+            const date = new Date();
+            const PaymenData = {
+                BookingId : orderId,
+                userName: data?.name,
+                userEmail: data?.email,
+                selectedDate: date,
+                totalePrice: finalPrice,
+                phone: data?.number,
+                address: data?.address,
+            };
+            const Payment = await initalePayment(PaymenData);
+            // Check if the response contains the payment URL
+            if (Payment?.data?.payment_url) {
+                // Redirect to payment URL
+                window.location.href = Payment.data.payment_url;
+            } else {
+                Swal.fire({
+                    title: "Payment Error",
+                    text: "Failed to initiate payment. Please try again later.",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                });
+            }
+
             // Use for...of for asynchronous operations
             for (const item of CartItems) {
                 const OrderItemData: any = {
@@ -74,11 +96,11 @@ const Checkout = () => {
                     quantity: item?.quantity,
                     price: item?.product?.price,
                 };
-    
+
                 // Wait for the item to be created
                 await CreateOrderItem(OrderItemData);
             }
-    
+
             // Success notification
             Swal.fire({
                 position: "center",
@@ -87,7 +109,7 @@ const Checkout = () => {
                 showConfirmButton: false,
                 timer: 1500,
             });
-    
+
             dispatch(resetCart());
             navigate("/success");
         } catch (error: any) {
@@ -101,7 +123,7 @@ const Checkout = () => {
             });
         }
     };
-    
+
 
 
 
