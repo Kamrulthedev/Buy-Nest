@@ -25,12 +25,8 @@ const SkeletonCard = () => (
 
 const CategoryProducts = () => {
   const user = useAppSelector((state) => state.auth.user);
-
   const { data: AllProducts, isLoading } = useGetAllProductsQuery(undefined);
-
   const [CreateCartItem] = useCreateCartItemMutation()
-
-
 
   const [showDropdown, setShowDropdown] = useState(false);
 
