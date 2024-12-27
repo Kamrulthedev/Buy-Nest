@@ -10,7 +10,7 @@ const AboutUs = () => {
 
         <div className="flex flex-col md:flex-row items-center mb-8 animate__animated animate__fadeInDown">
           <img
-            src="https://i.ibb.co.com/3mFq2g6/image.png"
+            src="https://i.ibb.co.com/ySxTnqN/hq720.jpg"
             alt="Company Overview"
             className="w-full md:w-1/2 rounded-lg shadow-lg mb-6 md:mb-0 md:mr-6 transition-transform hover:scale-x-110"
           />
@@ -28,9 +28,9 @@ const AboutUs = () => {
 
         <div className="flex flex-col md:flex-row-reverse items-center mb-8 animate__animated animate__fadeInDown">
           <img
-            src="https://i.ibb.co.com/3S9VfZC/image.png"
+            src="https://i.ibb.co.com/bNRKtPB/maxresdefault.jpg"
             alt="Our Mission"
-            className="w-full md:w-1/2 rounded-lg shadow-lg mb-6 md:mb-0 md:ml-6 transition-transform hover:scale-x-110"
+            className="w-[500px] md:w-1/2 h-[400px] rounded-lg shadow-lg mb-6 md:mb-0 md:ml-6 transition-transform hover:scale-x-110"
           />
           <div>
             <h2 className="text-2xl font-semibold mb-4 lg:text-start text-center">Mission</h2>
@@ -44,7 +44,7 @@ const AboutUs = () => {
 
         <div className="flex flex-col md:flex-row items-center mb-8 animate__animated animate__fadeInDown">
           <img
-            src="https://i.ibb.co.com/0XzvThq/image.png"
+            src="https://i.ibb.co.com/Pm8TSRp/louis-vuitton-designer-store-exchange-square-manchester-england-2-JAWGNT.jpg"
             alt="Our Vision"
             className="w-full md:w-1/2 rounded-lg shadow-lg mb-6 md:mb-0 md:mr-6 transition-transform hover:scale-x-110"
           />
@@ -66,7 +66,7 @@ const AboutUs = () => {
           <div className="flex flex-wrap justify-center">
             <div className="max-w-xs mx-4 mb-8 animate__animated animate__fadeInDown">
               <img
-                src="https://i.ibb.co.com/b5cb3q2/image.png"
+                src="https://i.ibb.co.com/Bwz1gKQ/https-slimages-macysassets-com-is-image-MCY-products-0-optimized-26900170-fpx-tif-wid-1200-fmt-jpeg.webpg"
                 alt="Team Member"
                 className="w-full rounded-lg shadow-lg mb-2 h-96 object-cover transition-transform hover:scale-x-110"
               />
@@ -81,7 +81,8 @@ const AboutUs = () => {
             {/* member 2 */}
             <div className="max-w-xs mx-4 mb-8 animate__animated animate__fadeInDown">
               <img
-                src="https://i.ibb.co.com/FxYqCcf/image.png"
+                src="https://i.ibb.co.com/MBwMMr4/image.png"
+               
                 alt="Team Member"
                 className="w-full rounded-lg shadow-lg mb-2 h-96 object-cover transition-transform hover:scale-x-110"
               />
@@ -95,7 +96,7 @@ const AboutUs = () => {
             {/* member 3 */}
             <div className="max-w-xs mx-4 mb-8 animate__animated animate__fadeInDown">
               <img
-                src="https://i.ibb.co.com/Vg9x2B4/image.png"
+               src="https://i.ibb.co.com/nPjhzN7/images.jpg"
                 alt="Team Member"
                 className="w-full rounded-lg shadow-lg mb-2 h-96 object-cover transition-transform hover:scale-x-110"
               />
@@ -116,7 +117,7 @@ const AboutUs = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-6 mb-4 flex items-center animate__animated animate__fadeInDown">
               <img
-                src="https://i.ibb.co.com/Sxbghhw/image.png"
+                src="https://i.ibb.co.com/nPjhzN7/images.jpg"
                 alt="Customer"
                 className="w-20 h-20 rounded-full mr-4 object-cover"
               />
