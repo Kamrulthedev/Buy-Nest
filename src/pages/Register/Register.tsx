@@ -137,6 +137,7 @@ const Register = () => {
                                 )}
                             </div>
                             <div>
+                                <p className="p-1 text-gray-600 text-sm">Profile Photo <span className="text-xs text-gray-500">(optional)</span></p>
                                 <input
                                     type="file"
                                     {...register("photo")}
