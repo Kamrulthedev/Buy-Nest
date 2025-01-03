@@ -77,22 +77,7 @@ const Register = () => {
                 <div className="flex justify-center items-center h-screen md:h-full lg:w-[500px] w-full animate__animated animate__fadeInDown">
                     <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg font-serif">
                         <h2 className="text-2xl text-black text-center font-semibold">Register to Buy Nest</h2>
-                        <p className="text-center text-black">Access your account</p>
-
-                        <button className="w-full flex items-center justify-center p-3 border-2 gap-6 rounded-3xl">
-                            <FcGoogle className="w-6 h-6" />
-                            <p className="hover:text-violet-500 text-gray-500 text-base">Continue with Google</p>
-                        </button>
-                        <button className="w-full flex items-center justify-center p-3 border-2 gap-6 rounded-3xl">
-                            <FaGithub className="w-6 h-6" />
-                            <p className="hover:text-violet-500 text-gray-500">Continue with GitHub</p>
-                        </button>
-
-                        <div className="text-center text-black flex items-center justify-center space-x-4">
-                            <p className="border-b-2 flex-grow"></p>
-                            <p>OR</p>
-                            <p className="border-b-2 flex-grow"></p>
-                        </div>
+                        <p className="text-center text-black">Create account</p>
 
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                             <div>
