@@ -3,8 +3,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 import Line from "@/components/CetegoryProducts/Line";
 import HeadLink from "@/components/ui/HeadLink";
 import { useCreateCustomerMutation } from "@/Redux/features/customer/customer.api";
