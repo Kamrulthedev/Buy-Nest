@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { setUser } from "@/Redux/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { imageUpload } from "@/Utils/imageUploads";
 
 
 const Register = () => {
@@ -22,43 +23,60 @@ const Register = () => {
     const onSubmit = async (formData: any) => {
         const toastId = toast.loading("Creating account...");
         const { name, email, contactNumber, password, photo } = formData;
-        let profilePhoto = photo; 
+        let profilePhoto = "";
+
+
+        if (photo && photo instanceof File) {
+            console.log("Photo is a valid file:", photo);  
+            const imageUrl = await imageUpload(photo);
+            console.log("Image URL after upload:", imageUrl);
+            if (imageUrl) {
+                profilePhoto = imageUrl;
+            } else {
+                toast.error("Image upload failed!");
+                return;
+            }
+        } else {
+            console.log("Photo is not a valid file:", photo); 
+        }
+
 
         const formPayload = new FormData();
         formPayload.append("data", JSON.stringify({ name, email, contactNumber, password, profilePhoto }));
+        console.log(formPayload)
 
-        if (photo && photo[0]) {
-            formPayload.append("file", photo[0]);
-        }
+        // if (photo && photo[0]) {
+        //     formPayload.append("file", photo[0]);
+        // }
 
-        try {
-            const res = await createCustomer(formPayload).unwrap();
-            if (res?.error) {
-                throw new Error(res?.message || "Account creation failed!");
-            }
+        // try {
+        //     const res = await createCustomer(formPayload).unwrap();
+        //     if (res?.error) {
+        //         throw new Error(res?.message || "Account creation failed!");
+        //     }
 
-            // Dispatch user data to the store
-            dispatch(setUser({ user: res?.data?.result, token: res?.data?.accessToken }));
+        //     // Dispatch user data to the store
+        //     dispatch(setUser({ user: res?.data?.result, token: res?.data?.accessToken }));
 
-            // Success toast
-            toast.update(toastId, {
-                render: res?.message || "Account created successfully!",
-                type: "success",
-                isLoading: false,
-                autoClose: 3000,
-                position: "top-right",
-            });
+        //     // Success toast
+        //     toast.update(toastId, {
+        //         render: res?.message || "Account created successfully!",
+        //         type: "success",
+        //         isLoading: false,
+        //         autoClose: 3000,
+        //         position: "top-right",
+        //     });
 
-            navigate("/");
-        } catch (res: any) {
-            toast.update(toastId, {
-                render: res?.message || "Account creation failed! Please try again.",
-                type: "error",
-                isLoading: false,
-                autoClose: 3000,
-                position: "top-right",
-            });
-        }
+        //     navigate("/");
+        // } catch (res: any) {
+        //     toast.update(toastId, {
+        //         render: res?.message || "Account creation failed! Please try again.",
+        //         type: "error",
+        //         isLoading: false,
+        //         autoClose: 3000,
+        //         position: "top-right",
+        //     });
+        // }
     };
     return (
         <div className="bg-gray-50 p-6">
