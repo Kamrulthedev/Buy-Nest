@@ -23,13 +23,12 @@ const Register = () => {
     const onSubmit = async (formData: any) => {
         const toastId = toast.loading("Creating account...");
         const { name, email, contactNumber, password, photo } = formData;
-        let profilePhoto = "";
+        let profilePhoto = photo;
+        
 
-
-        if (photo && photo instanceof File) {
-            console.log("Photo is a valid file:", photo);  
-            const imageUrl = await imageUpload(photo);
-            console.log("Image URL after upload:", imageUrl);
+        if (photo && photo instanceof FileList && photo.length > 0) {
+            const imageFile = photo[0];  
+            const imageUrl = await imageUpload(imageFile);
             if (imageUrl) {
                 profilePhoto = imageUrl;
             } else {
@@ -37,46 +36,45 @@ const Register = () => {
                 return;
             }
         } else {
-            console.log("Photo is not a valid file:", photo); 
+            console.error("No valid photo file found");
         }
-
 
         const formPayload = new FormData();
         formPayload.append("data", JSON.stringify({ name, email, contactNumber, password, profilePhoto }));
         console.log(formPayload)
 
-        // if (photo && photo[0]) {
-        //     formPayload.append("file", photo[0]);
-        // }
+        if (photo && photo[0]) {
+            formPayload.append("file", photo[0]);
+        }
 
-        // try {
-        //     const res = await createCustomer(formPayload).unwrap();
-        //     if (res?.error) {
-        //         throw new Error(res?.message || "Account creation failed!");
-        //     }
+        try {
+            const res = await createCustomer(formPayload).unwrap();
+            if (res?.error) {
+                throw new Error(res?.message || "Account creation failed!");
+            }
 
-        //     // Dispatch user data to the store
-        //     dispatch(setUser({ user: res?.data?.result, token: res?.data?.accessToken }));
+            // Dispatch user data to the store
+            dispatch(setUser({ user: res?.data?.result, token: res?.data?.accessToken }));
 
-        //     // Success toast
-        //     toast.update(toastId, {
-        //         render: res?.message || "Account created successfully!",
-        //         type: "success",
-        //         isLoading: false,
-        //         autoClose: 3000,
-        //         position: "top-right",
-        //     });
+            // Success toast
+            toast.update(toastId, {
+                render: res?.message || "Account created successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
 
-        //     navigate("/");
-        // } catch (res: any) {
-        //     toast.update(toastId, {
-        //         render: res?.message || "Account creation failed! Please try again.",
-        //         type: "error",
-        //         isLoading: false,
-        //         autoClose: 3000,
-        //         position: "top-right",
-        //     });
-        // }
+            navigate("/");
+        } catch (res: any) {
+            toast.update(toastId, {
+                render: res?.message || "Account creation failed! Please try again.",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        }
     };
     return (
         <div className="bg-gray-50 p-6">
