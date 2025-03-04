@@ -22,9 +22,10 @@ const Register = () => {
     const onSubmit = async (formData: any) => {
         const toastId = toast.loading("Creating account...");
         const { name, email, contactNumber, password, photo } = formData;
+        let profilePhoto = photo; 
 
         const formPayload = new FormData();
-        formPayload.append("data", JSON.stringify({ name, email, contactNumber, password }));
+        formPayload.append("data", JSON.stringify({ name, email, contactNumber, password, profilePhoto }));
 
         if (photo && photo[0]) {
             formPayload.append("file", photo[0]);
