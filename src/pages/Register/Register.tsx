@@ -68,7 +68,10 @@ const Register = () => {
                         Welcome to <br /> <span className="text-violet-400">Buy Nest</span>
                     </h1>
                     <p className="text-xl mt-4 text-gray-500">
-                        Experience seamless online shopping with the best deals on a wide  <br />  range of products.
+                        Experience seamless online shopping with the best deals on a <br /> wide range of products.
+                        Discover top-quality items <br /> from trusted vendors at unbeatable prices. <br />
+                        Enjoy a smooth and secure checkout process <br /> with multiple payment options.
+                        Shop now and get <br /> fast delivery straight to your doorstep!
                     </p>
                 </div>
 
