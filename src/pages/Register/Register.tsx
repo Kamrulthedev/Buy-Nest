@@ -43,9 +43,9 @@ const Register = () => {
         formPayload.append("data", JSON.stringify({ name, email, contactNumber, password, profilePhoto }));
         console.log(formPayload)
 
-        if (photo && photo[0]) {
-            formPayload.append("file", photo[0]);
-        }
+        // if (photo && photo[0]) {
+        //     formPayload.append("file", photo[0]);
+        // }
 
         try {
             const res = await createCustomer(formPayload).unwrap();
