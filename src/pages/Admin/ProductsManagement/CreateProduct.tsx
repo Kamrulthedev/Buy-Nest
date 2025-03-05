@@ -23,7 +23,6 @@ const CreateProduct = () => {
         if (file && file instanceof FileList && file.length > 0) {
             const imageFile = file[0];  
             const imageUrl = await imageUpload(imageFile);
-            console.log("Updateloaded URl" , imageUrl)
             if (imageUrl) {
                 ProductImageUpload = imageUrl;
             } else {
@@ -53,7 +52,6 @@ const CreateProduct = () => {
         // if (file && file[0]) {
         //     formPayload.append("file", file[0]);
         // }
-        console.log(formData);
 
         try {
             const res = await createProduct(formPayload).unwrap();
