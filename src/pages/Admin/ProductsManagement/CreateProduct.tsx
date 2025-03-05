@@ -47,12 +47,12 @@ const CreateProduct = () => {
             stock: parsedStock,
             category,
             shopId: shop,
-            imageUrl : ProductImageUpload
+            imageUrl: ProductImageUpload
         }));
 
-        if (file && file[0]) {
-            formPayload.append("file", file[0]);
-        }
+        // if (file && file[0]) {
+        //     formPayload.append("file", file[0]);
+        // }
         console.log(formData);
 
         try {
