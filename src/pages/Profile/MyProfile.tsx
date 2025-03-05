@@ -42,45 +42,47 @@ const MyProfile = () => {
 
         const formPayload = new FormData();
         // Only include data if it's present
-        if (name || contactNumber || address) {
+        if (name || contactNumber || address || profilePhoto) {
             formPayload.append("data", JSON.stringify({ name, contactNumber, address, profilePhoto }));
+
         } else {
             formPayload.append("data", JSON.stringify({}));
         }
 
-        if (photo && photo[0]) {
-            formPayload.append("file", photo[0]);
+        // if (photo && photo[0]) {
+        //     formPayload.append("file", photo[0]);
+        // }
+        console.log(formPayload)
+
+        try {
+            const res = await UpdateMe(formPayload);
+            if (res?.data?.error) {
+                throw new Error(res?.data?.message || "Profile Update failed!");
+            }
+
+            dispatch(setUser({
+                user: res?.data?.data,
+            }));
+
+            // Success toast
+            toast.update(toastId, {
+                render: res?.message || "Profile updated successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        } catch (error) {
+            toast.update(toastId, {
+                render: "Profile update failed! Please try again.",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
         }
 
-        // try {
-        //     const res = await UpdateMe(formPayload);
-        //     if (res?.data?.error) {
-        //         throw new Error(res?.data?.message || "Profile Update failed!");
-        //     }
-
-        //     dispatch(setUser({
-        //         user: res?.data?.data,
-        //     }));
-
-        //     // Success toast
-        //     toast.update(toastId, {
-        //         render: res?.message || "Profile updated successfully!",
-        //         type: "success",
-        //         isLoading: false,
-        //         autoClose: 3000,
-        //         position: "top-right",
-        //     });
-        // } catch (error) {
-        //     toast.update(toastId, {
-        //         render: "Profile update failed! Please try again.",
-        //         type: "error",
-        //         isLoading: false,
-        //         autoClose: 3000,
-        //         position: "top-right",
-        //     });
-        // }
-
-        // setIsEditing(false);
+        setIsEditing(false);
     };
 
 
