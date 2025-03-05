@@ -5,6 +5,7 @@ import Photo from '@/components/Profile/Photo';
 import { setUser } from '@/Redux/features/auth/authSlice';
 import { useUpdateMeMutation } from '@/Redux/features/user/userApi';
 import { useAppSelector } from '@/Redux/hooks';
+import { imageUpload } from '@/Utils/imageUploads';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSpinner } from 'react-icons/fa';
@@ -24,10 +25,25 @@ const MyProfile = () => {
         const toastId = toast.loading("Updating My Profile...");
         const { name, contactNumber, address, photo } = data;
 
+        let profilePhoto = photo;
+
+        if (photo && photo instanceof FileList && photo.length > 0) {
+            const imageFile = photo[0];
+            const imageUrl = await imageUpload(imageFile);
+            if (imageUrl) {
+                profilePhoto = imageUrl;
+            } else {
+                toast.error("Image upload failed!");
+                return;
+            }
+        } else {
+            console.error("No valid photo file found");
+        }
+
         const formPayload = new FormData();
         // Only include data if it's present
         if (name || contactNumber || address) {
-            formPayload.append("data", JSON.stringify({ name, contactNumber, address }));
+            formPayload.append("data", JSON.stringify({ name, contactNumber, address, profilePhoto }));
         } else {
             formPayload.append("data", JSON.stringify({}));
         }
@@ -36,35 +52,35 @@ const MyProfile = () => {
             formPayload.append("file", photo[0]);
         }
 
-        try {
-            const res = await UpdateMe(formPayload);
-            if (res?.data?.error) {
-                throw new Error(res?.data?.message || "Profile Update failed!");
-            }
+        // try {
+        //     const res = await UpdateMe(formPayload);
+        //     if (res?.data?.error) {
+        //         throw new Error(res?.data?.message || "Profile Update failed!");
+        //     }
 
-            dispatch(setUser({
-                user: res?.data?.data,
-            }));
+        //     dispatch(setUser({
+        //         user: res?.data?.data,
+        //     }));
 
-            // Success toast
-            toast.update(toastId, {
-                render: res?.message || "Profile updated successfully!",
-                type: "success",
-                isLoading: false,
-                autoClose: 3000,
-                position: "top-right",
-            });
-        } catch (error) {
-            toast.update(toastId, {
-                render: "Profile update failed! Please try again.",
-                type: "error",
-                isLoading: false,
-                autoClose: 3000,
-                position: "top-right",
-            });
-        }
+        //     // Success toast
+        //     toast.update(toastId, {
+        //         render: res?.message || "Profile updated successfully!",
+        //         type: "success",
+        //         isLoading: false,
+        //         autoClose: 3000,
+        //         position: "top-right",
+        //     });
+        // } catch (error) {
+        //     toast.update(toastId, {
+        //         render: "Profile update failed! Please try again.",
+        //         type: "error",
+        //         isLoading: false,
+        //         autoClose: 3000,
+        //         position: "top-right",
+        //     });
+        // }
 
-        setIsEditing(false);
+        // setIsEditing(false);
     };
 
 
