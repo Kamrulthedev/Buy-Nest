@@ -17,7 +17,7 @@ const ShopManagement = () => {
     const totalShops = data?.meta?.total || 0;
 
     // Filtering shops based on searchTerm
-    const filteredShops = shops.filter((shop: any) => 
+    const filteredShops = shops.filter((shop: any) =>
         shop.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     const totalPages = Math.ceil(data?.meta?.total / itemsPerPage);
@@ -65,8 +65,13 @@ const ShopManagement = () => {
                     <tbody>
                         {filteredShops.map((shop: any) => (
                             <tr className="text-xs animate__animated animate__fadeInDown" key={shop.id}>
-                                <td className="px-6 py-2">
-                                    <img src={shop.logoUrl} alt={`${shop.name} Logo`} className="w-16 h-16 object-cover rounded-full" />
+                                
+                                <td className="px-4 py-2 text-center">
+                                    <img
+                                        src={shop.logoUrl}
+                                        alt={shop.name}
+                                        className="w-16 h-16 object-cover rounded-md"
+                                    />
                                 </td>
                                 <td className="px-4 py-2">{shop.id}</td>
                                 <td className="px-4 py-2">{shop.name}</td>
@@ -74,16 +79,16 @@ const ShopManagement = () => {
                                 <td className="px-4 py-2">{shop?.products?.length}</td>
                                 <td className="px-4 py-2">{shop?.orders?.length}</td>
                                 <td className="px-4 py-2">{shop?.followers?.length}</td>
-                                <td className="px-4 py-2 lg:space-y-0 space-y-3">
+                                <td className="px-4 py-2 lg:space-y-0 space-y-3 flex gap-2">
                                     <Link
                                         to={`/admin/shop-details/${shop.id}`}
-                                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                                        className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
                                     >
                                         Details
                                     </Link>
                                     <button
                                         onClick={() => handleDeleteClick(shop.id)}
-                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        className="bg-red-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
                                     >
                                         Delete
                                     </button>
