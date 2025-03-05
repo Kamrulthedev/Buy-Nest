@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -6,6 +7,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useGetAllShopsQuery } from '@/Redux/features/shops/shopsApi';
 import { AiOutlineLoading } from 'react-icons/ai';
+import { imageUpload } from '@/Utils/imageUploads';
 
 const CreateProduct = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -16,8 +18,21 @@ const CreateProduct = () => {
         const toastId = toast.loading("Creating product...");
         const { name, description, price, discount, stock, category, shop, file } = formData;
 
-        const ProductImage = file;
-console.log(ProductImage)
+        let ProductImageUpload = file;
+
+        if (file && file instanceof FileList && file.length > 0) {
+            const imageFile = file[0];  
+            const imageUrl = await imageUpload(imageFile);
+            console.log("Updateloaded URl" , imageUrl)
+            if (imageUrl) {
+                ProductImageUpload = imageUrl;
+            } else {
+                toast.error("Image upload failed!");
+                return;
+            }
+        } else {
+            console.error("No valid photo file found");
+        }
 
         const parsedPrice = parseFloat(price);
         const parsedDiscount = parseFloat(discount) || 0;
@@ -32,6 +47,7 @@ console.log(ProductImage)
             stock: parsedStock,
             category,
             shopId: shop,
+            imageUrl : ProductImageUpload
         }));
 
         if (file && file[0]) {
@@ -39,30 +55,30 @@ console.log(ProductImage)
         }
         console.log(formData);
 
-        // try {
-        //     const res = await createProduct(formPayload).unwrap();
-        //     if (res?.error) {
-        //         throw new Error(res?.message || "Product creation failed!");
-        //     }
+        try {
+            const res = await createProduct(formPayload).unwrap();
+            if (res?.error) {
+                throw new Error(res?.message || "Product creation failed!");
+            }
 
-        //     // Success toast
-        //     toast.update(toastId, {
-        //         render: res?.message || "Product created successfully!",
-        //         type: "success",
-        //         isLoading: false,
-        //         autoClose: 3000,
-        //         position: "top-right",
-        //     });
-        //     reset(); 
-        // } catch (res: any) {
-        //     toast.update(toastId, {
-        //         render: res?.message || "Product creation failed! Please try again.",
-        //         type: "error",
-        //         isLoading: false,
-        //         autoClose: 3000,
-        //         position: "top-right",
-        //     });
-        // }
+            // Success toast
+            toast.update(toastId, {
+                render: res?.message || "Product created successfully!",
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+            reset(); 
+        } catch (res: any) {
+            toast.update(toastId, {
+                render: res?.message || "Product creation failed! Please try again.",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000,
+                position: "top-right",
+            });
+        }
     };
 
     return (
