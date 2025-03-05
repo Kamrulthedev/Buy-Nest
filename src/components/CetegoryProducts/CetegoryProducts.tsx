@@ -89,13 +89,13 @@ const CategoryProducts = () => {
           {AllProducts?.data?.slice(0, 4).map((product: any) => (
             <div
               key={product.id}
-              className="relative bg-white overflow-hidden group animate__animated animate__pulse rounded-md"
+              className="relative bg-white overflow-hidden group animate__animated animate__pulse rounded-md shadow-lg"
             >
               {/* Product Image */}
               <img
                 src={product?.imageUrl || "https://via.placeholder.com/150"}
                 alt={product.name}
-                className="w-full shadow-lg h-80 object-cover rounded-t-md"
+                className="w-full border-b border-orange-500 h-80 object-cover rounded-t-md"
               />
 
               {/* Overlay Icons */}
@@ -115,7 +115,7 @@ const CategoryProducts = () => {
               <div className="p-4">
                 <p className="text-sm text-gray-500">{product.brand}</p>
                 <h2 className="font-medium text-lg">{product.name}</h2>
-                <p className="text-blue-600 font-bold">{product.price}</p>
+                <p className="text-blue-600 font-bold">Price : {product.price}</p>
               </div>
 
               {/* Hover Buttons */}
