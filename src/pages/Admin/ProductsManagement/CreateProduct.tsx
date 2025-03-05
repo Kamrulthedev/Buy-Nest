@@ -15,6 +15,10 @@ const CreateProduct = () => {
     const onSubmit = async (formData: any) => {
         const toastId = toast.loading("Creating product...");
         const { name, description, price, discount, stock, category, shop, file } = formData;
+
+        const ProductImage = file;
+console.log(ProductImage)
+
         const parsedPrice = parseFloat(price);
         const parsedDiscount = parseFloat(discount) || 0;
         const parsedStock = parseInt(stock);
@@ -33,31 +37,32 @@ const CreateProduct = () => {
         if (file && file[0]) {
             formPayload.append("file", file[0]);
         }
+        console.log(formData);
 
-        try {
-            const res = await createProduct(formPayload).unwrap();
-            if (res?.error) {
-                throw new Error(res?.message || "Product creation failed!");
-            }
+        // try {
+        //     const res = await createProduct(formPayload).unwrap();
+        //     if (res?.error) {
+        //         throw new Error(res?.message || "Product creation failed!");
+        //     }
 
-            // Success toast
-            toast.update(toastId, {
-                render: res?.message || "Product created successfully!",
-                type: "success",
-                isLoading: false,
-                autoClose: 3000,
-                position: "top-right",
-            });
-            reset(); 
-        } catch (res: any) {
-            toast.update(toastId, {
-                render: res?.message || "Product creation failed! Please try again.",
-                type: "error",
-                isLoading: false,
-                autoClose: 3000,
-                position: "top-right",
-            });
-        }
+        //     // Success toast
+        //     toast.update(toastId, {
+        //         render: res?.message || "Product created successfully!",
+        //         type: "success",
+        //         isLoading: false,
+        //         autoClose: 3000,
+        //         position: "top-right",
+        //     });
+        //     reset(); 
+        // } catch (res: any) {
+        //     toast.update(toastId, {
+        //         render: res?.message || "Product creation failed! Please try again.",
+        //         type: "error",
+        //         isLoading: false,
+        //         autoClose: 3000,
+        //         position: "top-right",
+        //     });
+        // }
     };
 
     return (
