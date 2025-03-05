@@ -52,7 +52,6 @@ const MyProfile = () => {
         // if (photo && photo[0]) {
         //     formPayload.append("file", photo[0]);
         // }
-        console.log(formPayload)
 
         try {
             const res = await UpdateMe(formPayload);
