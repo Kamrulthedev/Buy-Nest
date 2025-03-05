@@ -90,13 +90,13 @@ const RecentProducts = () => {
                     {AllProducts?.data?.slice(0, 8).map((product: any) => (
                         <div
                             key={product.id}
-                            className="relative bg-white overflow-hidden group animate__animated animate__fadeInDown"
+                            className="relative bg-white overflow-hidden mb-6 group animate__animated animate__fadeInDown"
                         >
                             {/* Product Image */}
                             <img
                                 src={product?.imageUrl || "https://via.placeholder.com/150"}
                                 alt={product.name}
-                                className="w-full shadow-lg h-48 lg:h-80 object-cover hover:scale-110 transition-transform"
+                                className="w-full shadow-lg h-48 lg:h-80 object-cover rounded-md hover:scale-110 transition-transform"
                             />
 
                             {/* Overlay Icons */}
@@ -159,7 +159,7 @@ const RecentProducts = () => {
             )}
 
 
-            <div className="flex justify-center items-center mt-8 animate__animated animate__heartBeat">
+            <div className="flex justify-center items-center animate__animated animate__heartBeat">
                 <Link to='/products' className="px-12 py-3 text-gray-700 border bg-white shadow-md hover:text-white hover:bg-gray-600 hover:shadow-lg transition-all duration-300 font-medium">
                     View More Products ⇨
                 </Link>
