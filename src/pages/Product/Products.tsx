@@ -128,14 +128,14 @@ const Products = () => {
                   <div className="absolute left-0 right-0 flex justify-between space-x-4 opacity-0 group-hover:opacity-100 transition-opacity px-4">
                     <Link
                       to={`/products/${product?.id}`}
-                      className="w-28 mt-1 ml-1 h-8 flex justify-center items-center text-xs lg:text-base bg-blue-500 text-white rounded-md hover:bg-gray-600"
+                      className="w-28 mt-1 ml-1 h-8 flex justify-center items-center text-xs lg:text-sm bg-blue-500 text-white rounded-md hover:bg-gray-600"
                     >
                       View Details
                     </Link>
 
                     <div className="relative">
                       <button
-                        className="w-28 mt-1 mr-1 text-center h-8 text-xs lg:text-base bg-violet-400 text-white rounded-md hover:bg-gray-600"
+                        className="w-28 mt-1 mr-1 text-center h-8 text-xs lg:text-sm bg-violet-400 text-white rounded-md hover:bg-gray-600"
                         onClick={() => setShowDropdown((prev) => !prev)}
                       >
                         Add to Cart
