@@ -151,7 +151,7 @@ function Navbar() {
             </Link>
           )}
 
-          <button onClick={toggleMenu} className="md:hidden">
+          <button onClick={toggleMenu} className="md:hidden animate__animated animate__zoomIn">
             {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
