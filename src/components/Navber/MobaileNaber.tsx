@@ -5,7 +5,7 @@ const MobaileNaber = () => {
     return (
         <div className="md:hidden bg-violet-50 px-4 py-2 animate__animated animate__fadeInDown rounded-md">
         <div className="p-3">
-          <div className="flex items-center mb-4 relative hover:scale-105 transition-transform">
+          <div className="flex items-center mb-4 relative hover:scale-105 transition-transform animate__animated animate__zoomIn">
             <input
               type="text"
               placeholder="Search products"
